@@ -1,0 +1,104 @@
+{
+  "root_seed": 0,
+  "modes": ["improve", "repair", "complete", "verify"],
+  "splits": {
+    "train": {
+      "problems_per_family": 40,
+      "difficulty": "train"
+    },
+    "test": {
+      "problems_per_family": 12,
+      "difficulty": "test"
+    },
+    "ood": {
+      "problems_per_family": 12,
+      "difficulty": "ood"
+    }
+  },
+  "families": {
+    "graph_reachability": {
+      "enabled": true,
+      "train": {
+        "num_nodes_min": 5,
+        "num_nodes_max": 9,
+        "path_length_min": 2,
+        "path_length_max": 5,
+        "extra_edges_min": 1,
+        "extra_edges_max": 5,
+        "require_shortest": true
+      },
+      "test": {
+        "num_nodes_min": 5,
+        "num_nodes_max": 9,
+        "path_length_min": 2,
+        "path_length_max": 5,
+        "extra_edges_min": 1,
+        "extra_edges_max": 5,
+        "require_shortest": true
+      },
+      "ood": {
+        "num_nodes_min": 9,
+        "num_nodes_max": 13,
+        "path_length_min": 6,
+        "path_length_max": 8,
+        "extra_edges_min": 4,
+        "extra_edges_max": 9,
+        "require_shortest": true
+      }
+    },
+    "implication_chains": {
+      "enabled": true,
+      "train": {
+        "num_props_min": 5,
+        "num_props_max": 9,
+        "proof_length_min": 2,
+        "proof_length_max": 5,
+        "distractor_hyps_min": 1,
+        "distractor_hyps_max": 5
+      },
+      "test": {
+        "num_props_min": 5,
+        "num_props_max": 9,
+        "proof_length_min": 2,
+        "proof_length_max": 5,
+        "distractor_hyps_min": 1,
+        "distractor_hyps_max": 5
+      },
+      "ood": {
+        "num_props_min": 9,
+        "num_props_max": 13,
+        "proof_length_min": 6,
+        "proof_length_max": 8,
+        "distractor_hyps_min": 4,
+        "distractor_hyps_max": 9
+      }
+    },
+    "relation_composition": {
+      "enabled": true,
+      "train": {
+        "num_entities_min": 5,
+        "num_entities_max": 9,
+        "composition_depth_min": 2,
+        "composition_depth_max": 5,
+        "distractor_facts_min": 1,
+        "distractor_facts_max": 5
+      },
+      "test": {
+        "num_entities_min": 5,
+        "num_entities_max": 9,
+        "composition_depth_min": 2,
+        "composition_depth_max": 5,
+        "distractor_facts_min": 1,
+        "distractor_facts_max": 5
+      },
+      "ood": {
+        "num_entities_min": 9,
+        "num_entities_max": 13,
+        "composition_depth_min": 6,
+        "composition_depth_max": 8,
+        "distractor_facts_min": 4,
+        "distractor_facts_max": 9
+      }
+    }
+  }
+}

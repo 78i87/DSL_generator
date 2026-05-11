@@ -1,0 +1,133 @@
+{
+  "root_seed": 910,
+  "modes": ["action", "repair_action", "verify"],
+  "splits": {
+    "train": {
+      "difficulty_mixture": [
+        {"name": "minimal_2", "difficulty": "minimal_2", "problems_per_family": 1}
+      ]
+    },
+    "test": {
+      "difficulty_mixture": [
+        {"name": "minimal_3", "difficulty": "minimal_3", "problems_per_family": 1}
+      ]
+    },
+    "ood": {
+      "difficulty_mixture": [
+        {"name": "stress_8_offset_4", "difficulty": "stress_8", "problems_per_family": 12, "difficulty_overrides": {"symbol_offset": 4}},
+        {"name": "stress_9_offset_2", "difficulty": "stress_9", "problems_per_family": 12, "difficulty_overrides": {"symbol_offset": 2}},
+        {"name": "stress_10_offset_0", "difficulty": "stress_10", "problems_per_family": 12, "modes": ["action", "verify"], "difficulty_overrides": {"symbol_offset": 0}}
+      ]
+    }
+  },
+  "families": {
+    "graph_reachability": {
+      "enabled": true,
+      "minimal_2": {
+        "num_nodes": 5,
+        "path_length": 2,
+        "extra_edges": 1,
+        "require_shortest": true
+      },
+      "minimal_3": {
+        "num_nodes": 6,
+        "path_length": 3,
+        "extra_edges": 1,
+        "require_shortest": true
+      },
+      "stress_8": {
+        "num_nodes_min": 13,
+        "num_nodes_max": 15,
+        "path_length": 8,
+        "extra_edges_min": 10,
+        "extra_edges_max": 14,
+        "require_shortest": true
+      },
+      "stress_9": {
+        "num_nodes_min": 14,
+        "num_nodes_max": 17,
+        "path_length": 9,
+        "extra_edges_min": 11,
+        "extra_edges_max": 15,
+        "require_shortest": true
+      },
+      "stress_10": {
+        "num_nodes_min": 15,
+        "num_nodes_max": 19,
+        "path_length": 10,
+        "extra_edges_min": 12,
+        "extra_edges_max": 16,
+        "require_shortest": true
+      }
+    },
+    "implication_chains": {
+      "enabled": true,
+      "minimal_2": {
+        "num_props": 5,
+        "proof_length": 2,
+        "distractor_hyps": 1
+      },
+      "minimal_3": {
+        "num_props": 6,
+        "proof_length": 3,
+        "distractor_hyps": 1
+      },
+      "stress_8": {
+        "num_props_min": 13,
+        "num_props_max": 15,
+        "proof_length": 7,
+        "distractor_hyps_min": 8,
+        "distractor_hyps_max": 10
+      },
+      "stress_9": {
+        "num_props_min": 14,
+        "num_props_max": 17,
+        "proof_length": 8,
+        "distractor_hyps_min": 9,
+        "distractor_hyps_max": 11
+      },
+      "stress_10": {
+        "num_props_min": 15,
+        "num_props_max": 19,
+        "proof_length": 9,
+        "distractor_hyps_min": 10,
+        "distractor_hyps_max": 12
+      }
+    },
+    "relation_composition": {
+      "enabled": true,
+      "minimal_2": {
+        "num_entities": 5,
+        "composition_depth": 2,
+        "distractor_facts": 1
+      },
+      "minimal_3": {
+        "num_entities": 6,
+        "composition_depth": 3,
+        "distractor_facts": 1
+      },
+      "stress_8": {
+        "num_entities_min": 13,
+        "num_entities_max": 15,
+        "composition_depth": 8,
+        "distractor_facts_min": 10,
+        "distractor_facts_max": 14
+      },
+      "stress_9": {
+        "num_entities_min": 14,
+        "num_entities_max": 17,
+        "composition_depth": 9,
+        "distractor_facts_min": 11,
+        "distractor_facts_max": 15
+      },
+      "stress_10": {
+        "num_entities_min": 15,
+        "num_entities_max": 19,
+        "composition_depth": 10,
+        "distractor_facts_min": 12,
+        "distractor_facts_max": 16
+      }
+    }
+  },
+  "experiment_note": "Same-vocab v10 stress benchmark: compact action targets unchanged, with OOD length/depth 8-10, heavier distractors, and symbol offsets chosen to remain inside the canonical v10 vocabulary. Depth 10 excludes repair_action because graph repair targets can require standalone index token 10, which is intentionally outside the canonical v10 vocabulary."
+}

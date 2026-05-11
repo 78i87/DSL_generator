@@ -1,0 +1,430 @@
+{
+  "data_dir": "data/symbolic-v10-same-vocab-stress",
+  "errors": [],
+  "jsonl": {
+    "difficulty": {
+      "graph_reachability": {
+        "extra_edges": {
+          "max": 15.0,
+          "mean": 12.889380530973451,
+          "min": 1.0,
+          "unique": [
+            1,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "num_nodes": {
+          "max": 19.0,
+          "mean": 15.079646017699115,
+          "min": 5.0,
+          "unique": [
+            5,
+            6,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "path_length": {
+          "max": 10.0,
+          "mean": 8.705014749262537,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            8,
+            9,
+            10
+          ]
+        },
+        "require_shortest": {
+          "true": 678
+        },
+        "symbol_offset": {
+          "max": 4.0,
+          "mean": 2.1946902654867255,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            4
+          ]
+        }
+      },
+      "implication_chains": {
+        "distractor_hyps": {
+          "max": 12.0,
+          "mean": 9.462783171521036,
+          "min": 1.0,
+          "unique": [
+            1,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "num_props": {
+          "max": 19.0,
+          "mean": 15.346278317152104,
+          "min": 5.0,
+          "unique": [
+            5,
+            6,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "proof_length": {
+          "max": 10.0,
+          "mean": 8.724919093851133,
+          "min": 3.0,
+          "unique": [
+            3,
+            4,
+            8,
+            9,
+            10
+          ]
+        },
+        "symbol_offset": {
+          "max": 4.0,
+          "mean": 2.174757281553398,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            4
+          ]
+        }
+      },
+      "relation_composition": {
+        "composition_depth": {
+          "max": 10.0,
+          "mean": 8.774545454545455,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            8,
+            9,
+            10
+          ]
+        },
+        "distractor_facts": {
+          "max": 16.0,
+          "mean": 12.605454545454545,
+          "min": 1.0,
+          "unique": [
+            1,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "num_entities": {
+          "max": 19.0,
+          "mean": 15.212727272727273,
+          "min": 5.0,
+          "unique": [
+            5,
+            6,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "symbol_offset": {
+          "max": 4.0,
+          "mean": 2.1818181818181817,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            4
+          ]
+        }
+      }
+    },
+    "samples": {
+      "ood/graph_reachability/action": {
+        "id": "ood:graph_reachability:0:action:0",
+        "source_text": "MODE action\nPROBLEM\nEDGE e10 e11\nEDGE e10 e17\nEDGE e11 e12\nEDGE e11 e14\nEDGE e11 e5\nEDGE e11 e9\nEDGE e12 e15\nEDGE e12 e9\nEDGE e13 e10\nEDGE e13 e8\nEDGE e16 e5\nEDGE e4 e5\nEDGE e5 e14\nEDGE e5 e6\nEDGE e6 e7\nEDGE e7 e14\nEDGE e7 e8\nEDGE e8 e9\nEDGE e9 e10\nEDGE e9 e5\nEDGE e9 e7\nQUERY REACH e4 e12\nSTATE\nEMPTY",
+        "target_text": "APPEND e4"
+      },
+      "ood/graph_reachability/repair_action": {
+        "id": "ood:graph_reachability:0:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nEDGE e10 e11\nEDGE e10 e17\nEDGE e11 e12\nEDGE e11 e14\nEDGE e11 e5\nEDGE e11 e9\nEDGE e12 e15\nEDGE e12 e9\nEDGE e13 e10\nEDGE e13 e8\nEDGE e16 e5\nEDGE e4 e5\nEDGE e5 e14\nEDGE e5 e6\nEDGE e6 e7\nEDGE e7 e14\nEDGE e7 e8\nEDGE e8 e9\nEDGE e9 e10\nEDGE e9 e5\nEDGE e9 e7\nQUERY REACH e4 e12\nSTATE\nPATH e12",
+        "target_text": "REPLACE NODE 0 WITH e4"
+      },
+      "ood/graph_reachability/verify": {
+        "id": "ood:graph_reachability:0:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nEDGE e10 e11\nEDGE e10 e17\nEDGE e11 e12\nEDGE e11 e14\nEDGE e11 e5\nEDGE e11 e9\nEDGE e12 e15\nEDGE e12 e9\nEDGE e13 e10\nEDGE e13 e8\nEDGE e16 e5\nEDGE e4 e5\nEDGE e5 e14\nEDGE e5 e6\nEDGE e6 e7\nEDGE e7 e14\nEDGE e7 e8\nEDGE e8 e9\nEDGE e9 e10\nEDGE e9 e5\nEDGE e9 e7\nQUERY REACH e4 e12\nSTATE\nPATH e4 e5 e6 e7 e8 e9 e10 e11 e12",
+        "target_text": "VALID"
+      },
+      "ood/implication_chains/action": {
+        "id": "ood:implication_chains:36:action:0",
+        "source_text": "MODE action\nPROBLEM\nHYP h4 : p4\nHYP h5 : p4 -> p5\nHYP h6 : p5 -> p6\nHYP h7 : p6 -> p7\nHYP h8 : p7 -> p8\nHYP h9 : p8 -> p9\nHYP h10 : p9 -> p10\nHYP h11 : p10 -> p11\nHYP h12 : p4 -> p11\nHYP h13 : p4 -> p15\nHYP h14 : p7 -> p12\nHYP h15 : p9 -> p14\nHYP h16 : p10 -> p6\nHYP h17 : p15 -> p14\nHYP h18 : p16 -> p8\nHYP h19 : p17 -> p15\nGOAL p11\nSTATE\nEMPTY",
+        "target_text": "APPLY h4"
+      },
+      "ood/implication_chains/repair_action": {
+        "id": "ood:implication_chains:36:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nHYP h4 : p4\nHYP h5 : p4 -> p5\nHYP h6 : p5 -> p6\nHYP h7 : p6 -> p7\nHYP h8 : p7 -> p8\nHYP h9 : p8 -> p9\nHYP h10 : p9 -> p10\nHYP h11 : p10 -> p11\nHYP h12 : p4 -> p11\nHYP h13 : p4 -> p15\nHYP h14 : p7 -> p12\nHYP h15 : p9 -> p14\nHYP h16 : p10 -> p6\nHYP h17 : p15 -> p14\nHYP h18 : p16 -> p8\nHYP h19 : p17 -> p15\nGOAL p11\nSTATE\nDERIVE p4 BY h999",
+        "target_text": "REPLACE LINE 0 HYP h4"
+      },
+      "ood/implication_chains/verify": {
+        "id": "ood:implication_chains:36:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nHYP h4 : p4\nHYP h5 : p4 -> p5\nHYP h6 : p5 -> p6\nHYP h7 : p6 -> p7\nHYP h8 : p7 -> p8\nHYP h9 : p8 -> p9\nHYP h10 : p9 -> p10\nHYP h11 : p10 -> p11\nHYP h12 : p4 -> p11\nHYP h13 : p4 -> p15\nHYP h14 : p7 -> p12\nHYP h15 : p9 -> p14\nHYP h16 : p10 -> p6\nHYP h17 : p15 -> p14\nHYP h18 : p16 -> p8\nHYP h19 : p17 -> p15\nGOAL p11\nSTATE\nDERIVE p4 BY h4\nDERIVE p5 BY h5 FROM p4\nDERIVE p6 BY h6 FROM p5\nDERIVE p7 BY h7 FROM p6\nDERIVE p8 BY h8 FROM p7\nDERIVE p9 BY h9 FROM p8\nDERIVE p10 BY h10 FROM p9\nDERIVE p11 BY h11 FROM p10",
+        "target_text": "VALID"
+      },
+      "ood/relation_composition/action": {
+        "id": "ood:relation_composition:72:action:0",
+        "source_text": "MODE action\nPROBLEM\nFACT r4 e4 e5\nFACT r5 e5 e6\nFACT r6 e6 e7\nFACT r7 e7 e8\nFACT r8 e8 e9\nFACT r9 e9 e10\nFACT r10 e10 e11\nFACT r11 e11 e12\nRULE r12 = r4 ; r5\nRULE r13 = r12 ; r6\nRULE r14 = r13 ; r7\nRULE r15 = r14 ; r8\nRULE r16 = r15 ; r9\nRULE r17 = r16 ; r10\nRULE r18 = r17 ; r11\nFACT r4 e5 e12\nFACT r4 e7 e13\nFACT r5 e13 e15\nFACT r7 e4 e9\nFACT r7 e6 e11\nFACT r7 e8 e9\nFACT r8 e5 e18\nFACT r8 e16 e10\nFACT r8 e18 e12\nFACT r9 e5 e12\nFACT r9 e8 e4\nFACT r10 e5 e16\nFACT r10 e7 e4\nFACT r10 e9 e6\nQUERY r18 e4 e12\nSTATE\nEMPTY",
+        "target_text": "FOLLOW e6 VIA e5"
+      },
+      "ood/relation_composition/repair_action": {
+        "id": "ood:relation_composition:72:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nFACT r4 e4 e5\nFACT r5 e5 e6\nFACT r6 e6 e7\nFACT r7 e7 e8\nFACT r8 e8 e9\nFACT r9 e9 e10\nFACT r10 e10 e11\nFACT r11 e11 e12\nRULE r12 = r4 ; r5\nRULE r13 = r12 ; r6\nRULE r14 = r13 ; r7\nRULE r15 = r14 ; r8\nRULE r16 = r15 ; r9\nRULE r17 = r16 ; r10\nRULE r18 = r17 ; r11\nFACT r4 e5 e12\nFACT r4 e7 e13\nFACT r5 e13 e15\nFACT r7 e4 e9\nFACT r7 e6 e11\nFACT r7 e8 e9\nFACT r8 e5 e18\nFACT r8 e16 e10\nFACT r8 e18 e12\nFACT r9 e5 e12\nFACT r9 e8 e4\nFACT r10 e5 e16\nFACT r10 e7 e4\nFACT r10 e9 e6\nQUERY r18 e4 e12\nSTATE\nDERIVE r12 e4 e6 VIA e10",
+        "target_text": "REPLACE LINE 0 VIA e5"
+      },
+      "ood/relation_composition/verify": {
+        "id": "ood:relation_composition:72:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nFACT r4 e4 e5\nFACT r5 e5 e6\nFACT r6 e6 e7\nFACT r7 e7 e8\nFACT r8 e8 e9\nFACT r9 e9 e10\nFACT r10 e10 e11\nFACT r11 e11 e12\nRULE r12 = r4 ; r5\nRULE r13 = r12 ; r6\nRULE r14 = r13 ; r7\nRULE r15 = r14 ; r8\nRULE r16 = r15 ; r9\nRULE r17 = r16 ; r10\nRULE r18 = r17 ; r11\nFACT r4 e5 e12\nFACT r4 e7 e13\nFACT r5 e13 e15\nFACT r7 e4 e9\nFACT r7 e6 e11\nFACT r7 e8 e9\nFACT r8 e5 e18\nFACT r8 e16 e10\nFACT r8 e18 e12\nFACT r9 e5 e12\nFACT r9 e8 e4\nFACT r10 e5 e16\nFACT r10 e7 e4\nFACT r10 e9 e6\nQUERY r18 e4 e12\nSTATE\nDERIVE r12 e4 e6 VIA e5\nDERIVE r13 e4 e7 VIA e6\nDERIVE r14 e4 e8 VIA e7\nDERIVE r15 e4 e9 VIA e8\nDERIVE r16 e4 e10 VIA e9\nDERIVE r17 e4 e11 VIA e10\nDERIVE r18 e4 e12 VIA e11",
+        "target_text": "VALID"
+      },
+      "test/graph_reachability/action": {
+        "id": "test:graph_reachability:0:action:0",
+        "source_text": "MODE action\nPROBLEM\nEDGE e0 e1\nEDGE e1 e2\nEDGE e2 e0\nEDGE e2 e3\nQUERY REACH e0 e3\nSTATE\nEMPTY",
+        "target_text": "APPEND e0"
+      },
+      "test/graph_reachability/repair_action": {
+        "id": "test:graph_reachability:0:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nEDGE e0 e1\nEDGE e1 e2\nEDGE e2 e0\nEDGE e2 e3\nQUERY REACH e0 e3\nSTATE\nPATH e3",
+        "target_text": "REPLACE NODE 0 WITH e0"
+      },
+      "test/graph_reachability/verify": {
+        "id": "test:graph_reachability:0:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nEDGE e0 e1\nEDGE e1 e2\nEDGE e2 e0\nEDGE e2 e3\nQUERY REACH e0 e3\nSTATE\nPATH e0 e1 e2 e3",
+        "target_text": "VALID"
+      },
+      "test/implication_chains/action": {
+        "id": "test:implication_chains:1:action:0",
+        "source_text": "MODE action\nPROBLEM\nHYP h0 : p0\nHYP h1 : p0 -> p1\nHYP h2 : p1 -> p2\nHYP h3 : p2 -> p3\nHYP h4 : p4 -> p5\nGOAL p3\nSTATE\nEMPTY",
+        "target_text": "APPLY h0"
+      },
+      "test/implication_chains/repair_action": {
+        "id": "test:implication_chains:1:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nHYP h0 : p0\nHYP h1 : p0 -> p1\nHYP h2 : p1 -> p2\nHYP h3 : p2 -> p3\nHYP h4 : p4 -> p5\nGOAL p3\nSTATE\nDERIVE p0 BY h999",
+        "target_text": "REPLACE LINE 0 HYP h0"
+      },
+      "test/implication_chains/verify": {
+        "id": "test:implication_chains:1:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nHYP h0 : p0\nHYP h1 : p0 -> p1\nHYP h2 : p1 -> p2\nHYP h3 : p2 -> p3\nHYP h4 : p4 -> p5\nGOAL p3\nSTATE\nDERIVE p0 BY h0\nDERIVE p1 BY h1 FROM p0\nDERIVE p2 BY h2 FROM p1\nDERIVE p3 BY h3 FROM p2",
+        "target_text": "VALID"
+      },
+      "test/relation_composition/action": {
+        "id": "test:relation_composition:2:action:0",
+        "source_text": "MODE action\nPROBLEM\nFACT r0 e0 e1\nFACT r1 e1 e2\nFACT r2 e2 e3\nRULE r3 = r0 ; r1\nRULE r4 = r3 ; r2\nFACT r0 e3 e1\nQUERY r4 e0 e3\nSTATE\nEMPTY",
+        "target_text": "FOLLOW e2 VIA e1"
+      },
+      "test/relation_composition/repair_action": {
+        "id": "test:relation_composition:2:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nFACT r0 e0 e1\nFACT r1 e1 e2\nFACT r2 e2 e3\nRULE r3 = r0 ; r1\nRULE r4 = r3 ; r2\nFACT r0 e3 e1\nQUERY r4 e0 e3\nSTATE\nDERIVE r3 e0 e2 VIA e0",
+        "target_text": "REPLACE LINE 0 VIA e1"
+      },
+      "test/relation_composition/verify": {
+        "id": "test:relation_composition:2:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nFACT r0 e0 e1\nFACT r1 e1 e2\nFACT r2 e2 e3\nRULE r3 = r0 ; r1\nRULE r4 = r3 ; r2\nFACT r0 e3 e1\nQUERY r4 e0 e3\nSTATE\nDERIVE r3 e0 e2 VIA e1\nDERIVE r4 e0 e3 VIA e2",
+        "target_text": "VALID"
+      },
+      "train/graph_reachability/action": {
+        "id": "train:graph_reachability:0:action:0",
+        "source_text": "MODE action\nPROBLEM\nEDGE e0 e1\nEDGE e1 e2\nEDGE e4 e1\nQUERY REACH e0 e2\nSTATE\nEMPTY",
+        "target_text": "APPEND e0"
+      },
+      "train/graph_reachability/repair_action": {
+        "id": "train:graph_reachability:0:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nEDGE e0 e1\nEDGE e1 e2\nEDGE e4 e1\nQUERY REACH e0 e2\nSTATE\nPATH e2",
+        "target_text": "REPLACE NODE 0 WITH e0"
+      },
+      "train/graph_reachability/verify": {
+        "id": "train:graph_reachability:0:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nEDGE e0 e1\nEDGE e1 e2\nEDGE e4 e1\nQUERY REACH e0 e2\nSTATE\nPATH e0 e1 e2",
+        "target_text": "VALID"
+      },
+      "train/implication_chains/action": {
+        "id": "train:implication_chains:1:action:0",
+        "source_text": "MODE action\nPROBLEM\nHYP h0 : p0\nHYP h1 : p0 -> p1\nHYP h2 : p1 -> p2\nHYP h3 : p2 -> p4\nGOAL p2\nSTATE\nEMPTY",
+        "target_text": "APPLY h0"
+      },
+      "train/implication_chains/repair_action": {
+        "id": "train:implication_chains:1:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nHYP h0 : p0\nHYP h1 : p0 -> p1\nHYP h2 : p1 -> p2\nHYP h3 : p2 -> p4\nGOAL p2\nSTATE\nDERIVE p0 BY h999",
+        "target_text": "REPLACE LINE 0 HYP h0"
+      },
+      "train/implication_chains/verify": {
+        "id": "train:implication_chains:1:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nHYP h0 : p0\nHYP h1 : p0 -> p1\nHYP h2 : p1 -> p2\nHYP h3 : p2 -> p4\nGOAL p2\nSTATE\nDERIVE p0 BY h0\nDERIVE p1 BY h1 FROM p0\nDERIVE p2 BY h2 FROM p1",
+        "target_text": "VALID"
+      },
+      "train/relation_composition/action": {
+        "id": "train:relation_composition:2:action:0",
+        "source_text": "MODE action\nPROBLEM\nFACT r0 e0 e1\nFACT r1 e1 e2\nRULE r2 = r0 ; r1\nFACT r1 e2 e1\nQUERY r2 e0 e2\nSTATE\nEMPTY",
+        "target_text": "FOLLOW e2 VIA e1"
+      },
+      "train/relation_composition/repair_action": {
+        "id": "train:relation_composition:2:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nFACT r0 e0 e1\nFACT r1 e1 e2\nRULE r2 = r0 ; r1\nFACT r1 e2 e1\nQUERY r2 e0 e2\nSTATE\nDERIVE r2 e0 e2 VIA e0",
+        "target_text": "REPLACE LINE 0 VIA e1"
+      },
+      "train/relation_composition/verify": {
+        "id": "train:relation_composition:2:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nFACT r0 e0 e1\nFACT r1 e1 e2\nRULE r2 = r0 ; r1\nFACT r1 e2 e1\nQUERY r2 e0 e2\nSTATE\nDERIVE r2 e0 e2 VIA e1",
+        "target_text": "VALID"
+      }
+    },
+    "splits": {
+      "ood": {
+        "examples": 1800,
+        "families": {
+          "graph_reachability": 660,
+          "implication_chains": 600,
+          "relation_composition": 540
+        },
+        "modes": {
+          "action": 972,
+          "repair_action": 612,
+          "verify": 216
+        },
+        "problems": 108,
+        "verify_targets": {
+          "INVALID BAD_EDGE": 34,
+          "INVALID BAD_FACT": 36,
+          "INVALID BAD_PATH_END": 2,
+          "INVALID BAD_PREMISE": 31,
+          "INVALID UNKNOWN_HYP": 5,
+          "VALID": 108
+        }
+      },
+      "test": {
+        "examples": 26,
+        "families": {
+          "graph_reachability": 10,
+          "implication_chains": 10,
+          "relation_composition": 6
+        },
+        "modes": {
+          "action": 10,
+          "repair_action": 10,
+          "verify": 6
+        },
+        "problems": 3,
+        "verify_targets": {
+          "INVALID BAD_FACT": 1,
+          "INVALID BAD_PATH_END": 1,
+          "INVALID BAD_PREMISE": 1,
+          "VALID": 3
+        }
+      },
+      "train": {
+        "examples": 20,
+        "families": {
+          "graph_reachability": 8,
+          "implication_chains": 8,
+          "relation_composition": 4
+        },
+        "modes": {
+          "action": 7,
+          "repair_action": 7,
+          "verify": 6
+        },
+        "problems": 3,
+        "verify_targets": {
+          "INVALID BAD_EDGE": 1,
+          "INVALID BAD_FACT": 1,
+          "INVALID BAD_PREMISE": 1,
+          "VALID": 3
+        }
+      }
+    }
+  },
+  "status": "pass",
+  "trm": {
+    "identifiers": [
+      "<blank>"
+    ],
+    "splits": {
+      "ood": {
+        "inputs_shape": [
+          1800,
+          272
+        ],
+        "labels_shape": [
+          1800,
+          272
+        ],
+        "non_empty_target_rows": 1800,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 272,
+        "vocab_size": 133
+      },
+      "test": {
+        "inputs_shape": [
+          26,
+          272
+        ],
+        "labels_shape": [
+          26,
+          272
+        ],
+        "non_empty_target_rows": 26,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 272,
+        "vocab_size": 133
+      },
+      "train": {
+        "inputs_shape": [
+          20,
+          272
+        ],
+        "labels_shape": [
+          20,
+          272
+        ],
+        "non_empty_target_rows": 20,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 272,
+        "vocab_size": 133
+      }
+    }
+  },
+  "warnings": []
+}

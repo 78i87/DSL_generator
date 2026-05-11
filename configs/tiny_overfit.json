@@ -1,0 +1,77 @@
+{
+  "root_seed": 0,
+  "modes": ["improve", "repair", "complete", "verify"],
+  "splits": {
+    "train": {
+      "problems_per_family": 2,
+      "difficulty": "train"
+    },
+    "test": {
+      "problems_per_family": 1,
+      "difficulty": "test"
+    },
+    "ood": {
+      "problems_per_family": 1,
+      "difficulty": "ood"
+    }
+  },
+  "families": {
+    "graph_reachability": {
+      "enabled": true,
+      "train": {
+        "num_nodes": 5,
+        "path_length": 2,
+        "extra_edges": 1,
+        "require_shortest": true
+      },
+      "test": {
+        "num_nodes": 6,
+        "path_length": 3,
+        "extra_edges": 1,
+        "require_shortest": true
+      },
+      "ood": {
+        "num_nodes": 7,
+        "path_length": 4,
+        "extra_edges": 2,
+        "require_shortest": true
+      }
+    },
+    "implication_chains": {
+      "enabled": true,
+      "train": {
+        "num_props": 5,
+        "proof_length": 2,
+        "distractor_hyps": 1
+      },
+      "test": {
+        "num_props": 6,
+        "proof_length": 3,
+        "distractor_hyps": 1
+      },
+      "ood": {
+        "num_props": 7,
+        "proof_length": 4,
+        "distractor_hyps": 2
+      }
+    },
+    "relation_composition": {
+      "enabled": true,
+      "train": {
+        "num_entities": 5,
+        "composition_depth": 2,
+        "distractor_facts": 1
+      },
+      "test": {
+        "num_entities": 6,
+        "composition_depth": 3,
+        "distractor_facts": 1
+      },
+      "ood": {
+        "num_entities": 7,
+        "composition_depth": 4,
+        "distractor_facts": 2
+      }
+    }
+  }
+}
