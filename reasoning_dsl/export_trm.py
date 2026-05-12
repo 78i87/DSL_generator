@@ -26,6 +26,7 @@ def export_trm_arrays(
     output_dir: str | Path,
     *,
     vocab: Vocab | None = None,
+    tokenization: str = "whitespace",
 ) -> None:
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
@@ -33,7 +34,7 @@ def export_trm_arrays(
     if not all_examples:
         raise ValueError("Cannot export an empty dataset")
 
-    vocab = vocab or Vocab.build(all_examples)
+    vocab = vocab or Vocab.build(all_examples, tokenization=tokenization)
     seq_len = max(_sequence_lengths(all_examples, vocab))
 
     vocab.save(output / "vocab.json")

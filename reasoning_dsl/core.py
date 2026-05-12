@@ -1,7 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from typing import Any, Literal, Protocol
+
+from reasoning_dsl.task_specs import render_task_spec
 
 
 SplitName = Literal["train", "test", "ood"]
@@ -51,9 +53,13 @@ class Example:
     state_lines: list[str]
     target_lines: list[str]
     meta: dict[str, Any]
+    task_lines: list[str] = field(default_factory=list)
 
     def source_lines(self) -> list[str]:
-        lines = [f"MODE {self.mode}", "PROBLEM", *self.problem_lines, "STATE"]
+        lines = [f"MODE {self.mode}"]
+        if self.task_lines:
+            lines.extend(["TASK", *self.task_lines])
+        lines.extend(["PROBLEM", *self.problem_lines, "STATE"])
         lines.extend(self.state_lines if self.state_lines else ["EMPTY"])
         return lines
 
@@ -72,6 +78,7 @@ class Example:
             "problem_lines": self.problem_lines,
             "state_lines": self.state_lines,
             "target_lines": self.target_lines,
+            "task_lines": self.task_lines,
             "source_text": self.source_text(),
             "target_text": self.target_text(),
             "meta": self.meta,
@@ -114,9 +121,13 @@ def build_examples_for_problem(
     seed: int,
     modes: list[str],
     relation_action_format: str = "follow",
+    action_reference_format: str = "symbol",
     tree_repair_action_format: str = "index",
     repair_action_format: str = "index",
+    term_repair_action_format: str = "rewrite",
     verify_corruption_strategy: str = "default",
+    task_spec_format: str = "none",
+    task_spec_variant_count: int = 1,
 ) -> list[Example]:
     examples: list[Example] = []
     states = problem.canonical_states
@@ -131,6 +142,18 @@ def build_examples_for_problem(
     }
 
     def add(mode: str, suffix: str, state: list[str], target: list[str], extra: dict[str, Any] | None = None) -> None:
+        task_lines, task_variant = render_task_spec(
+            family=generator.family,
+            mode=mode,
+            seed=seed,
+            suffix=suffix,
+            variant_count=task_spec_variant_count,
+            task_spec_format=task_spec_format,
+        )
+        meta = {**base_meta, "mode": mode, **(extra or {})}
+        if task_variant is not None:
+            meta["task_spec_format"] = task_spec_format
+            meta["task_spec_variant"] = task_variant
         examples.append(
             Example(
                 id=f"{group_id}:{mode}:{suffix}",
@@ -140,7 +163,8 @@ def build_examples_for_problem(
                 problem_lines=problem.problem_lines,
                 state_lines=state,
                 target_lines=target,
-                meta={**base_meta, "mode": mode, **(extra or {})},
+                meta=meta,
+                task_lines=task_lines,
             )
         )
 
@@ -164,6 +188,7 @@ def build_examples_for_problem(
                     states[step],
                     states[step + 1],
                     relation_action_format=relation_action_format,
+                    action_reference_format=action_reference_format,
                 ),
                 {
                     "step": step,
@@ -191,6 +216,7 @@ def build_examples_for_problem(
                     states[step],
                     repair_action_format=repair_action_format,
                     tree_repair_action_format=tree_repair_action_format,
+                    term_repair_action_format=term_repair_action_format,
                 ),
                 {
                     "step": step,
@@ -239,12 +265,21 @@ def _action_target_lines(
     next_state: list[str],
     *,
     relation_action_format: str = "follow",
+    action_reference_format: str = "symbol",
 ) -> list[str]:
+    if action_reference_format not in {"symbol", "line_index"}:
+        raise ValueError(f"Unsupported action_reference_format: {action_reference_format}")
+
     if family == "graph_reachability":
         current_nodes = _graph_state_nodes(current)
         next_nodes = _graph_state_nodes(next_state)
         if len(next_nodes) != len(current_nodes) + 1 or next_nodes[: len(current_nodes)] != current_nodes:
             raise ValueError("Graph action target requires a one-node path extension")
+        if action_reference_format == "line_index":
+            if not current_nodes:
+                return ["APPEND START"]
+            edge_index = _problem_line_index(problem_lines, ["EDGE", current_nodes[-1], next_nodes[-1]])
+            return [f"APPEND EDGE {edge_index}"]
         return [f"APPEND {next_nodes[-1]}"]
 
     if family == "tree_ancestry":
@@ -252,6 +287,11 @@ def _action_target_lines(
         next_nodes = _lineage_state_nodes(next_state)
         if len(next_nodes) != len(current_nodes) + 1 or next_nodes[: len(current_nodes)] != current_nodes:
             raise ValueError("Tree action target requires a one-node lineage extension")
+        if action_reference_format == "line_index":
+            if not current_nodes:
+                return ["DESCEND ROOT"]
+            parent_index = _problem_line_index(problem_lines, ["PARENT", current_nodes[-1], next_nodes[-1]])
+            return [f"DESCEND PARENT {parent_index}"]
         return [f"DESCEND {next_nodes[-1]}"]
 
     if family == "term_rewriting":
@@ -261,6 +301,14 @@ def _action_target_lines(
             action_line = next_state[-2]
             term_line = next_state[-1]
             if action_line.startswith("RW ") and term_line.startswith("TERM "):
+                if action_reference_format == "line_index":
+                    tokens = action_line.split()
+                    rule_index = _problem_rule_line_index(problem_lines, tokens[1])
+                    if len(tokens) == 2:
+                        return [f"RW RULE {rule_index}"]
+                    if len(tokens) >= 4 and tokens[2] == "AT":
+                        return [f"RW RULE {rule_index} AT {' '.join(tokens[3:])}"]
+                    raise ValueError("Term rewriting action target has malformed rewrite line")
                 return [action_line]
         raise ValueError("Term rewriting action target requires one rewrite transition or HALT")
 
@@ -272,6 +320,9 @@ def _action_target_lines(
     if family == "implication_chains":
         if not ((len(tokens) == 4 or len(tokens) == 6) and tokens[0] == "DERIVE" and tokens[2] == "BY"):
             raise ValueError("Implication action target requires a derivation line")
+        if action_reference_format == "line_index":
+            hyp_index = _problem_line_index_by_name(problem_lines, "HYP", tokens[3])
+            return [f"APPLY HYP {hyp_index}"]
         return [f"APPLY {tokens[3]}"]
 
     if family == "relation_composition":
@@ -282,6 +333,10 @@ def _action_target_lines(
         if rel not in rules:
             raise ValueError(f"Relation action target has unknown derived relation: {rel}")
         left_rel, right_rel = rules[rel]
+        if action_reference_format == "line_index":
+            rule_index = _problem_rule_line_index(problem_lines, rel)
+            fact_index = _problem_line_index(problem_lines, ["FACT", right_rel, via, right_entity])
+            return [f"FOLLOW RULE {rule_index} FACT {fact_index}"]
         if relation_action_format == "compose":
             return [f"COMPOSE {left_rel} {left_entity} {right_rel} {right_entity} VIA {via}"]
         if relation_action_format == "follow_left":
@@ -300,6 +355,7 @@ def _repair_action_target_lines(
     *,
     repair_action_format: str = "index",
     tree_repair_action_format: str = "index",
+    term_repair_action_format: str = "rewrite",
 ) -> list[str]:
     if family == "graph_reachability":
         corrupted_nodes = _graph_state_nodes(corrupted)
@@ -382,6 +438,10 @@ def _repair_action_target_lines(
         return [f"{prefix} {token_names[token_idx]} {target_tokens[token_idx]}"]
 
     if family == "term_rewriting":
+        if term_repair_action_format == "first_bad":
+            return ["REPAIR FIRST_BAD"]
+        if term_repair_action_format != "rewrite":
+            raise ValueError(f"Unsupported term_repair_action_format: {term_repair_action_format}")
         if len(corrupted) != len(target):
             raise ValueError("Term rewriting repair action requires equal line counts")
         diffs = [idx for idx, (left, right) in enumerate(zip(corrupted, target)) if left != right]
@@ -443,3 +503,22 @@ def _relation_rules(problem_lines: list[str]) -> dict[str, tuple[str, str]]:
         if len(tokens) == 6 and tokens[0] == "RULE" and tokens[2] == "=" and tokens[4] == ";":
             rules[tokens[1]] = (tokens[3], tokens[5])
     return rules
+
+
+def _problem_line_index(problem_lines: list[str], expected_tokens: list[str]) -> int:
+    for idx, line in enumerate(problem_lines):
+        if line.split() == expected_tokens:
+            return idx
+    raise ValueError(f"Problem line not found: {' '.join(expected_tokens)}")
+
+
+def _problem_line_index_by_name(problem_lines: list[str], keyword: str, name: str) -> int:
+    for idx, line in enumerate(problem_lines):
+        tokens = line.split()
+        if len(tokens) >= 2 and tokens[0] == keyword and tokens[1] == name:
+            return idx
+    raise ValueError(f"Problem line not found for {keyword} {name}")
+
+
+def _problem_rule_line_index(problem_lines: list[str], rule_name: str) -> int:
+    return _problem_line_index_by_name(problem_lines, "RULE", rule_name)

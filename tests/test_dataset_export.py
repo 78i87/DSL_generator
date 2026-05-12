@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import json
+import re
 from collections import Counter
 from pathlib import Path
 
 import numpy as np
 import pytest
 
+from reasoning_dsl.alpha_rename import alpha_augment_train_split, alpha_rename_dataset, canonicalize_dataset
 from reasoning_dsl.export_jsonl import export_jsonl
 from reasoning_dsl.export_trm import export_trm_arrays
 from reasoning_dsl.generators import (
@@ -14,9 +16,11 @@ from reasoning_dsl.generators import (
     ImplicationChainGenerator,
     RelationCompositionGenerator,
     TermRewritingGenerator,
+    TreeAncestryGenerator,
 )
 from reasoning_dsl.split import generate_examples
-from reasoning_dsl.tokenize import SPECIAL_TOKENS, Vocab
+from reasoning_dsl.task_specs import render_task_spec
+from reasoning_dsl.tokenize import SPECIAL_TOKENS, Vocab, tokenize_text
 
 
 def _small_config() -> dict:
@@ -138,6 +142,40 @@ def _term_rewriting_config() -> dict:
     }
 
 
+def _five_family_task_spec_config() -> dict:
+    config = _small_config()
+    config["modes"] = ["action", "repair_action", "verify"]
+    config["task_spec_format"] = "compact_v1"
+    config["task_spec_variant_count"] = 3
+    config["splits"] = {"train": {"problems_per_family": 1, "difficulty": "train"}}
+    config["families"]["tree_ancestry"] = {
+        "enabled": True,
+        "train": {
+            "depth": 3,
+            "branching_factor": 2,
+            "distractor_subtrees": 1,
+        },
+    }
+    config["families"]["term_rewriting"] = {
+        "enabled": True,
+        "train": {
+            "rewrite_steps": 3,
+            "term_depth": 4,
+            "distractor_rules": 2,
+            "variable_rule_rate": 0.5,
+            "binary_rule_rate": 0.5,
+            "normal_form_rate": 0.5,
+        },
+    }
+    return config
+
+
+def _five_family_line_code_task_spec_config() -> dict:
+    config = _five_family_task_spec_config()
+    config["task_spec_format"] = "line_codes_v1"
+    return config
+
+
 def test_split_generation_has_no_cross_split_fingerprint_overlap() -> None:
     examples_by_split = generate_examples(
         generators=[GraphReachabilityGenerator(), ImplicationChainGenerator(), RelationCompositionGenerator()],
@@ -149,6 +187,217 @@ def test_split_generation_has_no_cross_split_fingerprint_overlap() -> None:
         fingerprints = {f"{example.family}:{example.meta['fingerprint']}" for example in examples}
         assert fingerprints.isdisjoint(seen), split
         seen.update(fingerprints)
+
+
+def test_task_spec_headers_render_between_mode_and_problem() -> None:
+    examples_by_split = generate_examples(
+        generators=[
+            GraphReachabilityGenerator(),
+            ImplicationChainGenerator(),
+            RelationCompositionGenerator(),
+            TreeAncestryGenerator(),
+            TermRewritingGenerator(),
+        ],
+        config=_five_family_task_spec_config(),
+        root_seed=0,
+    )
+    examples = examples_by_split["train"]
+    assert examples
+
+    family_names = {
+        "graph_reachability",
+        "implication_chains",
+        "relation_composition",
+        "tree_ancestry",
+        "term_rewriting",
+    }
+    symbol_re = re.compile(r"\b[ephrfgv]\d+\b")
+    demo_symbol_re = re.compile(r"\b[A-Z]+[0-9]+\b")
+    for example in examples:
+        source_lines = example.source_lines()
+        assert source_lines[0] == f"MODE {example.mode}"
+        assert source_lines[1] == "TASK"
+        assert "PROBLEM" in source_lines
+        assert source_lines.index("TASK") < source_lines.index("PROBLEM") < source_lines.index("STATE")
+        assert example.task_lines
+        task_text = "\n".join(example.task_lines)
+        assert not any(family_name in task_text for family_name in family_names)
+        assert any(line.startswith("DEMO ") for line in example.task_lines)
+        assert demo_symbol_re.findall(task_text)
+        current_symbols = set(symbol_re.findall("\n".join(example.problem_lines)))
+        assert current_symbols.isdisjoint(symbol_re.findall(task_text))
+        assert example.meta["task_spec_format"] == "compact_v1"
+        assert 0 <= example.meta["task_spec_variant"] < 3
+
+
+def test_compact_v1_task_spec_output_remains_stable() -> None:
+    lines, variant = render_task_spec(
+        family="graph_reachability",
+        mode="action",
+        seed=1,
+        suffix="0",
+        variant_count=3,
+        task_spec_format="compact_v1",
+    )
+
+    assert variant == 0
+    assert lines == [
+        "OUTPUT exactly one primitive action line",
+        "ACTION changes STATE by one valid step toward DONE",
+        "VALID means all rules hold; INVALID CODE names the first failed rule",
+        "SYNTAX EDGE A B : directed step from A to B",
+        "SYNTAX QUERY REACH A C : DONE needs PATH from A to C",
+        "SYNTAX PATH A B C : ordered visited nodes",
+        "STATE EMPTY means no PATH has started",
+        "VALID PATH requires each adjacent pair has EDGE",
+        "ACTION APPEND X starts with query start or extends from last node by EDGE",
+        "DONE when PATH starts at query start and ends at query target",
+        "DEMO EDGE A0 A1 ; EDGE A1 A2 ; QUERY REACH A0 A2 ; EMPTY => APPEND A0 ; PATH A0 => APPEND A1",
+    ]
+
+
+def test_line_code_task_spec_headers_render_as_single_tokens() -> None:
+    examples_by_split = generate_examples(
+        generators=[
+            GraphReachabilityGenerator(),
+            ImplicationChainGenerator(),
+            RelationCompositionGenerator(),
+            TreeAncestryGenerator(),
+            TermRewritingGenerator(),
+        ],
+        config=_five_family_line_code_task_spec_config(),
+        root_seed=0,
+    )
+    examples = examples_by_split["train"]
+    assert examples
+
+    for example in examples:
+        source_lines = example.source_lines()
+        assert source_lines[0] == f"MODE {example.mode}"
+        assert source_lines[1] == "TASK"
+        assert source_lines.index("TASK") < source_lines.index("PROBLEM") < source_lines.index("STATE")
+        assert example.task_lines
+        assert all(re.fullmatch(r"SPEC_[A-Z0-9_]+", line) for line in example.task_lines)
+        assert any(line.endswith("_DEMO") for line in example.task_lines)
+        assert example.meta["task_spec_format"] == "line_codes_v1"
+        assert 0 <= example.meta["task_spec_variant"] < 3
+
+
+def test_task_spec_variants_are_deterministic_for_fixed_seed() -> None:
+    generators = [
+        GraphReachabilityGenerator(),
+        ImplicationChainGenerator(),
+        RelationCompositionGenerator(),
+        TreeAncestryGenerator(),
+        TermRewritingGenerator(),
+    ]
+    first = generate_examples(generators=generators, config=_five_family_task_spec_config(), root_seed=17)["train"]
+    second = generate_examples(generators=generators, config=_five_family_task_spec_config(), root_seed=17)["train"]
+
+    assert [(example.id, example.task_lines) for example in first] == [
+        (example.id, example.task_lines) for example in second
+    ]
+
+
+def test_line_code_task_spec_variants_are_deterministic_for_fixed_seed() -> None:
+    generators = [
+        GraphReachabilityGenerator(),
+        ImplicationChainGenerator(),
+        RelationCompositionGenerator(),
+        TreeAncestryGenerator(),
+        TermRewritingGenerator(),
+    ]
+    first = generate_examples(generators=generators, config=_five_family_line_code_task_spec_config(), root_seed=17)[
+        "train"
+    ]
+    second = generate_examples(generators=generators, config=_five_family_line_code_task_spec_config(), root_seed=17)[
+        "train"
+    ]
+
+    assert [(example.id, example.task_lines) for example in first] == [
+        (example.id, example.task_lines) for example in second
+    ]
+
+
+def test_old_configs_without_task_spec_keep_old_source_shape() -> None:
+    examples_by_split = generate_examples(
+        generators=[GraphReachabilityGenerator(), ImplicationChainGenerator(), RelationCompositionGenerator()],
+        config=_small_config(),
+        root_seed=0,
+    )
+    source_lines = examples_by_split["train"][0].source_lines()
+
+    assert source_lines[0].startswith("MODE ")
+    assert source_lines[1] == "PROBLEM"
+    assert "TASK" not in source_lines
+    assert examples_by_split["train"][0].task_lines == []
+
+
+def test_task_spec_export_keeps_no_id_contract(tmp_path) -> None:
+    examples_by_split = generate_examples(
+        generators=[
+            GraphReachabilityGenerator(),
+            ImplicationChainGenerator(),
+            RelationCompositionGenerator(),
+            TreeAncestryGenerator(),
+            TermRewritingGenerator(),
+        ],
+        config=_five_family_task_spec_config(),
+        root_seed=0,
+    )
+
+    export_jsonl(examples_by_split, tmp_path)
+    export_trm_arrays(examples_by_split, tmp_path)
+
+    rows = [json.loads(line) for line in (tmp_path / "jsonl" / "train.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert all(row["task_lines"] for row in rows)
+    assert all("\nTASK\n" in row["source_text"] for row in rows)
+
+    identifiers = json.loads((tmp_path / "identifiers.json").read_text(encoding="utf-8"))
+    metadata = json.loads((tmp_path / "train" / "dataset.json").read_text(encoding="utf-8"))
+    puzzle_identifiers = np.load(tmp_path / "train" / "all__puzzle_identifiers.npy")
+
+    assert identifiers == ["<blank>"]
+    assert metadata["num_puzzle_identifiers"] == 1
+    assert np.all(puzzle_identifiers == 0)
+
+
+def test_0_39_task_spec_headers_change_only_task_spec_keys() -> None:
+    base_path = Path("configs/symbolic_0_29_relation_repair_hardened.json")
+    task_path = Path("configs/symbolic_0_39_task_spec_headers.json")
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    task = json.loads(task_path.read_text(encoding="utf-8"))
+
+    assert task["task_spec_format"] == "compact_v1"
+    assert task["task_spec_variant_count"] == 3
+    base_without_note = {key: value for key, value in base.items() if key != "experiment_note"}
+    task_without_task_spec = {
+        key: value
+        for key, value in task.items()
+        if key not in {"experiment_note", "task_spec_format", "task_spec_variant_count"}
+    }
+    assert task_without_task_spec == base_without_note
+
+
+def test_0_39_line_code_task_spec_config_changes_only_task_spec_format() -> None:
+    task_path = Path("configs/symbolic_0_39_task_spec_headers.json")
+    line_code_path = Path("configs/symbolic_0_39_task_spec_line_codes.json")
+    task = json.loads(task_path.read_text(encoding="utf-8"))
+    line_code = json.loads(line_code_path.read_text(encoding="utf-8"))
+
+    assert line_code["task_spec_format"] == "line_codes_v1"
+    assert line_code["task_spec_variant_count"] == 3
+    task_without_changed_fields = {
+        key: value
+        for key, value in task.items()
+        if key not in {"experiment_note", "task_spec_format"}
+    }
+    line_code_without_changed_fields = {
+        key: value
+        for key, value in line_code.items()
+        if key not in {"experiment_note", "task_spec_format"}
+    }
+    assert line_code_without_changed_fields == task_without_changed_fields
 
 
 def test_difficulty_mixture_has_exact_slice_counts_and_no_leakage() -> None:
@@ -648,6 +897,161 @@ def test_0_24_term_rewriting_adds_only_new_family() -> None:
     assert rewrite_without_note_and_families == baseline_without_note_and_families
 
 
+def test_0_25_term_rewriting_curriculum_adds_only_term_train_reinforcement() -> None:
+    base_path = Path("configs/symbolic_0_24_term_rewriting.json")
+    curriculum_path = Path("configs/symbolic_0_25_term_rewriting_curriculum.json")
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    curriculum = json.loads(curriculum_path.read_text(encoding="utf-8"))
+
+    assert curriculum["root_seed"] == base["root_seed"]
+    assert curriculum["modes"] == base["modes"] == ["action", "repair_action", "verify"]
+    assert curriculum["families"] == base["families"]
+    assert curriculum["splits"]["test"] == base["splits"]["test"]
+    assert curriculum["splits"]["ood"] == base["splits"]["ood"]
+
+    base_train_names = {item["name"] for item in base["splits"]["train"]["difficulty_mixture"]}
+    added = [
+        item
+        for item in curriculum["splits"]["train"]["difficulty_mixture"]
+        if item["name"] not in base_train_names
+    ]
+
+    assert [item["name"] for item in added] == [
+        "term_rewrite_bridge_6_balance",
+        "term_rewrite_bridge_7_balance",
+        "term_rewrite_stress_8_balance",
+        "term_rewrite_stress_9_balance",
+        "term_rewrite_stress_10_balance",
+    ]
+    assert all(item["families"] == ["term_rewriting"] for item in added)
+    assert all(item["modes"] == ["action", "repair_action", "verify"] for item in added)
+    assert all(item["problems_per_family"] == 48 for item in added)
+
+
+def test_0_26_term_rewrite_rule_action_changes_only_term_action_format() -> None:
+    base_path = Path("configs/symbolic_0_24_term_rewriting.json")
+    rule_path = Path("configs/symbolic_0_26_term_rewrite_rule_action.json")
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    rule = json.loads(rule_path.read_text(encoding="utf-8"))
+
+    assert base.get("term_rewrite_action_format", "path") == "path"
+    assert rule["term_rewrite_action_format"] == "rule"
+    assert rule["root_seed"] == base["root_seed"]
+    assert rule["modes"] == base["modes"]
+    assert rule["families"] == base["families"]
+    assert rule["splits"] == base["splits"]
+
+
+def test_0_27_term_rewrite_first_bad_changes_only_term_repair_format() -> None:
+    base_path = Path("configs/symbolic_0_26_term_rewrite_rule_action.json")
+    repair_path = Path("configs/symbolic_0_27_term_rewrite_first_bad_repair.json")
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    repair = json.loads(repair_path.read_text(encoding="utf-8"))
+
+    assert base.get("term_repair_action_format", "rewrite") == "rewrite"
+    assert repair["term_repair_action_format"] == "first_bad"
+    repair_without_note = {key: value for key, value in repair.items() if key not in {"experiment_note", "term_repair_action_format"}}
+    base_without_note = {key: value for key, value in base.items() if key != "experiment_note"}
+    assert repair_without_note == base_without_note
+
+
+def test_0_28_term_verify_hardened_adds_only_term_verify_train_slices() -> None:
+    base_path = Path("configs/symbolic_0_27_term_rewrite_first_bad_repair.json")
+    hardened_path = Path("configs/symbolic_0_28_term_verify_hardened.json")
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    hardened = json.loads(hardened_path.read_text(encoding="utf-8"))
+
+    assert hardened["root_seed"] == base["root_seed"]
+    assert hardened["modes"] == base["modes"]
+    assert hardened["families"] == base["families"]
+    assert hardened["splits"]["test"] == base["splits"]["test"]
+    assert hardened["splits"]["ood"] == base["splits"]["ood"]
+
+    base_train_names = {item["name"] for item in base["splits"]["train"]["difficulty_mixture"]}
+    added = [
+        item
+        for item in hardened["splits"]["train"]["difficulty_mixture"]
+        if item["name"] not in base_train_names
+    ]
+
+    assert [item["name"] for item in added] == [
+        "verify_balance_term_short_2_5",
+        "verify_balance_term_bridge_6",
+        "verify_balance_term_bridge_7",
+        "verify_balance_term_stress_8",
+        "verify_balance_term_stress_9",
+        "verify_balance_term_stress_10",
+    ]
+    assert all(item["families"] == ["term_rewriting"] for item in added)
+    assert all(item["modes"] == ["verify"] for item in added)
+    assert all(item["problems_per_family"] == 24 for item in added)
+
+
+def test_0_29_relation_repair_hardened_adds_only_relation_repair_train_slices() -> None:
+    base_path = Path("configs/symbolic_0_28_term_verify_hardened.json")
+    hardened_path = Path("configs/symbolic_0_29_relation_repair_hardened.json")
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    hardened = json.loads(hardened_path.read_text(encoding="utf-8"))
+
+    assert hardened["root_seed"] == base["root_seed"]
+    assert hardened["modes"] == base["modes"]
+    assert hardened["families"] == base["families"]
+    assert hardened["splits"]["test"] == base["splits"]["test"]
+    assert hardened["splits"]["ood"] == base["splits"]["ood"]
+
+    base_train_names = {item["name"] for item in base["splits"]["train"]["difficulty_mixture"]}
+    added = [
+        item
+        for item in hardened["splits"]["train"]["difficulty_mixture"]
+        if item["name"] not in base_train_names
+    ]
+
+    assert [item["name"] for item in added] == [
+        "repair_balance_relation_extra_6",
+        "repair_balance_relation_extra_7",
+        "repair_balance_relation_extra_8",
+        "repair_balance_relation_extra_9",
+        "repair_balance_relation_extra_10",
+    ]
+    assert all(item["families"] == ["relation_composition"] for item in added)
+    assert all(item["modes"] == ["repair_action"] for item in added)
+    assert all(item["problems_per_family"] == 24 for item in added)
+
+
+def test_0_37_term_action_repeated_hardened_adds_only_term_action_train_slices() -> None:
+    base_path = Path("configs/symbolic_0_29_relation_repair_hardened.json")
+    hardened_path = Path("configs/symbolic_0_37_term_action_repeated_hardened.json")
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    hardened = json.loads(hardened_path.read_text(encoding="utf-8"))
+
+    assert hardened["root_seed"] == base["root_seed"]
+    assert hardened["modes"] == base["modes"]
+    assert hardened["families"] == base["families"]
+    assert hardened["splits"]["test"] == base["splits"]["test"]
+    assert hardened["splits"]["ood"] == base["splits"]["ood"]
+    assert hardened["term_rewrite_action_format"] == base["term_rewrite_action_format"] == "rule"
+
+    base_train_names = {item["name"] for item in base["splits"]["train"]["difficulty_mixture"]}
+    added = [
+        item
+        for item in hardened["splits"]["train"]["difficulty_mixture"]
+        if item["name"] not in base_train_names
+    ]
+
+    assert [item["name"] for item in added] == [
+        "term_action_repeated_bridge_6",
+        "term_action_repeated_bridge_7",
+        "term_action_repeated_stress_8",
+        "term_action_repeated_stress_9",
+        "term_action_repeated_stress_10",
+    ]
+    assert all(item["families"] == ["term_rewriting"] for item in added)
+    assert all(item["modes"] == ["action"] for item in added)
+    assert all(item["problems_per_family"] == 48 for item in added)
+    assert all(item["difficulty_overrides"]["repeated_subterm_rate"] == 1.0 for item in added)
+    assert all(item["difficulty_overrides"]["normal_form_rate"] == 0.0 for item in added)
+
+
 def test_term_rewriting_export_preserves_no_id_contract(tmp_path) -> None:
     examples_by_split = generate_examples(
         generators=[TermRewritingGenerator()],
@@ -737,6 +1141,92 @@ def test_action_rows_export_with_supervised_targets(tmp_path) -> None:
     assert labels.max() < metadata["vocab_size"]
 
 
+def test_line_index_action_targets_reference_problem_lines(tmp_path) -> None:
+    config = _small_config()
+    config["modes"] = ["action"]
+    config["action_reference_format"] = "line_index"
+
+    examples_by_split = generate_examples(
+        generators=[GraphReachabilityGenerator(), ImplicationChainGenerator(), RelationCompositionGenerator()],
+        config=config,
+        root_seed=0,
+    )
+    train_actions = [example.target_lines[0] for example in examples_by_split["train"]]
+
+    assert "APPEND START" in train_actions
+    assert any(action.startswith("APPEND EDGE ") for action in train_actions)
+    assert any(action.startswith("APPLY HYP ") for action in train_actions)
+    assert any(action.startswith("FOLLOW RULE ") and " FACT " in action for action in train_actions)
+
+    export_jsonl(examples_by_split, tmp_path)
+    export_trm_arrays(examples_by_split, tmp_path)
+    rows = [json.loads(line) for line in (tmp_path / "jsonl" / "train.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert all(row["mode"] == "action" for row in rows)
+    assert all(len(row["target_lines"]) == 1 for row in rows)
+
+
+def test_line_index_action_targets_support_tree_and_term_rewriting() -> None:
+    config = _term_rewriting_config()
+    config["action_reference_format"] = "line_index"
+    tree_config = {
+        "modes": ["action"],
+        "action_reference_format": "line_index",
+        "splits": {"train": {"problems_per_family": 1, "difficulty": "train"}},
+        "families": {
+            "tree_ancestry": {
+                "enabled": True,
+                "train": {
+                    "depth": 3,
+                    "branching_factor": 2,
+                    "distractor_subtrees": 1,
+                },
+            }
+        },
+    }
+
+    term_examples = generate_examples(generators=[TermRewritingGenerator()], config=config, root_seed=0)["train"]
+    tree_examples = generate_examples(generators=[TreeAncestryGenerator()], config=tree_config, root_seed=0)["train"]
+
+    assert any(example.target_lines == ["HALT"] for example in term_examples) or all(
+        example.target_lines[0].startswith("RW RULE ") for example in term_examples
+    )
+    assert any(example.target_lines[0].startswith("RW RULE ") for example in term_examples)
+    assert tree_examples[0].target_lines == ["DESCEND ROOT"]
+    assert any(example.target_lines[0].startswith("DESCEND PARENT ") for example in tree_examples)
+
+
+def test_0_33_line_index_actions_change_only_action_reference_format() -> None:
+    base_path = Path("configs/symbolic_0_29_relation_repair_hardened.json")
+    line_index_path = Path("configs/symbolic_0_33_line_index_actions.json")
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    line_index = json.loads(line_index_path.read_text(encoding="utf-8"))
+
+    assert line_index["action_reference_format"] == "line_index"
+    assert base.get("action_reference_format", "symbol") == "symbol"
+    base_without_note = {key: value for key, value in base.items() if key != "experiment_note"}
+    line_index_without_note = {
+        key: value for key, value in line_index.items() if key not in {"experiment_note", "action_reference_format"}
+    }
+    assert line_index_without_note == base_without_note
+
+
+def test_0_35_term_path_actions_change_only_term_rewrite_action_format() -> None:
+    base_path = Path("configs/symbolic_0_29_relation_repair_hardened.json")
+    path_path = Path("configs/symbolic_0_35_term_path_actions.json")
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    path_config = json.loads(path_path.read_text(encoding="utf-8"))
+
+    assert base["term_rewrite_action_format"] == "rule"
+    assert path_config["term_rewrite_action_format"] == "path"
+    base_without_note = {
+        key: value for key, value in base.items() if key not in {"experiment_note", "term_rewrite_action_format"}
+    }
+    path_without_note = {
+        key: value for key, value in path_config.items() if key not in {"experiment_note", "term_rewrite_action_format"}
+    }
+    assert path_without_note == base_without_note
+
+
 def test_repair_action_rows_export_with_supervised_targets(tmp_path) -> None:
     config = _small_config()
     config["modes"] = ["repair_action"]
@@ -820,3 +1310,113 @@ def test_jsonl_and_trm_export(tmp_path) -> None:
     assert metadata["total_groups"] == inputs.shape[0]
     assert labels.max() < metadata["vocab_size"]
     assert inputs.max() < metadata["vocab_size"]
+
+
+def test_symbol_parts_tokenization_splits_symbol_and_number_tokens(tmp_path) -> None:
+    tokens = tokenize_text("EDGE e17 e2\nREPLACE NODE 12 WITH r3", tokenization="symbol_parts")
+
+    assert tokens == [
+        "EDGE",
+        "SYM_E",
+        "DIGIT_1",
+        "DIGIT_7",
+        "SYM_END",
+        "SYM_E",
+        "DIGIT_2",
+        "SYM_END",
+        "<NL>",
+        "REPLACE",
+        "NODE",
+        "NUM",
+        "DIGIT_1",
+        "DIGIT_2",
+        "NUM_END",
+        "WITH",
+        "SYM_R",
+        "DIGIT_3",
+        "SYM_END",
+    ]
+
+    examples_by_split = generate_examples(
+        generators=[GraphReachabilityGenerator()],
+        config=_small_config(),
+        root_seed=0,
+    )
+    export_trm_arrays(examples_by_split, tmp_path, tokenization="symbol_parts")
+    vocab = Vocab.load(tmp_path / "vocab.json")
+
+    assert vocab.tokenization == "symbol_parts"
+    assert "e0" not in vocab.token_to_id
+    assert {"SYM_E", "DIGIT_0", "SYM_END"}.issubset(vocab.token_to_id)
+
+
+def test_alpha_rename_preserves_fixed_vocab_and_changes_symbols(tmp_path) -> None:
+    examples_by_split = generate_examples(
+        generators=[GraphReachabilityGenerator(), ImplicationChainGenerator(), RelationCompositionGenerator()],
+        config=_small_config(),
+        root_seed=0,
+    )
+    base_dir = tmp_path / "base"
+    renamed_dir = tmp_path / "renamed"
+    export_jsonl(examples_by_split, base_dir)
+    export_trm_arrays(examples_by_split, base_dir)
+
+    renamed = alpha_rename_dataset(base_dir, seed=123)
+    export_jsonl(renamed, renamed_dir)
+    export_trm_arrays(renamed, renamed_dir, vocab=Vocab.load(base_dir / "vocab.json"))
+
+    original_rows = (base_dir / "jsonl" / "train.jsonl").read_text(encoding="utf-8").splitlines()
+    renamed_rows = (renamed_dir / "jsonl" / "train.jsonl").read_text(encoding="utf-8").splitlines()
+    assert original_rows != renamed_rows
+
+    row = json.loads(renamed_rows[0])
+    assert row["meta"]["alpha_renamed"] is True
+    assert row["meta"]["alpha_symbol_map"]
+    assert json.loads((renamed_dir / "vocab.json").read_text(encoding="utf-8")) == json.loads(
+        (base_dir / "vocab.json").read_text(encoding="utf-8")
+    )
+
+
+def test_alpha_augment_appends_train_only_with_unique_ids(tmp_path) -> None:
+    examples_by_split = generate_examples(
+        generators=[GraphReachabilityGenerator()],
+        config=_small_config(),
+        root_seed=0,
+    )
+    base_dir = tmp_path / "base"
+    export_jsonl(examples_by_split, base_dir)
+    export_trm_arrays(examples_by_split, base_dir)
+
+    augmented = alpha_augment_train_split(base_dir, seed=123, copies=2)
+
+    assert len(augmented["train"]) == len(examples_by_split["train"]) * 3
+    assert len(augmented["test"]) == len(examples_by_split["test"])
+    assert len(augmented["ood"]) == len(examples_by_split["ood"])
+    train_ids = [example.id for example in augmented["train"]]
+    assert len(train_ids) == len(set(train_ids))
+    assert any(example.meta.get("alpha_augmentation_copy") == 2 for example in augmented["train"])
+
+
+def test_canonicalize_maps_renamed_symbols_to_local_names(tmp_path) -> None:
+    examples_by_split = generate_examples(
+        generators=[GraphReachabilityGenerator()],
+        config=_small_config(),
+        root_seed=0,
+    )
+    base_dir = tmp_path / "base"
+    renamed_dir = tmp_path / "renamed"
+    canonical_dir = tmp_path / "canonical"
+    export_jsonl(examples_by_split, base_dir)
+    export_trm_arrays(examples_by_split, base_dir)
+    renamed = alpha_rename_dataset(base_dir, seed=123)
+    export_jsonl(renamed, renamed_dir)
+    export_trm_arrays(renamed, renamed_dir, vocab=Vocab.load(base_dir / "vocab.json"))
+
+    canonicalized = canonicalize_dataset(renamed_dir)
+    export_jsonl(canonicalized, canonical_dir)
+    export_trm_arrays(canonicalized, canonical_dir, vocab=Vocab.load(base_dir / "vocab.json"))
+
+    row = json.loads((canonical_dir / "jsonl" / "train.jsonl").read_text(encoding="utf-8").splitlines()[0])
+    assert row["meta"]["canonicalized_symbols"] is True
+    assert row["meta"]["canonical_symbol_map"]
+    assert "e999" not in row["source_text"]

@@ -21,9 +21,14 @@ def generate_examples(
 ) -> dict[str, list[Example]]:
     modes = list(config.get("modes", ["improve", "repair", "complete", "verify"]))
     relation_action_format = str(config.get("relation_action_format", "follow"))
+    action_reference_format = str(config.get("action_reference_format", "symbol"))
+    term_rewrite_action_format = str(config.get("term_rewrite_action_format", "path"))
+    term_repair_action_format = str(config.get("term_repair_action_format", "rewrite"))
     tree_repair_action_format = str(config.get("tree_repair_action_format", "index"))
     repair_action_format = str(config.get("repair_action_format", "index"))
     verify_corruption_strategy = str(config.get("verify_corruption_strategy", "default"))
+    task_spec_format = str(config.get("task_spec_format", "none"))
+    task_spec_variant_count = int(config.get("task_spec_variant_count", 1))
     split_config = config["splits"]
     family_config = config["families"]
     seen_fingerprints: set[str] = set()
@@ -41,6 +46,8 @@ def generate_examples(
             for slice_name, count, difficulty, slice_modes in _difficulty_slices(
                 split, split_info, family_config[generator.family], modes, generator.family
             ):
+                if generator.family == "term_rewriting":
+                    difficulty = {**difficulty, "action_format": term_rewrite_action_format}
                 generated = 0
                 attempts = 0
                 while generated < count:
@@ -69,9 +76,13 @@ def generate_examples(
                             seed=seed,
                             modes=slice_modes,
                             relation_action_format=relation_action_format,
+                            action_reference_format=action_reference_format,
                             tree_repair_action_format=tree_repair_action_format,
                             repair_action_format=repair_action_format,
+                            term_repair_action_format=term_repair_action_format,
                             verify_corruption_strategy=verify_corruption_strategy,
+                            task_spec_format=task_spec_format,
+                            task_spec_variant_count=task_spec_variant_count,
                         )
                     )
                     generated += 1

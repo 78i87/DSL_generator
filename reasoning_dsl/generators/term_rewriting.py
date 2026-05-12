@@ -39,6 +39,9 @@ class TermRewritingGenerator:
         binary_rule_rate = float(difficulty.get("binary_rule_rate", 0.35))
         repeated_subterm_rate = float(difficulty.get("repeated_subterm_rate", 0.2))
         normal_form_rate = float(difficulty.get("normal_form_rate", 0.25))
+        action_format = str(difficulty.get("action_format", "path"))
+        if action_format not in {"path", "rule"}:
+            raise ValueError(f"Unsupported term rewriting action_format: {action_format}")
 
         query_kind = "normal_form" if rng.random() < normal_form_rate else "goal"
         repeated_subterms = query_kind == "goal" and rng.random() < repeated_subterm_rate
@@ -64,6 +67,7 @@ class TermRewritingGenerator:
             symbol_offset,
             repeated_subterms,
             binary_rule_rate,
+            force_leftmost_repeated=action_format == "rule",
         )
         trace_terms = [context(term) for term in stage_terms]
 
@@ -94,7 +98,10 @@ class TermRewritingGenerator:
         canonical_states.append(list(state))
         action_path_text = _format_path(action_path)
         for idx, term in enumerate(trace_terms[1:]):
-            state.extend([f"RW {rules[idx].name} AT {action_path_text}", f"TERM {_format_term(term)}"])
+            action_line = f"RW {rules[idx].name}"
+            if action_format == "path":
+                action_line = f"{action_line} AT {action_path_text}"
+            state.extend([action_line, f"TERM {_format_term(term)}"])
             canonical_states.append(list(state))
         if query_kind == "normal_form":
             state.append("HALT")
@@ -113,6 +120,7 @@ class TermRewritingGenerator:
                 "binary_rules": sum(1 for rule in rules[:rewrite_steps] if rule.lhs.kind == "B" or rule.rhs.kind == "B"),
                 "repeated_subterms": repeated_subterms,
                 "query_kind": query_kind,
+                "action_format": action_format,
             },
             "solver": {
                 "trace_steps": rewrite_steps,
@@ -163,6 +171,10 @@ class TermRewritingGenerator:
                 return VerificationResult(False, "MALFORMED", "RW must be followed by a TERM line.", Span(line_idx, 0, len(line.split())))
             if rule_name not in parsed["rules_by_name"]:
                 return VerificationResult(False, "BAD_NO_MATCH", "Unknown rewrite rule.", Span(line_idx, 1, 2))
+            if path is None:
+                path = _leftmost_matching_path(parsed["rules_by_name"][rule_name], current)
+                if path is None:
+                    return VerificationResult(False, "BAD_NO_MATCH", "Rule lhs does not match any subterm.", Span(line_idx, 1, len(line.split())))
 
             subterm = _subterm_at(current, path)
             if subterm is None:
@@ -239,8 +251,15 @@ class TermRewritingGenerator:
             action = _parse_action_line(line, idx)
             if isinstance(action, VerificationResult):
                 continue
-            _current_rule, path = action
+            current_rule, path = action
             current = _last_term(state_lines[:idx])
+            if path is None:
+                rule = parsed["rules_by_name"].get(current_rule)
+                if rule is None:
+                    continue
+                path = _leftmost_matching_path(rule, current)
+                if path is None:
+                    continue
             subterm = _subterm_at(current, path)
             if subterm is None:
                 continue
@@ -307,6 +326,8 @@ def _build_context(
     symbol_offset: int,
     repeated_subterms: bool,
     binary_rule_rate: float,
+    *,
+    force_leftmost_repeated: bool = False,
 ):
     max_context_depth = max(0, requested_depth - _term_depth(initial_stage))
     context_depth = rng.randint(0, max_context_depth) if max_context_depth else 0
@@ -316,7 +337,7 @@ def _build_context(
     wrappers: list[tuple[str, str, str | None, Term | None]] = []
     for idx in range(context_depth):
         if repeated_subterms and idx == 0:
-            side = rng.choice(["L", "R"])
+            side = "L" if force_leftmost_repeated else rng.choice(["L", "R"])
             wrappers.append(("B", f"g{symbol_offset + 60 + idx}", side, initial_stage))
         elif rng.random() < binary_rule_rate:
             side = rng.choice(["L", "R"])
@@ -403,8 +424,10 @@ def _parse_term_line(line: str, line_idx: int) -> Term | VerificationResult:
         return VerificationResult(False, "MALFORMED", str(exc), Span(line_idx, 1, len(tokens)))
 
 
-def _parse_action_line(line: str, line_idx: int) -> tuple[str, Path] | VerificationResult:
+def _parse_action_line(line: str, line_idx: int) -> tuple[str, Path | None] | VerificationResult:
     tokens = line.split()
+    if len(tokens) == 2 and tokens[0] == "RW":
+        return tokens[1], None
     if len(tokens) < 4 or tokens[0] != "RW" or tokens[2] != "AT":
         return VerificationResult(False, "MALFORMED", "Expected RW rN AT PATH.", Span(line_idx, 0, len(tokens)))
     path = _parse_path(tokens[3:])
@@ -548,6 +571,14 @@ def _applicable_actions(rules: list[RewriteRule], term: Term) -> list[tuple[str,
             if _match(rule.lhs, subterm, {}):
                 actions.append((rule.name, path))
     return actions
+
+
+def _leftmost_matching_path(rule: RewriteRule, term: Term) -> Path | None:
+    for path in _all_paths(term):
+        subterm = _subterm_at(term, path)
+        if subterm is not None and _match(rule.lhs, subterm, {}):
+            return path
+    return None
 
 
 def _last_term(state_lines: list[str]) -> Term:

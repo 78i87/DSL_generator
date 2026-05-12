@@ -166,6 +166,94 @@ def test_term_rewriting_action_targets_include_rewrite_and_halt() -> None:
     assert examples[-1].meta["next_state_lines"] == problem.final_state
 
 
+def test_term_rewriting_rule_action_format_uses_rule_only_rewrites() -> None:
+    generator = TermRewritingGenerator()
+    problem = generator.generate(
+        3,
+        {
+            "rewrite_steps": 3,
+            "term_depth": 5,
+            "distractor_rules": 2,
+            "variable_rule_rate": 1.0,
+            "binary_rule_rate": 0.7,
+            "normal_form_rate": 1.0,
+            "action_format": "rule",
+        },
+    )
+    examples = build_examples_for_problem(
+        generator=generator,
+        problem=problem,
+        split="train",
+        problem_index=0,
+        seed=3,
+        modes=["action", "repair_action"],
+    )
+
+    action_examples = [example for example in examples if example.mode == "action"]
+    repair_examples = [example for example in examples if example.mode == "repair_action"]
+    assert action_examples
+    assert repair_examples
+    assert all(" AT " not in line for state in problem.canonical_states for line in state if line.startswith("RW "))
+    assert all(" AT " not in example.target_lines[0] for example in action_examples[:-1])
+    assert action_examples[-1].target_lines == ["HALT"]
+    assert all(example.target_lines[0].startswith("REPAIR RW ") for example in repair_examples)
+    assert all(" AT " not in example.target_lines[0] for example in repair_examples)
+    assert generator.verify(problem, problem.final_state).valid
+
+
+def test_term_rewriting_first_bad_repair_action_is_single_primitive() -> None:
+    generator = TermRewritingGenerator()
+    problem = generator.generate(
+        3,
+        {
+            "rewrite_steps": 3,
+            "term_depth": 5,
+            "distractor_rules": 2,
+            "variable_rule_rate": 1.0,
+            "binary_rule_rate": 0.7,
+            "normal_form_rate": 1.0,
+            "action_format": "rule",
+        },
+    )
+    examples = build_examples_for_problem(
+        generator=generator,
+        problem=problem,
+        split="train",
+        problem_index=0,
+        seed=3,
+        modes=["repair_action"],
+        term_repair_action_format="first_bad",
+    )
+
+    assert examples
+    assert {tuple(example.target_lines) for example in examples} == {("REPAIR FIRST_BAD",)}
+    for example in examples:
+        assert not generator.verify(problem, example.state_lines).valid
+        assert example.meta["repaired_state_lines"] == problem.canonical_states[example.meta["target_step"]]
+
+
+def test_term_rewriting_rule_action_repeated_subterms_stay_leftmost_valid() -> None:
+    generator = TermRewritingGenerator()
+    problem = generator.generate(
+        7,
+        {
+            "rewrite_steps": 4,
+            "term_depth": 5,
+            "distractor_rules": 0,
+            "variable_rule_rate": 1.0,
+            "binary_rule_rate": 1.0,
+            "repeated_subterm_rate": 1.0,
+            "normal_form_rate": 0.0,
+            "action_format": "rule",
+        },
+    )
+
+    assert problem.meta["difficulty"]["repeated_subterms"] is True
+    assert all(" AT " not in line for state in problem.canonical_states for line in state if line.startswith("RW "))
+    assert problem.meta["solver"]["action_path"].startswith("L")
+    assert generator.verify(problem, problem.final_state).valid
+
+
 def test_repair_action_targets_one_compact_edit() -> None:
     cases = [
         (

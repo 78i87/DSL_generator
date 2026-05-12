@@ -21,10 +21,13 @@ New DSL families should implement a generator under `reasoning_dsl/generators/`.
 Each family must define:
 
 - Formal `problem_lines` with anonymous symbols such as `e0`, `p0`, `r0`, `h0`.
-- Canonical `state_lines` from empty/partial state to final solved state.
+- A canonical answer-state representation, also called `y_current`.
+- Canonical `state_lines` from empty/partial answer-state to final solved state.
 - Compact `action` targets: one primitive delta action per row.
 - Compact `repair_action` targets using local anchors when possible.
 - `verify` targets as `VALID` or `INVALID CODE`.
+- A deterministic transition function from `problem_lines + y_current + action` to `y_next`.
+- Where useful, a mechanical patch/diff view from `y_current` to `y_next`.
 - Corruption behavior for repair and verify examples.
 - Metadata for difficulty and solver-measured properties.
 - Canonical fingerprints that detect semantic duplicates across splits.
@@ -37,6 +40,131 @@ Design rules:
 - Avoid numeric-position repair targets when a visible local anchor form works.
 - Action targets should include enough binding information to be self-contained.
 - If a new family adds tokens, old checkpoints are not vocab-compatible without retraining.
+
+## State-Refinement Frame
+
+Treat every family as a state-refinement problem:
+
+```text
+problem x
+current answer-state y_current
+        ->
+better answer-state y_next
+```
+
+Compact actions and global answer refinement are two views of that same update:
+
+```text
+compact action = sparse semantic edit to y_current
+patch/diff     = explicit local or dense edit to y_current
+next_state     = y_next after applying the edit
+```
+
+For current symbolic families, compact action prediction remains the primary
+target. For future grid, Sudoku, ARC-like, assignment, or dense constraint
+families, patch or full-state refinement may become the primary target. Do not
+treat these as separate paradigms; both should be generated from the same
+canonical transition.
+
+Examples:
+
+```text
+Graph:
+  y_current = PATH e0 e1 _ _
+  action    = APPEND e2
+  patch     = SET path[2] e2
+  y_next    = PATH e0 e1 e2 _
+
+Term rewriting:
+  y_current = TERM g(f(a))
+  action    = RW r0
+  patch     = REPLACE subtree[...] WITH b
+  y_next    = TERM g(b)
+
+Grid:
+  y_current = partial output grid
+  action    = optional macro, such as FILL r3 c4 7
+  patch     = SET grid[3,4] 7, or a multi-cell repaint
+  y_next    = updated output grid
+```
+
+When adding a new family, first define the answer canvas:
+
+- path slots for reachability-like tasks.
+- derived proposition/fact sets for proof-like tasks.
+- lineage slots for tree tasks.
+- term/tree tokens for rewriting tasks.
+- grids for Sudoku, maze, ARC-like, or cellular tasks.
+- variable-to-value tables for assignment and constraint tasks.
+
+Then define which supervised views are available:
+
+```python
+targets = {
+    "action": optional_compact_action,
+    "patch": optional_state_diff,
+    "next_state": improved_answer_state,
+    "final_state": optional_final_answer,
+    "validity": verifier_result,
+    "error_mask": optional_error_location,
+    "halt": solved_bool,
+}
+```
+
+Do not add puzzle/category identifier side channels to select the view. The
+structure of `problem_lines`, `state_lines`, and target syntax should carry the
+task meaning.
+
+## Compact Target Design
+
+Compact actions are the default for new families. The model should predict the
+smallest meaningful reasoning move, not every low-level execution coordinate.
+
+Examples:
+
+```text
+Good:  RW r0
+Avoid when deterministic semantics exist: RW r0 AT L IN R
+```
+
+Rules:
+
+- Compact away execution details only when the DSL defines deterministic semantics for the missing detail.
+- If a compact action can apply in more than one place, either define a deterministic policy such as leftmost match, or include the minimum extra binding needed to disambiguate.
+- The generator's canonical traces must follow that deterministic policy exactly.
+- Do not hide the reasoning task behind opaque lookup IDs. The action should still name the meaningful primitive choice.
+- Prefer changing target representation before adding large curriculum patches when failures are mostly syntax/path/binding precision.
+
+## Semantic Self-Consistency
+
+Every generated target must be correct under the same semantics used by the evaluator.
+Before training on a new or changed family, tests should prove:
+
+- every `action` target applies to `state_lines` and produces `next_state_lines`.
+- every `repair_action` target applies to the corrupted `state_lines` and produces `repaired_state_lines`.
+- every canonical final state verifies as `VALID`.
+- every invalid verifier example returns the intended single `INVALID CODE`.
+- exact targets are also semantically valid under the family verifier/action applier.
+
+This matters especially for compact actions. For example, if `RW r0` means
+"apply rule `r0` at the leftmost matching subterm", repeated-subterm problems
+must generate canonical traces that actually rewrite the leftmost match.
+
+## Evaluator Contract
+
+Any target syntax or semantic change in this repo must be mirrored in
+`/Users/morganye/Desktop/TinyRecursiveModels-mlx` before training:
+
+- parser support for the new target form.
+- action application and repair application semantics.
+- verifier/semantic scoring.
+- rollout grammar for syntactic generation.
+- unit tests for valid, invalid, malformed, and unapplicable cases.
+
+Primary rollout metrics may use grammar constraints, syntax checks, state
+application, and verifier checks after generation. Do not use legal-action
+enumeration as the main metric unless the user explicitly asks for a ceiling or
+control experiment.
 
 ## Dataset And Export Rules
 
@@ -87,5 +215,6 @@ python3 -m reasoning_dsl.cli audit \
 
 - Stable baseline: `configs/symbolic_0_22_single_error_verify.json`
 - Fresh holdout: `configs/symbolic_0_23_fresh_holdout.json`
-- Current families: graph reachability, implication chains, relation composition, tree ancestry.
+- Stable families: graph reachability, implication chains, relation composition, tree ancestry.
+- Active experimental family: term rewriting (`0.24+`), not stable until its chosen compact-action version passes.
 - Current modes: `action`, `repair_action`, `verify`.

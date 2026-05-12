@@ -1,0 +1,897 @@
+{
+  "root_seed": 1414,
+  "relation_action_format": "follow_left",
+  "repair_action_format": "local",
+  "tree_repair_action_format": "after",
+  "term_repair_action_format": "first_bad",
+  "verify_corruption_strategy": "single_error",
+  "experiment_note": "0.29 keeps the 0.28 five-family compact-action DSL, term verify reinforcement, and REPAIR FIRST_BAD term repair target, changing one variable: train-only relation_composition repair_action reinforcement is added across bridge and stress train difficulty ranges. Test/OOD splits, root seed, no-ID export behavior, model settings, and existing target formats are unchanged.",
+  "modes": [
+    "action",
+    "repair_action",
+    "verify"
+  ],
+  "splits": {
+    "train": {
+      "difficulty_mixture": [
+        {
+          "name": "short_2_5",
+          "difficulty": "train_short_2_5",
+          "problems_per_family": 24
+        },
+        {
+          "name": "bridge_6",
+          "difficulty": "train_bridge_6",
+          "problems_per_family": 24
+        },
+        {
+          "name": "bridge_7",
+          "difficulty": "train_bridge_7",
+          "problems_per_family": 24
+        },
+        {
+          "name": "action_bridge_6",
+          "difficulty": "train_bridge_6",
+          "problems_per_family": 24,
+          "modes": [
+            "action"
+          ]
+        },
+        {
+          "name": "action_bridge_7",
+          "difficulty": "train_bridge_7",
+          "problems_per_family": 24,
+          "modes": [
+            "action"
+          ]
+        },
+        {
+          "name": "repair_balance_graph_6",
+          "difficulty": "train_bridge_6",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "graph_reachability"
+          ]
+        },
+        {
+          "name": "repair_balance_graph_7",
+          "difficulty": "train_bridge_7",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "graph_reachability"
+          ]
+        },
+        {
+          "name": "repair_balance_implication_6",
+          "difficulty": "train_bridge_6",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "implication_chains"
+          ]
+        },
+        {
+          "name": "repair_balance_implication_7",
+          "difficulty": "train_bridge_7",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "implication_chains"
+          ]
+        },
+        {
+          "name": "repair_balance_relation_6",
+          "difficulty": "train_bridge_6",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "relation_composition"
+          ]
+        },
+        {
+          "name": "repair_balance_relation_7",
+          "difficulty": "train_bridge_7",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "relation_composition"
+          ]
+        },
+        {
+          "name": "repair_balance_tree_6",
+          "difficulty": "train_bridge_6",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "tree_ancestry"
+          ]
+        },
+        {
+          "name": "repair_balance_tree_7",
+          "difficulty": "train_bridge_7",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "tree_ancestry"
+          ]
+        },
+        {
+          "name": "compact_symbol_bridge_7_offset_3",
+          "difficulty": "train_bridge_7",
+          "problems_per_family": 24,
+          "modes": [
+            "action",
+            "repair_action"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 3
+          }
+        },
+        {
+          "name": "compact_symbol_bridge_7_offset_6",
+          "difficulty": "train_bridge_7",
+          "problems_per_family": 24,
+          "modes": [
+            "action",
+            "repair_action"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 6
+          }
+        },
+        {
+          "name": "stress_8_offset_4",
+          "difficulty": "train_stress_8",
+          "problems_per_family": 24,
+          "modes": [
+            "action",
+            "repair_action",
+            "verify"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 4
+          }
+        },
+        {
+          "name": "stress_9_offset_2",
+          "difficulty": "train_stress_9",
+          "problems_per_family": 24,
+          "modes": [
+            "action",
+            "repair_action",
+            "verify"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 2
+          }
+        },
+        {
+          "name": "stress_10_offset_0",
+          "difficulty": "train_stress_10",
+          "problems_per_family": 24,
+          "modes": [
+            "action",
+            "verify"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 0
+          }
+        },
+        {
+          "name": "repair_balance_stress_10",
+          "difficulty": "train_stress_10",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 0
+          }
+        },
+        {
+          "name": "verify_balance_term_short_2_5",
+          "difficulty": "train_short_2_5",
+          "problems_per_family": 24,
+          "modes": [
+            "verify"
+          ],
+          "families": [
+            "term_rewriting"
+          ]
+        },
+        {
+          "name": "verify_balance_term_bridge_6",
+          "difficulty": "train_bridge_6",
+          "problems_per_family": 24,
+          "modes": [
+            "verify"
+          ],
+          "families": [
+            "term_rewriting"
+          ]
+        },
+        {
+          "name": "verify_balance_term_bridge_7",
+          "difficulty": "train_bridge_7",
+          "problems_per_family": 24,
+          "modes": [
+            "verify"
+          ],
+          "families": [
+            "term_rewriting"
+          ]
+        },
+        {
+          "name": "verify_balance_term_stress_8",
+          "difficulty": "train_stress_8",
+          "problems_per_family": 24,
+          "modes": [
+            "verify"
+          ],
+          "families": [
+            "term_rewriting"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 4
+          }
+        },
+        {
+          "name": "verify_balance_term_stress_9",
+          "difficulty": "train_stress_9",
+          "problems_per_family": 24,
+          "modes": [
+            "verify"
+          ],
+          "families": [
+            "term_rewriting"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 2
+          }
+        },
+        {
+          "name": "verify_balance_term_stress_10",
+          "difficulty": "train_stress_10",
+          "problems_per_family": 24,
+          "modes": [
+            "verify"
+          ],
+          "families": [
+            "term_rewriting"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 0
+          }
+        },
+        {
+          "name": "repair_balance_relation_extra_6",
+          "difficulty": "train_bridge_6",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "relation_composition"
+          ]
+        },
+        {
+          "name": "repair_balance_relation_extra_7",
+          "difficulty": "train_bridge_7",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "relation_composition"
+          ]
+        },
+        {
+          "name": "repair_balance_relation_extra_8",
+          "difficulty": "train_stress_8",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "relation_composition"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 4
+          }
+        },
+        {
+          "name": "repair_balance_relation_extra_9",
+          "difficulty": "train_stress_9",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "relation_composition"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 2
+          }
+        },
+        {
+          "name": "repair_balance_relation_extra_10",
+          "difficulty": "train_stress_10",
+          "problems_per_family": 24,
+          "modes": [
+            "repair_action"
+          ],
+          "families": [
+            "relation_composition"
+          ],
+          "difficulty_overrides": {
+            "symbol_offset": 0
+          }
+        }
+      ]
+    },
+    "test": {
+      "difficulty_mixture": [
+        {
+          "name": "short_2_5",
+          "difficulty": "test_short_2_5",
+          "problems_per_family": 6
+        },
+        {
+          "name": "bridge_6",
+          "difficulty": "test_bridge_6",
+          "problems_per_family": 6
+        },
+        {
+          "name": "bridge_7",
+          "difficulty": "test_bridge_7",
+          "problems_per_family": 6
+        }
+      ]
+    },
+    "ood": {
+      "difficulty_mixture": [
+        {
+          "name": "heldout_8",
+          "difficulty": "ood_8",
+          "problems_per_family": 6
+        },
+        {
+          "name": "heldout_9",
+          "difficulty": "ood_9",
+          "problems_per_family": 6
+        },
+        {
+          "name": "heldout_10",
+          "difficulty": "ood_10",
+          "problems_per_family": 6
+        }
+      ]
+    }
+  },
+  "families": {
+    "graph_reachability": {
+      "enabled": true,
+      "train_short_2_5": {
+        "num_nodes_min": 5,
+        "num_nodes_max": 9,
+        "path_length_min": 2,
+        "path_length_max": 5,
+        "extra_edges_min": 1,
+        "extra_edges_max": 5,
+        "require_shortest": true
+      },
+      "train_bridge_6": {
+        "num_nodes_min": 9,
+        "num_nodes_max": 12,
+        "path_length": 6,
+        "extra_edges_min": 4,
+        "extra_edges_max": 9,
+        "require_shortest": true
+      },
+      "train_bridge_7": {
+        "num_nodes_min": 10,
+        "num_nodes_max": 13,
+        "path_length": 7,
+        "extra_edges_min": 4,
+        "extra_edges_max": 9,
+        "require_shortest": true
+      },
+      "train_stress_8": {
+        "num_nodes_min": 13,
+        "num_nodes_max": 15,
+        "path_length": 8,
+        "extra_edges_min": 10,
+        "extra_edges_max": 14,
+        "require_shortest": true
+      },
+      "train_stress_9": {
+        "num_nodes_min": 14,
+        "num_nodes_max": 17,
+        "path_length": 9,
+        "extra_edges_min": 11,
+        "extra_edges_max": 15,
+        "require_shortest": true
+      },
+      "train_stress_10": {
+        "num_nodes_min": 15,
+        "num_nodes_max": 19,
+        "path_length": 10,
+        "extra_edges_min": 12,
+        "extra_edges_max": 16,
+        "require_shortest": true
+      },
+      "test_short_2_5": {
+        "num_nodes_min": 5,
+        "num_nodes_max": 9,
+        "path_length_min": 2,
+        "path_length_max": 5,
+        "extra_edges_min": 1,
+        "extra_edges_max": 5,
+        "require_shortest": true
+      },
+      "test_bridge_6": {
+        "num_nodes_min": 9,
+        "num_nodes_max": 12,
+        "path_length": 6,
+        "extra_edges_min": 4,
+        "extra_edges_max": 9,
+        "require_shortest": true
+      },
+      "test_bridge_7": {
+        "num_nodes_min": 10,
+        "num_nodes_max": 13,
+        "path_length": 7,
+        "extra_edges_min": 4,
+        "extra_edges_max": 9,
+        "require_shortest": true
+      },
+      "ood_8": {
+        "num_nodes_min": 11,
+        "num_nodes_max": 14,
+        "path_length": 8,
+        "extra_edges_min": 5,
+        "extra_edges_max": 10,
+        "require_shortest": true
+      },
+      "ood_9": {
+        "num_nodes_min": 12,
+        "num_nodes_max": 15,
+        "path_length": 9,
+        "extra_edges_min": 5,
+        "extra_edges_max": 10,
+        "require_shortest": true
+      },
+      "ood_10": {
+        "num_nodes_min": 13,
+        "num_nodes_max": 16,
+        "path_length": 10,
+        "extra_edges_min": 5,
+        "extra_edges_max": 10,
+        "require_shortest": true
+      }
+    },
+    "implication_chains": {
+      "enabled": true,
+      "train_short_2_5": {
+        "num_props_min": 5,
+        "num_props_max": 9,
+        "proof_length_min": 1,
+        "proof_length_max": 4,
+        "distractor_hyps_min": 1,
+        "distractor_hyps_max": 5
+      },
+      "train_bridge_6": {
+        "num_props_min": 8,
+        "num_props_max": 12,
+        "proof_length": 5,
+        "distractor_hyps_min": 4,
+        "distractor_hyps_max": 9
+      },
+      "train_bridge_7": {
+        "num_props_min": 9,
+        "num_props_max": 13,
+        "proof_length": 6,
+        "distractor_hyps_min": 4,
+        "distractor_hyps_max": 9
+      },
+      "train_stress_8": {
+        "num_props_min": 13,
+        "num_props_max": 15,
+        "proof_length": 7,
+        "distractor_hyps_min": 8,
+        "distractor_hyps_max": 10
+      },
+      "train_stress_9": {
+        "num_props_min": 14,
+        "num_props_max": 17,
+        "proof_length": 8,
+        "distractor_hyps_min": 9,
+        "distractor_hyps_max": 11
+      },
+      "train_stress_10": {
+        "num_props_min": 15,
+        "num_props_max": 19,
+        "proof_length": 9,
+        "distractor_hyps_min": 10,
+        "distractor_hyps_max": 12
+      },
+      "test_short_2_5": {
+        "num_props_min": 5,
+        "num_props_max": 9,
+        "proof_length_min": 1,
+        "proof_length_max": 4,
+        "distractor_hyps_min": 1,
+        "distractor_hyps_max": 5
+      },
+      "test_bridge_6": {
+        "num_props_min": 8,
+        "num_props_max": 12,
+        "proof_length": 5,
+        "distractor_hyps_min": 4,
+        "distractor_hyps_max": 9
+      },
+      "test_bridge_7": {
+        "num_props_min": 9,
+        "num_props_max": 13,
+        "proof_length": 6,
+        "distractor_hyps_min": 4,
+        "distractor_hyps_max": 9
+      },
+      "ood_8": {
+        "num_props_min": 11,
+        "num_props_max": 15,
+        "proof_length": 7,
+        "distractor_hyps_min": 5,
+        "distractor_hyps_max": 11
+      },
+      "ood_9": {
+        "num_props_min": 12,
+        "num_props_max": 16,
+        "proof_length": 8,
+        "distractor_hyps_min": 5,
+        "distractor_hyps_max": 11
+      },
+      "ood_10": {
+        "num_props_min": 13,
+        "num_props_max": 17,
+        "proof_length": 9,
+        "distractor_hyps_min": 5,
+        "distractor_hyps_max": 11
+      }
+    },
+    "relation_composition": {
+      "enabled": true,
+      "train_short_2_5": {
+        "num_entities_min": 5,
+        "num_entities_max": 9,
+        "composition_depth_min": 2,
+        "composition_depth_max": 5,
+        "distractor_facts_min": 1,
+        "distractor_facts_max": 5
+      },
+      "train_bridge_6": {
+        "num_entities_min": 9,
+        "num_entities_max": 12,
+        "composition_depth": 6,
+        "distractor_facts_min": 4,
+        "distractor_facts_max": 9
+      },
+      "train_bridge_7": {
+        "num_entities_min": 10,
+        "num_entities_max": 13,
+        "composition_depth": 7,
+        "distractor_facts_min": 4,
+        "distractor_facts_max": 9
+      },
+      "train_stress_8": {
+        "num_entities_min": 13,
+        "num_entities_max": 15,
+        "composition_depth": 8,
+        "distractor_facts_min": 10,
+        "distractor_facts_max": 14
+      },
+      "train_stress_9": {
+        "num_entities_min": 14,
+        "num_entities_max": 17,
+        "composition_depth": 9,
+        "distractor_facts_min": 11,
+        "distractor_facts_max": 15
+      },
+      "train_stress_10": {
+        "num_entities_min": 15,
+        "num_entities_max": 19,
+        "composition_depth": 10,
+        "distractor_facts_min": 12,
+        "distractor_facts_max": 16
+      },
+      "test_short_2_5": {
+        "num_entities_min": 5,
+        "num_entities_max": 9,
+        "composition_depth_min": 2,
+        "composition_depth_max": 5,
+        "distractor_facts_min": 1,
+        "distractor_facts_max": 5
+      },
+      "test_bridge_6": {
+        "num_entities_min": 9,
+        "num_entities_max": 12,
+        "composition_depth": 6,
+        "distractor_facts_min": 4,
+        "distractor_facts_max": 9
+      },
+      "test_bridge_7": {
+        "num_entities_min": 10,
+        "num_entities_max": 13,
+        "composition_depth": 7,
+        "distractor_facts_min": 4,
+        "distractor_facts_max": 9
+      },
+      "ood_8": {
+        "num_entities_min": 11,
+        "num_entities_max": 14,
+        "composition_depth": 8,
+        "distractor_facts_min": 5,
+        "distractor_facts_max": 10
+      },
+      "ood_9": {
+        "num_entities_min": 12,
+        "num_entities_max": 15,
+        "composition_depth": 9,
+        "distractor_facts_min": 5,
+        "distractor_facts_max": 10
+      },
+      "ood_10": {
+        "num_entities_min": 13,
+        "num_entities_max": 16,
+        "composition_depth": 10,
+        "distractor_facts_min": 5,
+        "distractor_facts_max": 10
+      }
+    },
+    "tree_ancestry": {
+      "enabled": true,
+      "train_short_2_5": {
+        "depth_min": 2,
+        "depth_max": 5,
+        "branching_factor_min": 2,
+        "branching_factor_max": 3,
+        "distractor_subtrees_min": 1,
+        "distractor_subtrees_max": 5
+      },
+      "train_bridge_6": {
+        "depth": 6,
+        "branching_factor_min": 2,
+        "branching_factor_max": 3,
+        "distractor_subtrees_min": 4,
+        "distractor_subtrees_max": 9
+      },
+      "train_bridge_7": {
+        "depth": 7,
+        "branching_factor_min": 2,
+        "branching_factor_max": 3,
+        "distractor_subtrees_min": 4,
+        "distractor_subtrees_max": 9
+      },
+      "train_stress_8": {
+        "depth": 8,
+        "branching_factor_min": 2,
+        "branching_factor_max": 4,
+        "distractor_subtrees_min": 10,
+        "distractor_subtrees_max": 14
+      },
+      "train_stress_9": {
+        "depth": 9,
+        "branching_factor_min": 2,
+        "branching_factor_max": 4,
+        "distractor_subtrees_min": 11,
+        "distractor_subtrees_max": 15
+      },
+      "train_stress_10": {
+        "depth": 10,
+        "branching_factor_min": 2,
+        "branching_factor_max": 4,
+        "distractor_subtrees_min": 12,
+        "distractor_subtrees_max": 16
+      },
+      "test_short_2_5": {
+        "depth_min": 2,
+        "depth_max": 5,
+        "branching_factor_min": 2,
+        "branching_factor_max": 3,
+        "distractor_subtrees_min": 1,
+        "distractor_subtrees_max": 5
+      },
+      "test_bridge_6": {
+        "depth": 6,
+        "branching_factor_min": 2,
+        "branching_factor_max": 3,
+        "distractor_subtrees_min": 4,
+        "distractor_subtrees_max": 9
+      },
+      "test_bridge_7": {
+        "depth": 7,
+        "branching_factor_min": 2,
+        "branching_factor_max": 3,
+        "distractor_subtrees_min": 4,
+        "distractor_subtrees_max": 9
+      },
+      "ood_8": {
+        "depth": 8,
+        "branching_factor_min": 2,
+        "branching_factor_max": 3,
+        "distractor_subtrees_min": 5,
+        "distractor_subtrees_max": 10
+      },
+      "ood_9": {
+        "depth": 9,
+        "branching_factor_min": 2,
+        "branching_factor_max": 3,
+        "distractor_subtrees_min": 5,
+        "distractor_subtrees_max": 10
+      },
+      "ood_10": {
+        "depth": 10,
+        "branching_factor_min": 2,
+        "branching_factor_max": 3,
+        "distractor_subtrees_min": 5,
+        "distractor_subtrees_max": 10
+      }
+    },
+    "term_rewriting": {
+      "enabled": true,
+      "train_short_2_5": {
+        "rewrite_steps_min": 2,
+        "rewrite_steps_max": 5,
+        "term_depth_min": 1,
+        "term_depth_max": 4,
+        "distractor_rules_min": 0,
+        "distractor_rules_max": 4,
+        "variable_rule_rate": 0.35,
+        "binary_rule_rate": 0.35,
+        "repeated_subterm_rate": 0.15,
+        "normal_form_rate": 0.25
+      },
+      "train_bridge_6": {
+        "rewrite_steps": 6,
+        "term_depth_min": 3,
+        "term_depth_max": 5,
+        "distractor_rules_min": 4,
+        "distractor_rules_max": 9,
+        "variable_rule_rate": 0.5,
+        "binary_rule_rate": 0.45,
+        "repeated_subterm_rate": 0.25,
+        "normal_form_rate": 0.3
+      },
+      "train_bridge_7": {
+        "rewrite_steps": 7,
+        "term_depth_min": 3,
+        "term_depth_max": 6,
+        "distractor_rules_min": 4,
+        "distractor_rules_max": 9,
+        "variable_rule_rate": 0.55,
+        "binary_rule_rate": 0.45,
+        "repeated_subterm_rate": 0.3,
+        "normal_form_rate": 0.3
+      },
+      "train_stress_8": {
+        "rewrite_steps": 8,
+        "term_depth_min": 5,
+        "term_depth_max": 7,
+        "distractor_rules_min": 8,
+        "distractor_rules_max": 12,
+        "variable_rule_rate": 0.6,
+        "binary_rule_rate": 0.5,
+        "repeated_subterm_rate": 0.4,
+        "normal_form_rate": 0.35
+      },
+      "train_stress_9": {
+        "rewrite_steps": 9,
+        "term_depth_min": 5,
+        "term_depth_max": 8,
+        "distractor_rules_min": 9,
+        "distractor_rules_max": 14,
+        "variable_rule_rate": 0.65,
+        "binary_rule_rate": 0.55,
+        "repeated_subterm_rate": 0.45,
+        "normal_form_rate": 0.35
+      },
+      "train_stress_10": {
+        "rewrite_steps": 10,
+        "term_depth_min": 6,
+        "term_depth_max": 9,
+        "distractor_rules_min": 10,
+        "distractor_rules_max": 16,
+        "variable_rule_rate": 0.7,
+        "binary_rule_rate": 0.6,
+        "repeated_subterm_rate": 0.5,
+        "normal_form_rate": 0.4
+      },
+      "test_short_2_5": {
+        "rewrite_steps_min": 2,
+        "rewrite_steps_max": 5,
+        "term_depth_min": 1,
+        "term_depth_max": 4,
+        "distractor_rules_min": 0,
+        "distractor_rules_max": 4,
+        "variable_rule_rate": 0.35,
+        "binary_rule_rate": 0.35,
+        "repeated_subterm_rate": 0.15,
+        "normal_form_rate": 0.25
+      },
+      "test_bridge_6": {
+        "rewrite_steps": 6,
+        "term_depth_min": 3,
+        "term_depth_max": 5,
+        "distractor_rules_min": 4,
+        "distractor_rules_max": 9,
+        "variable_rule_rate": 0.5,
+        "binary_rule_rate": 0.45,
+        "repeated_subterm_rate": 0.25,
+        "normal_form_rate": 0.3
+      },
+      "test_bridge_7": {
+        "rewrite_steps": 7,
+        "term_depth_min": 3,
+        "term_depth_max": 6,
+        "distractor_rules_min": 4,
+        "distractor_rules_max": 9,
+        "variable_rule_rate": 0.55,
+        "binary_rule_rate": 0.45,
+        "repeated_subterm_rate": 0.3,
+        "normal_form_rate": 0.3
+      },
+      "ood_8": {
+        "rewrite_steps": 8,
+        "term_depth_min": 5,
+        "term_depth_max": 7,
+        "distractor_rules_min": 8,
+        "distractor_rules_max": 12,
+        "variable_rule_rate": 0.6,
+        "binary_rule_rate": 0.55,
+        "repeated_subterm_rate": 0.45,
+        "normal_form_rate": 0.35
+      },
+      "ood_9": {
+        "rewrite_steps": 9,
+        "term_depth_min": 6,
+        "term_depth_max": 8,
+        "distractor_rules_min": 10,
+        "distractor_rules_max": 14,
+        "variable_rule_rate": 0.65,
+        "binary_rule_rate": 0.6,
+        "repeated_subterm_rate": 0.5,
+        "normal_form_rate": 0.4
+      },
+      "ood_10": {
+        "rewrite_steps": 10,
+        "term_depth_min": 7,
+        "term_depth_max": 9,
+        "distractor_rules_min": 12,
+        "distractor_rules_max": 16,
+        "variable_rule_rate": 0.7,
+        "binary_rule_rate": 0.6,
+        "repeated_subterm_rate": 0.55,
+        "normal_form_rate": 0.4
+      }
+    }
+  },
+  "term_rewrite_action_format": "rule"
+}
