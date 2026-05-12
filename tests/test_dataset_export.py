@@ -381,7 +381,7 @@ def test_0_39_task_spec_headers_change_only_task_spec_keys() -> None:
 
 def test_0_39_line_code_task_spec_config_changes_only_task_spec_format() -> None:
     task_path = Path("configs/symbolic_0_39_task_spec_headers.json")
-    line_code_path = Path("configs/symbolic_0_39_task_spec_line_codes.json")
+    line_code_path = Path("configs/symbolic_0_40_task_spec_line_codes.json")
     task = json.loads(task_path.read_text(encoding="utf-8"))
     line_code = json.loads(line_code_path.read_text(encoding="utf-8"))
 

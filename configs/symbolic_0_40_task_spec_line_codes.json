@@ -7,7 +7,7 @@
   "verify_corruption_strategy": "single_error",
   "task_spec_format": "line_codes_v1",
   "task_spec_variant_count": 3,
-  "experiment_note": "0.39 line-code task-spec variant: keeps the 0.29 five-family compact-action dataset shape and 0.39 task-spec intent, but replaces prose TASK lines with stable single-token SPEC_* line codes to reduce vocabulary without increasing sequence length. No puzzle IDs or family labels are introduced.",
+  "experiment_note": "0.40 line-code task-spec variant: keeps the 0.29 five-family compact-action dataset shape and 0.39 task-spec intent, but changes the exported vocabulary contract by replacing prose TASK lines with stable single-token SPEC_* line codes. No puzzle IDs or family labels are introduced.",
   "modes": [
     "action",
     "repair_action",
