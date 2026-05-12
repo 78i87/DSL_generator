@@ -123,7 +123,7 @@ def _load_examples(data_dir: str | Path) -> dict[str, list[Example]]:
 def _symbol_map(examples: list[Example], *, seed: int, problem_id: str) -> dict[str, str]:
     by_prefix: dict[str, set[str]] = {}
     for example in examples:
-        for text in _example_strings(example):
+        for text in _visible_example_strings(example):
             for symbol in SYMBOL_RE.findall(text):
                 prefix_match = PREFIX_RE.fullmatch(symbol)
                 if prefix_match:
@@ -143,6 +143,15 @@ def _symbol_map(examples: list[Example], *, seed: int, problem_id: str) -> dict[
                 target = [*target[1:], target[0]]
         symbol_map.update(dict(zip(source, target)))
     return symbol_map
+
+
+def _visible_example_strings(example: Example) -> list[str]:
+    values: list[str] = []
+    values.extend(example.problem_lines)
+    values.extend(example.task_lines)
+    values.extend(example.state_lines)
+    values.extend(example.target_lines)
+    return values
 
 
 def _canonical_symbol_map(examples: list[Example], *, token_to_id: dict[str, int] | None) -> dict[str, str]:

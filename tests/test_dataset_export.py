@@ -9,6 +9,7 @@ import numpy as np
 import pytest
 
 from reasoning_dsl.alpha_rename import alpha_augment_train_split, alpha_rename_dataset, canonicalize_dataset
+from reasoning_dsl.core import Example
 from reasoning_dsl.export_jsonl import export_jsonl
 from reasoning_dsl.export_trm import export_trm_arrays
 from reasoning_dsl.generators import (
@@ -398,6 +399,23 @@ def test_0_39_line_code_task_spec_config_changes_only_task_spec_format() -> None
         if key not in {"experiment_note", "task_spec_format"}
     }
     assert line_code_without_changed_fields == task_without_changed_fields
+
+
+def test_0_41_structural_actions_change_only_action_reference_format() -> None:
+    line_code_path = Path("configs/symbolic_0_40_task_spec_line_codes.json")
+    structural_path = Path("configs/symbolic_0_41_structural_actions.json")
+    line_code = json.loads(line_code_path.read_text(encoding="utf-8"))
+    structural = json.loads(structural_path.read_text(encoding="utf-8"))
+
+    assert line_code.get("action_reference_format", "symbol") == "symbol"
+    assert structural["action_reference_format"] == "line_index"
+    line_code_without_changed_fields = {
+        key: value for key, value in line_code.items() if key != "experiment_note"
+    }
+    structural_without_changed_fields = {
+        key: value for key, value in structural.items() if key not in {"experiment_note", "action_reference_format"}
+    }
+    assert structural_without_changed_fields == line_code_without_changed_fields
 
 
 def test_difficulty_mixture_has_exact_slice_counts_and_no_leakage() -> None:
@@ -1375,6 +1393,39 @@ def test_alpha_rename_preserves_fixed_vocab_and_changes_symbols(tmp_path) -> Non
     assert json.loads((renamed_dir / "vocab.json").read_text(encoding="utf-8")) == json.loads(
         (base_dir / "vocab.json").read_text(encoding="utf-8")
     )
+
+
+def test_alpha_rename_does_not_promote_meta_only_symbols_into_visible_text(tmp_path) -> None:
+    examples_by_split = {
+        "train": [
+            Example(
+                id="meta-only-symbol",
+                split="train",
+                family="graph_reachability",
+                mode="action",
+                problem_lines=["EDGE e0 e1", "QUERY REACH e0 e1"],
+                state_lines=[],
+                target_lines=["APPEND e0"],
+                meta={
+                    "problem_id": "meta-only-symbol",
+                    "fingerprint": "meta-only-symbol",
+                    "debug_meta_only_symbol": "e40",
+                },
+            )
+        ]
+    }
+    base_dir = tmp_path / "base"
+    renamed_dir = tmp_path / "renamed"
+    export_jsonl(examples_by_split, base_dir)
+    export_trm_arrays(examples_by_split, base_dir)
+
+    renamed = alpha_rename_dataset(base_dir, seed=0)
+    export_jsonl(renamed, renamed_dir)
+    export_trm_arrays(renamed, renamed_dir, vocab=Vocab.load(base_dir / "vocab.json"))
+
+    row = json.loads((renamed_dir / "jsonl" / "train.jsonl").read_text(encoding="utf-8").splitlines()[0])
+    assert "e40" not in row["source_text"]
+    assert "e40" not in row["target_text"]
 
 
 def test_alpha_augment_appends_train_only_with_unique_ids(tmp_path) -> None:
