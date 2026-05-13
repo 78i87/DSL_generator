@@ -22,6 +22,7 @@ def generate_examples(
     modes = list(config.get("modes", ["improve", "repair", "complete", "verify"]))
     relation_action_format = str(config.get("relation_action_format", "follow"))
     action_reference_format = str(config.get("action_reference_format", "symbol"))
+    term_action_reference_format = str(config.get("term_action_reference_format", action_reference_format))
     term_rewrite_action_format = str(config.get("term_rewrite_action_format", "path"))
     term_repair_action_format = str(config.get("term_repair_action_format", "rewrite"))
     tree_repair_action_format = str(config.get("tree_repair_action_format", "index"))
@@ -77,6 +78,7 @@ def generate_examples(
                             modes=slice_modes,
                             relation_action_format=relation_action_format,
                             action_reference_format=action_reference_format,
+                            term_action_reference_format=term_action_reference_format,
                             tree_repair_action_format=tree_repair_action_format,
                             repair_action_format=repair_action_format,
                             term_repair_action_format=term_repair_action_format,

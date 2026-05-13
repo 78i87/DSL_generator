@@ -408,6 +408,23 @@ def test_verify_examples_are_balanced_valid_invalid() -> None:
     assert targets[1].startswith("INVALID ")
 
 
+def test_implication_verify_unknown_hyp_corruption_strategy() -> None:
+    generator = ImplicationChainGenerator()
+    problem = generator.generate(1, {"num_props": 6, "proof_length": 3, "distractor_hyps": 2})
+    examples = build_examples_for_problem(
+        generator=generator,
+        problem=problem,
+        split="train",
+        problem_index=0,
+        seed=1,
+        modes=["verify"],
+        verify_corruption_strategy="implication_unknown_hyp",
+    )
+
+    assert examples[0].target_lines == ["VALID"]
+    assert examples[1].target_lines == ["INVALID UNKNOWN_HYP"]
+
+
 def test_single_error_verify_corruption_avoids_endpoint_ambiguity() -> None:
     graph = GraphReachabilityGenerator()
     graph_problem = graph.generate(

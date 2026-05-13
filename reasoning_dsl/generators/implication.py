@@ -115,6 +115,18 @@ class ImplicationChainGenerator:
         corrupted[line_idx] = " ".join(tokens)
         return corrupted
 
+    def corrupt_for_verify_unknown_hyp(self, seed: int, problem: ProblemSpec, state_lines: list[str]) -> list[str]:
+        del seed, problem
+        if not state_lines:
+            return ["DERIVE p999 BY h999"]
+        corrupted = list(state_lines)
+        tokens = corrupted[0].split()
+        if len(tokens) in {4, 6} and tokens[0] == "DERIVE" and tokens[2] == "BY":
+            tokens[3] = "h999"
+            corrupted[0] = " ".join(tokens)
+            return corrupted
+        return ["DERIVE p999 BY h999"]
+
 
 def _parse_problem(lines: list[str]) -> dict[str, Any]:
     facts: dict[str, str] = {}

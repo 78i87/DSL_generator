@@ -122,6 +122,7 @@ def build_examples_for_problem(
     modes: list[str],
     relation_action_format: str = "follow",
     action_reference_format: str = "symbol",
+    term_action_reference_format: str | None = None,
     tree_repair_action_format: str = "index",
     repair_action_format: str = "index",
     term_repair_action_format: str = "rewrite",
@@ -140,6 +141,7 @@ def build_examples_for_problem(
         "fingerprint": problem.fingerprint,
         **problem.meta,
     }
+    term_action_reference_format = term_action_reference_format or action_reference_format
 
     def add(mode: str, suffix: str, state: list[str], target: list[str], extra: dict[str, Any] | None = None) -> None:
         task_lines, task_variant = render_task_spec(
@@ -149,6 +151,8 @@ def build_examples_for_problem(
             suffix=suffix,
             variant_count=task_spec_variant_count,
             task_spec_format=task_spec_format,
+            relation_action_format=relation_action_format,
+            action_reference_format=term_action_reference_format if generator.family == "term_rewriting" else action_reference_format,
         )
         meta = {**base_meta, "mode": mode, **(extra or {})}
         if task_variant is not None:
@@ -188,7 +192,7 @@ def build_examples_for_problem(
                     states[step],
                     states[step + 1],
                     relation_action_format=relation_action_format,
-                    action_reference_format=action_reference_format,
+                    action_reference_format=term_action_reference_format if generator.family == "term_rewriting" else action_reference_format,
                 ),
                 {
                     "step": step,
@@ -250,6 +254,11 @@ def _verify_corruption(
 ) -> list[str]:
     if strategy == "default":
         return generator.corrupt(seed, problem, state_lines)
+    if strategy == "implication_unknown_hyp":
+        unknown_hyp_corrupt = getattr(generator, "corrupt_for_verify_unknown_hyp", None)
+        if unknown_hyp_corrupt is not None:
+            return unknown_hyp_corrupt(seed, problem, state_lines)
+        strategy = "single_error"
     if strategy != "single_error":
         raise ValueError(f"Unsupported verify_corruption_strategy: {strategy}")
     single_error_corrupt = getattr(generator, "corrupt_for_verify", None)

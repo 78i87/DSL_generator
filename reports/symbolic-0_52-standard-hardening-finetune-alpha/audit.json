@@ -1,0 +1,688 @@
+{
+  "data_dir": "data/symbolic-0_52-standard-hardening-finetune-alpha",
+  "errors": [],
+  "jsonl": {
+    "difficulty": {
+      "graph_reachability": {
+        "extra_edges": {
+          "max": 16.0,
+          "mean": 10.911374407582938,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "num_nodes": {
+          "max": 19.0,
+          "mean": 14.644075829383887,
+          "min": 5.0,
+          "unique": [
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "path_length": {
+          "max": 10.0,
+          "mean": 8.653080568720378,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "require_shortest": {
+          "true": 2110
+        },
+        "symbol_offset": {
+          "max": 4.0,
+          "mean": 1.2739336492890996,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            4
+          ]
+        }
+      },
+      "implication_chains": {
+        "distractor_hyps": {
+          "max": 12.0,
+          "mean": 8.17123287671233,
+          "min": 1.0,
+          "unique": [
+            1,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "num_props": {
+          "max": 19.0,
+          "mean": 13.422374429223744,
+          "min": 6.0,
+          "unique": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "proof_length": {
+          "max": 10.0,
+          "mean": 8.19634703196347,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "symbol_offset": {
+          "max": 4.0,
+          "mean": 0.6575342465753424,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            4
+          ]
+        }
+      },
+      "relation_composition": {
+        "composition_depth": {
+          "max": 10.0,
+          "mean": 7.925490196078432,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "distractor_facts": {
+          "max": 10.0,
+          "mean": 6.956862745098039,
+          "min": 1.0,
+          "unique": [
+            1,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "num_entities": {
+          "max": 16.0,
+          "mean": 12.568627450980392,
+          "min": 5.0,
+          "unique": [
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "symbol_offset": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "unique": [
+            0
+          ]
+        }
+      },
+      "term_rewriting": {
+        "action_format": {
+          "rule": 1956
+        },
+        "binary_rules": {
+          "max": 10.0,
+          "mean": 6.741820040899795,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "distractor_rules": {
+          "max": 16.0,
+          "mean": 11.1579754601227,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "query_kind": {
+          "goal": 1219,
+          "normal_form": 737
+        },
+        "repeated_subterms": {
+          "false": 1500,
+          "true": 456
+        },
+        "rewrite_steps": {
+          "max": 10.0,
+          "mean": 8.681492842535787,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "symbol_offset": {
+          "max": 4.0,
+          "mean": 1.2750511247443763,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            4
+          ]
+        },
+        "term_depth": {
+          "max": 9.0,
+          "mean": 4.736707566462168,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        },
+        "variable_rules": {
+          "max": 7.0,
+          "mean": 2.9473415132924337,
+          "min": 0.0,
+          "unique": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      },
+      "tree_ancestry": {
+        "branching_factor": {
+          "max": 4.0,
+          "mean": 2.876341050254094,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4
+          ]
+        },
+        "depth": {
+          "max": 10.0,
+          "mean": 8.822699040090344,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "distractor_subtrees": {
+          "max": 16.0,
+          "mean": 11.79107848673066,
+          "min": 1.0,
+          "unique": [
+            1,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "symbol_offset": {
+          "max": 4.0,
+          "mean": 1.517786561264822,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            4
+          ]
+        }
+      }
+    },
+    "samples": {
+      "ood/graph_reachability/action": {
+        "id": "ood:graph_reachability:0:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE X0 X1 ; EDGE X1 X2 ; QUERY REACH X0 X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nEDGE e4 e0\nEDGE e0 e5\nEDGE e10 e3\nEDGE e5 e2\nEDGE e2 e3\nEDGE e3 e0\nEDGE e3 e1\nEDGE e1 e3\nEDGE e1 e6\nEDGE e6 e8\nEDGE e8 e9\nEDGE e9 e0\nEDGE e9 e3\nEDGE e7 e0\nQUERY REACH e4 e9\nSTATE\nEMPTY",
+        "target_text": "APPEND e4"
+      },
+      "ood/graph_reachability/repair_action": {
+        "id": "ood:graph_reachability:0:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE A0 A1 ; EDGE A1 A2 ; QUERY REACH A0 A2 ; EMPTY => APPEND A0 ; PATH A0 => APPEND A1\nPROBLEM\nEDGE e4 e0\nEDGE e0 e5\nEDGE e10 e3\nEDGE e5 e2\nEDGE e2 e3\nEDGE e3 e0\nEDGE e3 e1\nEDGE e1 e3\nEDGE e1 e6\nEDGE e6 e8\nEDGE e8 e9\nEDGE e9 e0\nEDGE e9 e3\nEDGE e7 e0\nQUERY REACH e4 e9\nSTATE\nPATH e9",
+        "target_text": "REPLACE ROOT WITH e4"
+      },
+      "ood/graph_reachability/verify": {
+        "id": "ood:graph_reachability:0:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE A0 A1 ; EDGE A1 A2 ; QUERY REACH A0 A2 ; EMPTY => APPEND A0 ; PATH A0 => APPEND A1\nPROBLEM\nEDGE e4 e0\nEDGE e0 e5\nEDGE e10 e3\nEDGE e5 e2\nEDGE e2 e3\nEDGE e3 e0\nEDGE e3 e1\nEDGE e1 e3\nEDGE e1 e6\nEDGE e6 e8\nEDGE e8 e9\nEDGE e9 e0\nEDGE e9 e3\nEDGE e7 e0\nQUERY REACH e4 e9\nSTATE\nPATH e4 e0 e5 e2 e3 e1 e6 e8 e9",
+        "target_text": "VALID"
+      },
+      "ood/implication_chains/action": {
+        "id": "ood:implication_chains:18:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX HYP K : P : K proves fact P\nSYNTAX HYP K : P -> Q : K maps known P to Q\nSYNTAX GOAL Q : DONE needs Q derived\nSYNTAX DERIVE Q BY K FROM P : Q follows by implication K and prior P\nACTION APPLY K adds the derivation licensed by K\nVALID proof uses only known facts and prior derived premises\nDONE when GOAL proposition is derived\nDEMO HYP K20 : X0 ; HYP K21 : X0 -> X1 ; GOAL X1 ; EMPTY => APPLY K20 ; DERIVE X0 BY K20 => APPLY K21\nPROBLEM\nHYP h8 : p0\nHYP h7 : p0 -> p1\nHYP h11 : p1 -> p7\nHYP h999 : p7 -> p6\nHYP h6 : p6 -> p9\nHYP h1 : p9 -> p12\nHYP h12 : p12 -> p4\nHYP h3 : p4 -> p3\nHYP h18 : p6 -> p1\nHYP h15 : p9 -> p3\nHYP h4 : p12 -> p2\nHYP h17 : p4 -> p1\nHYP h9 : p4 -> p9\nHYP h16 : p4 -> p11\nHYP h5 : p8 -> p12\nHYP h10 : p8 -> p2\nHYP h0 : p5 -> p6\nHYP h14 : p5 -> p4\nHYP h2 : p11 -> p1\nGOAL p3\nSTATE\nEMPTY",
+        "target_text": "APPLY h8"
+      },
+      "ood/implication_chains/repair_action": {
+        "id": "ood:implication_chains:18:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX HYP K : P : K proves fact P\nSYNTAX HYP K : P -> Q : K maps known P to Q\nSYNTAX GOAL Q : DONE needs Q derived\nSYNTAX DERIVE Q BY K FROM P : Q follows by implication K and prior P\nACTION APPLY K adds the derivation licensed by K\nVALID proof uses only known facts and prior derived premises\nDONE when GOAL proposition is derived\nDEMO HYP K00 : A0 ; HYP K01 : A0 -> A1 ; GOAL A1 ; EMPTY => APPLY K00 ; DERIVE A0 BY K00 => APPLY K01\nPROBLEM\nHYP h8 : p0\nHYP h7 : p0 -> p1\nHYP h11 : p1 -> p7\nHYP h999 : p7 -> p6\nHYP h6 : p6 -> p9\nHYP h1 : p9 -> p12\nHYP h12 : p12 -> p4\nHYP h3 : p4 -> p3\nHYP h18 : p6 -> p1\nHYP h15 : p9 -> p3\nHYP h4 : p12 -> p2\nHYP h17 : p4 -> p1\nHYP h9 : p4 -> p9\nHYP h16 : p4 -> p11\nHYP h5 : p8 -> p12\nHYP h10 : p8 -> p2\nHYP h0 : p5 -> p6\nHYP h14 : p5 -> p4\nHYP h2 : p11 -> p1\nGOAL p3\nSTATE\nDERIVE p0 BY h13",
+        "target_text": "REPLACE FIRST HYP h8"
+      },
+      "ood/implication_chains/verify": {
+        "id": "ood:implication_chains:18:verify:valid",
+        "source_text": "MODE verify\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nSYNTAX HYP K : P : K proves fact P\nSYNTAX GOAL Q : DONE needs Q derived\nSYNTAX HYP K : P -> Q : K maps known P to Q\nSYNTAX DERIVE Q BY K FROM P : Q follows by implication K and prior P\nACTION APPLY K adds the derivation licensed by K\nVALID proof uses only known facts and prior derived premises\nDONE when GOAL proposition is derived\nDEMO HYP K10 : N0 ; HYP K11 : N0 -> N1 ; GOAL N1 ; EMPTY => APPLY K10 ; DERIVE N0 BY K10 => APPLY K11\nPROBLEM\nHYP h8 : p0\nHYP h7 : p0 -> p1\nHYP h11 : p1 -> p7\nHYP h999 : p7 -> p6\nHYP h6 : p6 -> p9\nHYP h1 : p9 -> p12\nHYP h12 : p12 -> p4\nHYP h3 : p4 -> p3\nHYP h18 : p6 -> p1\nHYP h15 : p9 -> p3\nHYP h4 : p12 -> p2\nHYP h17 : p4 -> p1\nHYP h9 : p4 -> p9\nHYP h16 : p4 -> p11\nHYP h5 : p8 -> p12\nHYP h10 : p8 -> p2\nHYP h0 : p5 -> p6\nHYP h14 : p5 -> p4\nHYP h2 : p11 -> p1\nGOAL p3\nSTATE\nDERIVE p0 BY h8\nDERIVE p1 BY h7 FROM p0\nDERIVE p7 BY h11 FROM p1\nDERIVE p6 BY h999 FROM p7\nDERIVE p9 BY h6 FROM p6\nDERIVE p12 BY h1 FROM p9\nDERIVE p4 BY h12 FROM p12\nDERIVE p3 BY h3 FROM p4",
+        "target_text": "VALID"
+      },
+      "ood/relation_composition/action": {
+        "id": "ood:relation_composition:36:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE RC = RA ; RB : compose RA then RB through a shared middle\nSYNTAX FACT R A B : relation R holds from A to B\nSYNTAX QUERY R A C : DONE needs relation R from A to C\nSYNTAX DERIVE R A C VIA B : composed fact uses middle B\nACTION FOLLOW C VIA B adds the next composed fact ending at C\nVALID derivation requires matching left fact, right fact, and rule\nDONE when queried relation fact is available\nDEMO FACT REL20 X0 X1 ; FACT REL21 X1 X2 ; RULE REL22 = REL20 ; REL21 ; QUERY REL22 X0 X2 ; EMPTY => FOLLOW X2 VIA X1\nPROBLEM\nFACT r2 e4 e12\nFACT r6 e12 e8\nFACT r5 e8 e0\nFACT r7 e0 e11\nFACT r14 e11 e6\nFACT r12 e6 e3\nFACT r8 e3 e7\nFACT r10 e7 e5\nRULE r0 = r2 ; r6\nRULE r3 = r0 ; r5\nRULE r1 = r3 ; r7\nRULE r4 = r1 ; r14\nRULE r11 = r4 ; r12\nRULE r9 = r11 ; r8\nRULE r13 = r9 ; r10\nFACT r2 e12 e7\nFACT r2 e6 e0\nFACT r6 e12 e5\nFACT r7 e12 e6\nFACT r7 e5 e2\nFACT r14 e1 e7\nFACT r12 e2 e6\nFACT r8 e12 e2\nFACT r8 e11 e8\nQUERY r13 e4 e5\nSTATE\nEMPTY",
+        "target_text": "FOLLOW e4 e8 VIA e12"
+      },
+      "ood/relation_composition/repair_action": {
+        "id": "ood:relation_composition:36:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX FACT R A B : relation R holds from A to B\nSYNTAX RULE RC = RA ; RB : compose RA then RB through a shared middle\nSYNTAX QUERY R A C : DONE needs relation R from A to C\nSYNTAX DERIVE R A C VIA B : composed fact uses middle B\nACTION FOLLOW C VIA B adds the next composed fact ending at C\nVALID derivation requires matching left fact, right fact, and rule\nDONE when queried relation fact is available\nDEMO FACT REL00 A0 A1 ; FACT REL01 A1 A2 ; RULE REL02 = REL00 ; REL01 ; QUERY REL02 A0 A2 ; EMPTY => FOLLOW A2 VIA A1\nPROBLEM\nFACT r2 e4 e12\nFACT r6 e12 e8\nFACT r5 e8 e0\nFACT r7 e0 e11\nFACT r14 e11 e6\nFACT r12 e6 e3\nFACT r8 e3 e7\nFACT r10 e7 e5\nRULE r0 = r2 ; r6\nRULE r3 = r0 ; r5\nRULE r1 = r3 ; r7\nRULE r4 = r1 ; r14\nRULE r11 = r4 ; r12\nRULE r9 = r11 ; r8\nRULE r13 = r9 ; r10\nFACT r2 e12 e7\nFACT r2 e6 e0\nFACT r6 e12 e5\nFACT r7 e12 e6\nFACT r7 e5 e2\nFACT r14 e1 e7\nFACT r12 e2 e6\nFACT r8 e12 e2\nFACT r8 e11 e8\nQUERY r13 e4 e5\nSTATE\nDERIVE r0 e4 e8 VIA e4",
+        "target_text": "REPLACE FIRST VIA e12"
+      },
+      "ood/relation_composition/verify": {
+        "id": "ood:relation_composition:36:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE RC = RA ; RB : compose RA then RB through a shared middle\nSYNTAX FACT R A B : relation R holds from A to B\nSYNTAX QUERY R A C : DONE needs relation R from A to C\nSYNTAX DERIVE R A C VIA B : composed fact uses middle B\nACTION FOLLOW C VIA B adds the next composed fact ending at C\nVALID derivation requires matching left fact, right fact, and rule\nDONE when queried relation fact is available\nDEMO FACT REL20 X0 X1 ; FACT REL21 X1 X2 ; RULE REL22 = REL20 ; REL21 ; QUERY REL22 X0 X2 ; EMPTY => FOLLOW X2 VIA X1\nPROBLEM\nFACT r2 e4 e12\nFACT r6 e12 e8\nFACT r5 e8 e0\nFACT r7 e0 e11\nFACT r14 e11 e6\nFACT r12 e6 e3\nFACT r8 e3 e7\nFACT r10 e7 e5\nRULE r0 = r2 ; r6\nRULE r3 = r0 ; r5\nRULE r1 = r3 ; r7\nRULE r4 = r1 ; r14\nRULE r11 = r4 ; r12\nRULE r9 = r11 ; r8\nRULE r13 = r9 ; r10\nFACT r2 e12 e7\nFACT r2 e6 e0\nFACT r6 e12 e5\nFACT r7 e12 e6\nFACT r7 e5 e2\nFACT r14 e1 e7\nFACT r12 e2 e6\nFACT r8 e12 e2\nFACT r8 e11 e8\nQUERY r13 e4 e5\nSTATE\nDERIVE r0 e4 e8 VIA e12\nDERIVE r3 e4 e0 VIA e8\nDERIVE r1 e4 e11 VIA e0\nDERIVE r4 e4 e6 VIA e11\nDERIVE r11 e4 e3 VIA e6\nDERIVE r9 e4 e7 VIA e3\nDERIVE r13 e4 e5 VIA e7",
+        "target_text": "VALID"
+      },
+      "ood/term_rewriting/action": {
+        "id": "ood:term_rewriting:72:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K replaces a matching L subterm with R\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs current TERM equal T\nSYNTAX QUERY NORMAL_FORM : DONE needs no RULE applicable\nSYNTAX TERM T : current expression\nACTION RW K AT PATH applies rule K to the subterm at PATH\nACTION HALT stops only when DONE already holds\nVALID trace alternates TERM then RW then TERM, with optional final HALT\nDEMO RULE K00 : OP00 A0 -> OP01 A0 ; START OP00 A0 ; GOAL OP01 A0 ; TERM OP00 A0 => RW K00 AT ROOT\nPROBLEM\nRULE r12 : B g63 U f100 U f124 e0 e72 -> U f111 U f100 U f124 e0\nRULE r3 : U f111 U f100 U f124 e0 -> B g5 U f100 U f124 e0 e72\nRULE r13 : B g5 U f100 U f124 e0 e72 -> U f3 U f100 U f124 e0\nRULE r8 : U f3 U f100 U f124 e0 -> B g122 U f100 U f124 e0 e72\nRULE r10 : B g122 v1 v0 -> B g127 v1 v0\nRULE r7 : B g127 U f100 U f124 e0 e72 -> U f120 U f100 U f124 e0\nRULE r5 : U f120 U f100 U f124 e0 -> B g60 U f100 U f124 e0 e72\nRULE r9 : B g60 v1 v0 -> B g103 v1 v0\nRULE r17 : U f32 v1 -> U f30 v1\nRULE r15 : B g61 v1 v0 -> B g2 v1 v0\nRULE r18 : B g102 v1 v0 -> B g8 v1 v0\nRULE r1 : B g4 v1 v0 -> B g121 v1 v0\nRULE r14 : U f104 v1 -> U f108 v1\nRULE r2 : B g130 v1 v0 -> B g0 v1 v0\nRULE r6 : B g107 v1 v0 -> B g7 v1 v0\nRULE r16 : B g106 v1 v0 -> B g125 v1 v0\nRULE r0 : U f61 v1 -> U f31 v1\nRULE r4 : U f109 v1 -> U f129 v1\nRULE r19 : B g126 v1 v0 -> B g105 v1 v0\nRULE r11 : U f6 v1 -> U f131 v1\nSTART B g62 e71 U f128 B g110 B g63 U f100 U f124 e0 e72 e1\nGOAL B g62 e71 U f128 B g110 B g103 U f100 U f124 e0 e72 e1\nSTATE\nTERM B g62 e71 U f128 B g110 B g63 U f100 U f124 e0 e72 e1",
+        "target_text": "RW r12"
+      },
+      "ood/term_rewriting/repair_action": {
+        "id": "ood:term_rewriting:72:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K replaces a matching L subterm with R\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs current TERM equal T\nSYNTAX QUERY NORMAL_FORM : DONE needs no RULE applicable\nSYNTAX TERM T : current expression\nACTION RW K AT PATH applies rule K to the subterm at PATH\nACTION HALT stops only when DONE already holds\nVALID trace alternates TERM then RW then TERM, with optional final HALT\nDEMO RULE K00 : OP00 A0 -> OP01 A0 ; START OP00 A0 ; GOAL OP01 A0 ; TERM OP00 A0 => RW K00 AT ROOT\nPROBLEM\nRULE r12 : B g63 U f100 U f124 e0 e72 -> U f111 U f100 U f124 e0\nRULE r3 : U f111 U f100 U f124 e0 -> B g5 U f100 U f124 e0 e72\nRULE r13 : B g5 U f100 U f124 e0 e72 -> U f3 U f100 U f124 e0\nRULE r8 : U f3 U f100 U f124 e0 -> B g122 U f100 U f124 e0 e72\nRULE r10 : B g122 v1 v0 -> B g127 v1 v0\nRULE r7 : B g127 U f100 U f124 e0 e72 -> U f120 U f100 U f124 e0\nRULE r5 : U f120 U f100 U f124 e0 -> B g60 U f100 U f124 e0 e72\nRULE r9 : B g60 v1 v0 -> B g103 v1 v0\nRULE r17 : U f32 v1 -> U f30 v1\nRULE r15 : B g61 v1 v0 -> B g2 v1 v0\nRULE r18 : B g102 v1 v0 -> B g8 v1 v0\nRULE r1 : B g4 v1 v0 -> B g121 v1 v0\nRULE r14 : U f104 v1 -> U f108 v1\nRULE r2 : B g130 v1 v0 -> B g0 v1 v0\nRULE r6 : B g107 v1 v0 -> B g7 v1 v0\nRULE r16 : B g106 v1 v0 -> B g125 v1 v0\nRULE r0 : U f61 v1 -> U f31 v1\nRULE r4 : U f109 v1 -> U f129 v1\nRULE r19 : B g126 v1 v0 -> B g105 v1 v0\nRULE r11 : U f6 v1 -> U f131 v1\nSTART B g62 e71 U f128 B g110 B g63 U f100 U f124 e0 e72 e1\nGOAL B g62 e71 U f128 B g110 B g103 U f100 U f124 e0 e72 e1\nSTATE\nTERM B g62 e71 U f128 B g110 B g63 U f100 U f124 e0 e72 e1\nRW r12\nTERM B g62 e71 U f128 B g110 U f111 U f1 U f124 e0 e1",
+        "target_text": "REPAIR FIRST_BAD"
+      },
+      "ood/term_rewriting/verify": {
+        "id": "ood:term_rewriting:72:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K replaces a matching L subterm with R\nSYNTAX TERM T : current expression\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs current TERM equal T\nSYNTAX QUERY NORMAL_FORM : DONE needs no RULE applicable\nACTION RW K AT PATH applies rule K to the subterm at PATH\nACTION HALT stops only when DONE already holds\nVALID trace alternates TERM then RW then TERM, with optional final HALT\nDEMO RULE K20 : OP20 X0 -> OP21 X0 ; START OP20 X0 ; GOAL OP21 X0 ; TERM OP20 X0 => RW K20 AT ROOT\nPROBLEM\nRULE r12 : B g63 U f100 U f124 e0 e72 -> U f111 U f100 U f124 e0\nRULE r3 : U f111 U f100 U f124 e0 -> B g5 U f100 U f124 e0 e72\nRULE r13 : B g5 U f100 U f124 e0 e72 -> U f3 U f100 U f124 e0\nRULE r8 : U f3 U f100 U f124 e0 -> B g122 U f100 U f124 e0 e72\nRULE r10 : B g122 v1 v0 -> B g127 v1 v0\nRULE r7 : B g127 U f100 U f124 e0 e72 -> U f120 U f100 U f124 e0\nRULE r5 : U f120 U f100 U f124 e0 -> B g60 U f100 U f124 e0 e72\nRULE r9 : B g60 v1 v0 -> B g103 v1 v0\nRULE r17 : U f32 v1 -> U f30 v1\nRULE r15 : B g61 v1 v0 -> B g2 v1 v0\nRULE r18 : B g102 v1 v0 -> B g8 v1 v0\nRULE r1 : B g4 v1 v0 -> B g121 v1 v0\nRULE r14 : U f104 v1 -> U f108 v1\nRULE r2 : B g130 v1 v0 -> B g0 v1 v0\nRULE r6 : B g107 v1 v0 -> B g7 v1 v0\nRULE r16 : B g106 v1 v0 -> B g125 v1 v0\nRULE r0 : U f61 v1 -> U f31 v1\nRULE r4 : U f109 v1 -> U f129 v1\nRULE r19 : B g126 v1 v0 -> B g105 v1 v0\nRULE r11 : U f6 v1 -> U f131 v1\nSTART B g62 e71 U f128 B g110 B g63 U f100 U f124 e0 e72 e1\nGOAL B g62 e71 U f128 B g110 B g103 U f100 U f124 e0 e72 e1\nSTATE\nTERM B g62 e71 U f128 B g110 B g63 U f100 U f124 e0 e72 e1\nRW r12\nTERM B g62 e71 U f128 B g110 U f111 U f100 U f124 e0 e1\nRW r3\nTERM B g62 e71 U f128 B g110 B g5 U f100 U f124 e0 e72 e1\nRW r13\nTERM B g62 e71 U f128 B g110 U f3 U f100 U f124 e0 e1\nRW r8\nTERM B g62 e71 U f128 B g110 B g122 U f100 U f124 e0 e72 e1\nRW r10\nTERM B g62 e71 U f128 B g110 B g127 U f100 U f124 e0 e72 e1\nRW r7\nTERM B g62 e71 U f128 B g110 U f120 U f100 U f124 e0 e1\nRW r5\nTERM B g62 e71 U f128 B g110 B g60 U f100 U f124 e0 e72 e1\nRW r9\nTERM B g62 e71 U f128 B g110 B g103 U f100 U f124 e0 e72 e1",
+        "target_text": "VALID"
+      },
+      "ood/tree_ancestry/action": {
+        "id": "ood:tree_ancestry:54:action:0",
+        "source_text": "MODE action\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nSYNTAX QUERY ANCESTOR A C : DONE needs lineage from A to C\nSYNTAX PARENT A B : A is direct parent of B\nSYNTAX LINEAGE A B C : ordered ancestor chain\nSTATE EMPTY means no lineage has started\nVALID LINEAGE starts at query ancestor and follows PARENT steps\nACTION DESCEND X starts with query ancestor or appends a child of last node\nDONE when LINEAGE ends at query target\nDEMO PARENT N0 N1 ; PARENT N1 N2 ; QUERY ANCESTOR N0 N2 ; EMPTY => DESCEND N0 ; LINEAGE N0 => DESCEND N1\nPROBLEM\nPARENT e5 e8\nPARENT e5 e16\nPARENT e8 e11\nPARENT e7 e4\nPARENT e7 e10\nPARENT e4 e3\nPARENT e11 e15\nPARENT e11 e13\nPARENT e13 e6\nPARENT e6 e2\nPARENT e2 e1\nPARENT e2 e9\nPARENT e9 e12\nPARENT e12 e14\nPARENT e14 e7\nPARENT e14 e0\nQUERY ANCESTOR e5 e14\nSTATE\nEMPTY",
+        "target_text": "DESCEND e5"
+      },
+      "ood/tree_ancestry/repair_action": {
+        "id": "ood:tree_ancestry:54:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX PARENT A B : A is direct parent of B\nSYNTAX QUERY ANCESTOR A C : DONE needs lineage from A to C\nSYNTAX LINEAGE A B C : ordered ancestor chain\nSTATE EMPTY means no lineage has started\nVALID LINEAGE starts at query ancestor and follows PARENT steps\nACTION DESCEND X starts with query ancestor or appends a child of last node\nDONE when LINEAGE ends at query target\nDEMO PARENT A0 A1 ; PARENT A1 A2 ; QUERY ANCESTOR A0 A2 ; EMPTY => DESCEND A0 ; LINEAGE A0 => DESCEND A1\nPROBLEM\nPARENT e5 e8\nPARENT e5 e16\nPARENT e8 e11\nPARENT e7 e4\nPARENT e7 e10\nPARENT e4 e3\nPARENT e11 e15\nPARENT e11 e13\nPARENT e13 e6\nPARENT e6 e2\nPARENT e2 e1\nPARENT e2 e9\nPARENT e9 e12\nPARENT e12 e14\nPARENT e14 e7\nPARENT e14 e0\nQUERY ANCESTOR e5 e14\nSTATE\nLINEAGE e14",
+        "target_text": "REPLACE ROOT WITH e5"
+      },
+      "ood/tree_ancestry/verify": {
+        "id": "ood:tree_ancestry:54:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX PARENT A B : A is direct parent of B\nSYNTAX QUERY ANCESTOR A C : DONE needs lineage from A to C\nSYNTAX LINEAGE A B C : ordered ancestor chain\nSTATE EMPTY means no lineage has started\nVALID LINEAGE starts at query ancestor and follows PARENT steps\nACTION DESCEND X starts with query ancestor or appends a child of last node\nDONE when LINEAGE ends at query target\nDEMO PARENT A0 A1 ; PARENT A1 A2 ; QUERY ANCESTOR A0 A2 ; EMPTY => DESCEND A0 ; LINEAGE A0 => DESCEND A1\nPROBLEM\nPARENT e5 e8\nPARENT e5 e16\nPARENT e8 e11\nPARENT e7 e4\nPARENT e7 e10\nPARENT e4 e3\nPARENT e11 e15\nPARENT e11 e13\nPARENT e13 e6\nPARENT e6 e2\nPARENT e2 e1\nPARENT e2 e9\nPARENT e9 e12\nPARENT e12 e14\nPARENT e14 e7\nPARENT e14 e0\nQUERY ANCESTOR e5 e14\nSTATE\nLINEAGE e5 e8 e11 e13 e6 e2 e9 e12 e14",
+        "target_text": "VALID"
+      },
+      "test/graph_reachability/action": {
+        "id": "test:graph_reachability:0:action:0",
+        "source_text": "MODE action\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE N0 N1 ; EDGE N1 N2 ; QUERY REACH N0 N2 ; EMPTY => APPEND N0 ; PATH N0 => APPEND N1\nPROBLEM\nEDGE e2 e0\nEDGE e0 e8\nEDGE e8 e6\nEDGE e3 e1\nQUERY REACH e2 e6\nSTATE\nEMPTY",
+        "target_text": "APPEND e2"
+      },
+      "test/graph_reachability/repair_action": {
+        "id": "test:graph_reachability:0:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE X0 X1 ; EDGE X1 X2 ; QUERY REACH X0 X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nEDGE e2 e0\nEDGE e0 e8\nEDGE e8 e6\nEDGE e3 e1\nQUERY REACH e2 e6\nSTATE\nPATH e6",
+        "target_text": "REPLACE ROOT WITH e2"
+      },
+      "test/graph_reachability/verify": {
+        "id": "test:graph_reachability:0:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE X0 X1 ; EDGE X1 X2 ; QUERY REACH X0 X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nEDGE e2 e0\nEDGE e0 e8\nEDGE e8 e6\nEDGE e3 e1\nQUERY REACH e2 e6\nSTATE\nPATH e2 e0 e8 e6",
+        "target_text": "VALID"
+      },
+      "test/implication_chains/action": {
+        "id": "test:implication_chains:18:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX HYP K : P : K proves fact P\nSYNTAX HYP K : P -> Q : K maps known P to Q\nSYNTAX GOAL Q : DONE needs Q derived\nSYNTAX DERIVE Q BY K FROM P : Q follows by implication K and prior P\nACTION APPLY K adds the derivation licensed by K\nVALID proof uses only known facts and prior derived premises\nDONE when GOAL proposition is derived\nDEMO HYP K20 : X0 ; HYP K21 : X0 -> X1 ; GOAL X1 ; EMPTY => APPLY K20 ; DERIVE X0 BY K20 => APPLY K21\nPROBLEM\nHYP h4 : p4\nHYP h8 : p4 -> p0\nHYP h999 : p0 -> p5\nHYP h2 : p5 -> p6\nHYP h5 : p4 -> p6\nHYP h1 : p0 -> p2\nHYP h0 : p1 -> p2\nHYP h3 : p2 -> p6\nHYP h7 : p3 -> p0\nGOAL p6\nSTATE\nEMPTY",
+        "target_text": "APPLY h4"
+      },
+      "test/implication_chains/repair_action": {
+        "id": "test:implication_chains:18:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX HYP K : P : K proves fact P\nSYNTAX HYP K : P -> Q : K maps known P to Q\nSYNTAX GOAL Q : DONE needs Q derived\nSYNTAX DERIVE Q BY K FROM P : Q follows by implication K and prior P\nACTION APPLY K adds the derivation licensed by K\nVALID proof uses only known facts and prior derived premises\nDONE when GOAL proposition is derived\nDEMO HYP K00 : A0 ; HYP K01 : A0 -> A1 ; GOAL A1 ; EMPTY => APPLY K00 ; DERIVE A0 BY K00 => APPLY K01\nPROBLEM\nHYP h4 : p4\nHYP h8 : p4 -> p0\nHYP h999 : p0 -> p5\nHYP h2 : p5 -> p6\nHYP h5 : p4 -> p6\nHYP h1 : p0 -> p2\nHYP h0 : p1 -> p2\nHYP h3 : p2 -> p6\nHYP h7 : p3 -> p0\nGOAL p6\nSTATE\nDERIVE p4 BY h6",
+        "target_text": "REPLACE FIRST HYP h4"
+      },
+      "test/implication_chains/verify": {
+        "id": "test:implication_chains:18:verify:valid",
+        "source_text": "MODE verify\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nSYNTAX HYP K : P : K proves fact P\nSYNTAX GOAL Q : DONE needs Q derived\nSYNTAX HYP K : P -> Q : K maps known P to Q\nSYNTAX DERIVE Q BY K FROM P : Q follows by implication K and prior P\nACTION APPLY K adds the derivation licensed by K\nVALID proof uses only known facts and prior derived premises\nDONE when GOAL proposition is derived\nDEMO HYP K10 : N0 ; HYP K11 : N0 -> N1 ; GOAL N1 ; EMPTY => APPLY K10 ; DERIVE N0 BY K10 => APPLY K11\nPROBLEM\nHYP h4 : p4\nHYP h8 : p4 -> p0\nHYP h999 : p0 -> p5\nHYP h2 : p5 -> p6\nHYP h5 : p4 -> p6\nHYP h1 : p0 -> p2\nHYP h0 : p1 -> p2\nHYP h3 : p2 -> p6\nHYP h7 : p3 -> p0\nGOAL p6\nSTATE\nDERIVE p4 BY h4\nDERIVE p0 BY h8 FROM p4\nDERIVE p5 BY h999 FROM p0\nDERIVE p6 BY h2 FROM p5",
+        "target_text": "VALID"
+      },
+      "test/relation_composition/action": {
+        "id": "test:relation_composition:36:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX FACT R A B : relation R holds from A to B\nSYNTAX RULE RC = RA ; RB : compose RA then RB through a shared middle\nSYNTAX QUERY R A C : DONE needs relation R from A to C\nSYNTAX DERIVE R A C VIA B : composed fact uses middle B\nACTION FOLLOW C VIA B adds the next composed fact ending at C\nVALID derivation requires matching left fact, right fact, and rule\nDONE when queried relation fact is available\nDEMO FACT REL00 A0 A1 ; FACT REL01 A1 A2 ; RULE REL02 = REL00 ; REL01 ; QUERY REL02 A0 A2 ; EMPTY => FOLLOW A2 VIA A1\nPROBLEM\nFACT r1 e1 e0\nFACT r2 e0 e3\nRULE r0 = r1 ; r2\nFACT r1 e1 e2\nFACT r2 e5 e3\nFACT r2 e2 e3\nFACT r2 e6 e4\nQUERY r0 e1 e3\nSTATE\nEMPTY",
+        "target_text": "FOLLOW e1 e3 VIA e0"
+      },
+      "test/relation_composition/repair_action": {
+        "id": "test:relation_composition:36:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nSYNTAX FACT R A B : relation R holds from A to B\nSYNTAX RULE RC = RA ; RB : compose RA then RB through a shared middle\nSYNTAX QUERY R A C : DONE needs relation R from A to C\nSYNTAX DERIVE R A C VIA B : composed fact uses middle B\nACTION FOLLOW C VIA B adds the next composed fact ending at C\nVALID derivation requires matching left fact, right fact, and rule\nDONE when queried relation fact is available\nDEMO FACT REL10 N0 N1 ; FACT REL11 N1 N2 ; RULE REL12 = REL10 ; REL11 ; QUERY REL12 N0 N2 ; EMPTY => FOLLOW N2 VIA N1\nPROBLEM\nFACT r1 e1 e0\nFACT r2 e0 e3\nRULE r0 = r1 ; r2\nFACT r1 e1 e2\nFACT r2 e5 e3\nFACT r2 e2 e3\nFACT r2 e6 e4\nQUERY r0 e1 e3\nSTATE\nDERIVE r0 e1 e3 VIA e1",
+        "target_text": "REPLACE FIRST VIA e0"
+      },
+      "test/relation_composition/verify": {
+        "id": "test:relation_composition:36:verify:valid",
+        "source_text": "MODE verify\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nSYNTAX FACT R A B : relation R holds from A to B\nSYNTAX RULE RC = RA ; RB : compose RA then RB through a shared middle\nSYNTAX QUERY R A C : DONE needs relation R from A to C\nSYNTAX DERIVE R A C VIA B : composed fact uses middle B\nACTION FOLLOW C VIA B adds the next composed fact ending at C\nVALID derivation requires matching left fact, right fact, and rule\nDONE when queried relation fact is available\nDEMO FACT REL10 N0 N1 ; FACT REL11 N1 N2 ; RULE REL12 = REL10 ; REL11 ; QUERY REL12 N0 N2 ; EMPTY => FOLLOW N2 VIA N1\nPROBLEM\nFACT r1 e1 e0\nFACT r2 e0 e3\nRULE r0 = r1 ; r2\nFACT r1 e1 e2\nFACT r2 e5 e3\nFACT r2 e2 e3\nFACT r2 e6 e4\nQUERY r0 e1 e3\nSTATE\nDERIVE r0 e1 e3 VIA e0",
+        "target_text": "VALID"
+      },
+      "test/term_rewriting/action": {
+        "id": "test:term_rewriting:72:action:0",
+        "source_text": "MODE action\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nSYNTAX RULE K : L -> R : K replaces a matching L subterm with R\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs current TERM equal T\nSYNTAX QUERY NORMAL_FORM : DONE needs no RULE applicable\nSYNTAX TERM T : current expression\nACTION RW K AT PATH applies rule K to the subterm at PATH\nACTION HALT stops only when DONE already holds\nVALID trace alternates TERM then RW then TERM, with optional final HALT\nDEMO RULE K10 : OP10 N0 -> OP11 N0 ; START OP10 N0 ; GOAL OP11 N0 ; TERM OP10 N0 => RW K10 AT ROOT\nPROBLEM\nRULE r3 : B g121 U f1 U f30 e1 e0 -> U f100 U f1 U f30 e1\nRULE r0 : U f100 U f1 U f30 e1 -> U f61 U f1 U f30 e1\nRULE r1 : U f61 U f1 U f30 e1 -> U f60 U f1 U f30 e1\nRULE r4 : U f122 v1 -> U f3 v1\nRULE r5 : B g0 v1 v0 -> B g101 v1 v0\nRULE r2 : U f102 v1 -> U f120 v1\nSTART U f2 B g121 U f1 U f30 e1 e0\nGOAL U f2 U f60 U f1 U f30 e1\nSTATE\nTERM U f2 B g121 U f1 U f30 e1 e0",
+        "target_text": "RW r3"
+      },
+      "test/term_rewriting/repair_action": {
+        "id": "test:term_rewriting:72:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nSYNTAX RULE K : L -> R : K replaces a matching L subterm with R\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs current TERM equal T\nSYNTAX QUERY NORMAL_FORM : DONE needs no RULE applicable\nSYNTAX TERM T : current expression\nACTION RW K AT PATH applies rule K to the subterm at PATH\nACTION HALT stops only when DONE already holds\nVALID trace alternates TERM then RW then TERM, with optional final HALT\nDEMO RULE K10 : OP10 N0 -> OP11 N0 ; START OP10 N0 ; GOAL OP11 N0 ; TERM OP10 N0 => RW K10 AT ROOT\nPROBLEM\nRULE r3 : B g121 U f1 U f30 e1 e0 -> U f100 U f1 U f30 e1\nRULE r0 : U f100 U f1 U f30 e1 -> U f61 U f1 U f30 e1\nRULE r1 : U f61 U f1 U f30 e1 -> U f60 U f1 U f30 e1\nRULE r4 : U f122 v1 -> U f3 v1\nRULE r5 : B g0 v1 v0 -> B g101 v1 v0\nRULE r2 : U f102 v1 -> U f120 v1\nSTART U f2 B g121 U f1 U f30 e1 e0\nGOAL U f2 U f60 U f1 U f30 e1\nSTATE\nTERM U f2 B g121 U f1 U f30 e1 e0\nRW r3\nTERM U f31 U f100 U f1 U f30 e1",
+        "target_text": "REPAIR FIRST_BAD"
+      },
+      "test/term_rewriting/verify": {
+        "id": "test:term_rewriting:72:verify:valid",
+        "source_text": "MODE verify\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nSYNTAX RULE K : L -> R : K replaces a matching L subterm with R\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs current TERM equal T\nSYNTAX QUERY NORMAL_FORM : DONE needs no RULE applicable\nSYNTAX TERM T : current expression\nACTION RW K AT PATH applies rule K to the subterm at PATH\nACTION HALT stops only when DONE already holds\nVALID trace alternates TERM then RW then TERM, with optional final HALT\nDEMO RULE K10 : OP10 N0 -> OP11 N0 ; START OP10 N0 ; GOAL OP11 N0 ; TERM OP10 N0 => RW K10 AT ROOT\nPROBLEM\nRULE r3 : B g121 U f1 U f30 e1 e0 -> U f100 U f1 U f30 e1\nRULE r0 : U f100 U f1 U f30 e1 -> U f61 U f1 U f30 e1\nRULE r1 : U f61 U f1 U f30 e1 -> U f60 U f1 U f30 e1\nRULE r4 : U f122 v1 -> U f3 v1\nRULE r5 : B g0 v1 v0 -> B g101 v1 v0\nRULE r2 : U f102 v1 -> U f120 v1\nSTART U f2 B g121 U f1 U f30 e1 e0\nGOAL U f2 U f60 U f1 U f30 e1\nSTATE\nTERM U f2 B g121 U f1 U f30 e1 e0\nRW r3\nTERM U f2 U f100 U f1 U f30 e1\nRW r0\nTERM U f2 U f61 U f1 U f30 e1\nRW r1\nTERM U f2 U f60 U f1 U f30 e1",
+        "target_text": "VALID"
+      },
+      "test/tree_ancestry/action": {
+        "id": "test:tree_ancestry:54:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX PARENT A B : A is direct parent of B\nSYNTAX QUERY ANCESTOR A C : DONE needs lineage from A to C\nSYNTAX LINEAGE A B C : ordered ancestor chain\nSTATE EMPTY means no lineage has started\nVALID LINEAGE starts at query ancestor and follows PARENT steps\nACTION DESCEND X starts with query ancestor or appends a child of last node\nDONE when LINEAGE ends at query target\nDEMO PARENT X0 X1 ; PARENT X1 X2 ; QUERY ANCESTOR X0 X2 ; EMPTY => DESCEND X0 ; LINEAGE X0 => DESCEND X1\nPROBLEM\nPARENT e2 e4\nPARENT e4 e3\nPARENT e3 e1\nPARENT e3 e0\nQUERY ANCESTOR e2 e1\nSTATE\nEMPTY",
+        "target_text": "DESCEND e2"
+      },
+      "test/tree_ancestry/repair_action": {
+        "id": "test:tree_ancestry:54:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nSYNTAX QUERY ANCESTOR A C : DONE needs lineage from A to C\nSYNTAX PARENT A B : A is direct parent of B\nSYNTAX LINEAGE A B C : ordered ancestor chain\nSTATE EMPTY means no lineage has started\nVALID LINEAGE starts at query ancestor and follows PARENT steps\nACTION DESCEND X starts with query ancestor or appends a child of last node\nDONE when LINEAGE ends at query target\nDEMO PARENT N0 N1 ; PARENT N1 N2 ; QUERY ANCESTOR N0 N2 ; EMPTY => DESCEND N0 ; LINEAGE N0 => DESCEND N1\nPROBLEM\nPARENT e2 e4\nPARENT e4 e3\nPARENT e3 e1\nPARENT e3 e0\nQUERY ANCESTOR e2 e1\nSTATE\nLINEAGE e1",
+        "target_text": "REPLACE ROOT WITH e2"
+      },
+      "test/tree_ancestry/verify": {
+        "id": "test:tree_ancestry:54:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX PARENT A B : A is direct parent of B\nSYNTAX QUERY ANCESTOR A C : DONE needs lineage from A to C\nSYNTAX LINEAGE A B C : ordered ancestor chain\nSTATE EMPTY means no lineage has started\nVALID LINEAGE starts at query ancestor and follows PARENT steps\nACTION DESCEND X starts with query ancestor or appends a child of last node\nDONE when LINEAGE ends at query target\nDEMO PARENT A0 A1 ; PARENT A1 A2 ; QUERY ANCESTOR A0 A2 ; EMPTY => DESCEND A0 ; LINEAGE A0 => DESCEND A1\nPROBLEM\nPARENT e2 e4\nPARENT e4 e3\nPARENT e3 e1\nPARENT e3 e0\nQUERY ANCESTOR e2 e1\nSTATE\nLINEAGE e2 e4 e3 e1",
+        "target_text": "VALID"
+      },
+      "train/graph_reachability/repair_action": {
+        "id": "train:graph_reachability:0:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE A0 A1 ; EDGE A1 A2 ; QUERY REACH A0 A2 ; EMPTY => APPEND A0 ; PATH A0 => APPEND A1\nPROBLEM\nEDGE e14 e15\nEDGE e14 e16\nEDGE e14 e13\nEDGE e14 e10\nEDGE e15 e6\nEDGE e16 e7\nEDGE e17 e8\nEDGE e17 e10\nEDGE e8 e14\nEDGE e8 e16\nEDGE e4 e14\nEDGE e5 e6\nEDGE e5 e10\nEDGE e12 e9\nEDGE e9 e7\nEDGE e7 e11\nEDGE e11 e17\nEDGE e11 e12\nEDGE e11 e13\nEDGE e13 e9\nEDGE e13 e10\nEDGE e10 e14\nQUERY REACH e12 e6\nSTATE\nPATH e6",
+        "target_text": "REPLACE ROOT WITH e12"
+      },
+      "train/implication_chains/verify": {
+        "id": "train:implication_chains:144:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX HYP K : P : K proves fact P\nSYNTAX HYP K : P -> Q : K maps known P to Q\nSYNTAX GOAL Q : DONE needs Q derived\nSYNTAX DERIVE Q BY K FROM P : Q follows by implication K and prior P\nACTION APPLY K adds the derivation licensed by K\nVALID proof uses only known facts and prior derived premises\nDONE when GOAL proposition is derived\nDEMO HYP K20 : X0 ; HYP K21 : X0 -> X1 ; GOAL X1 ; EMPTY => APPLY K20 ; DERIVE X0 BY K20 => APPLY K21\nPROBLEM\nHYP h9 : p14\nHYP h12 : p14 -> p12\nHYP h10 : p12 -> p10\nHYP h15 : p10 -> p13\nHYP h11 : p13 -> p4\nHYP h17 : p4 -> p16\nHYP h8 : p16 -> p6\nHYP h5 : p6 -> p7\nHYP h13 : p12 -> p7\nHYP h19 : p10 -> p6\nHYP h16 : p9 -> p15\nHYP h18 : p15 -> p13\nHYP h6 : p15 -> p8\nHYP h7 : p8 -> p12\nHYP h14 : p11 -> p4\nHYP h4 : p5 -> p13\nGOAL p7\nSTATE\nDERIVE p14 BY h9\nDERIVE p12 BY h12 FROM p14\nDERIVE p10 BY h10 FROM p12\nDERIVE p13 BY h15 FROM p10\nDERIVE p4 BY h11 FROM p13\nDERIVE p16 BY h17 FROM p4\nDERIVE p6 BY h8 FROM p16\nDERIVE p7 BY h5 FROM p6",
+        "target_text": "VALID"
+      },
+      "train/term_rewriting/action": {
+        "id": "train:term_rewriting:432:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K replaces a matching L subterm with R\nSYNTAX TERM T : current expression\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs current TERM equal T\nSYNTAX QUERY NORMAL_FORM : DONE needs no RULE applicable\nACTION RW K AT PATH applies rule K to the subterm at PATH\nACTION HALT stops only when DONE already holds\nVALID trace alternates TERM then RW then TERM, with optional final HALT\nDEMO RULE K20 : OP20 X0 -> OP21 X0 ; START OP20 X0 ; GOAL OP21 X0 ; TERM OP20 X0 => RW K20 AT ROOT\nPROBLEM\nRULE r15 : U f130 U f110 U f107 e5 -> B g6 U f110 U f107 e5 e4\nRULE r6 : B g6 U f110 U f107 e5 e4 -> B g9 U f110 U f107 e5 e4\nRULE r11 : B g9 v1 v0 -> B g133 v1 v0\nRULE r13 : B g133 U f110 U f107 e5 e4 -> U f34 U f110 U f107 e5\nRULE r19 : U f34 U f110 U f107 e5 -> B g106 U f110 U f107 e5 e4\nRULE r5 : B g106 U f110 U f107 e5 e4 -> U f35 U f110 U f107 e5\nRULE r7 : U f35 U f110 U f107 e5 -> B g11 U f110 U f107 e5 e4\nRULE r23 : B g11 U f110 U f107 e5 e4 -> U f8 U f110 U f107 e5\nRULE r22 : U f131 v1 -> U f105 v1\nRULE r21 : U f111 v1 -> U f12 v1\nRULE r12 : B g135 v1 v0 -> B g128 v1 v0\nRULE r17 : U f104 v1 -> U f10 v1\nRULE r16 : B g5 v1 v0 -> B g115 v1 v0\nRULE r4 : B g126 v1 v0 -> B g108 v1 v0\nRULE r10 : U f4 v1 -> U f124 v1\nRULE r14 : U f127 v1 -> U f125 v1\nRULE r8 : B g114 v1 v0 -> B g129 v1 v0\nRULE r9 : B g134 v1 v0 -> B g113 v1 v0\nRULE r18 : B g109 v1 v0 -> B g132 v1 v0\nRULE r20 : B g112 v1 v0 -> B g7 v1 v0\nSTART U f130 U f110 U f107 e5\nGOAL U f8 U f110 U f107 e5\nSTATE\nTERM U f130 U f110 U f107 e5",
+        "target_text": "RW r15"
+      },
+      "train/tree_ancestry/action": {
+        "id": "train:tree_ancestry:288:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX PARENT A B : A is direct parent of B\nSYNTAX QUERY ANCESTOR A C : DONE needs lineage from A to C\nSYNTAX LINEAGE A B C : ordered ancestor chain\nSTATE EMPTY means no lineage has started\nVALID LINEAGE starts at query ancestor and follows PARENT steps\nACTION DESCEND X starts with query ancestor or appends a child of last node\nDONE when LINEAGE ends at query target\nDEMO PARENT X0 X1 ; PARENT X1 X2 ; QUERY ANCESTOR X0 X2 ; EMPTY => DESCEND X0 ; LINEAGE X0 => DESCEND X1\nPROBLEM\nPARENT e10 e12\nPARENT e10 e20\nPARENT e10 e18\nPARENT e10 e15\nPARENT e12 e13\nPARENT e13 e4\nPARENT e16 e21\nPARENT e14 e24\nPARENT e21 e9\nPARENT e8 e25\nPARENT e7 e23\nPARENT e7 e5\nPARENT e5 e16\nPARENT e5 e17\nPARENT e5 e6\nPARENT e6 e14\nPARENT e6 e11\nPARENT e11 e22\nPARENT e22 e8\nPARENT e22 e19\nPARENT e19 e10\nQUERY ANCESTOR e7 e13\nSTATE\nEMPTY",
+        "target_text": "DESCEND e7"
+      },
+      "train/tree_ancestry/repair_action": {
+        "id": "train:tree_ancestry:288:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nSYNTAX QUERY ANCESTOR A C : DONE needs lineage from A to C\nSYNTAX PARENT A B : A is direct parent of B\nSYNTAX LINEAGE A B C : ordered ancestor chain\nSTATE EMPTY means no lineage has started\nVALID LINEAGE starts at query ancestor and follows PARENT steps\nACTION DESCEND X starts with query ancestor or appends a child of last node\nDONE when LINEAGE ends at query target\nDEMO PARENT N0 N1 ; PARENT N1 N2 ; QUERY ANCESTOR N0 N2 ; EMPTY => DESCEND N0 ; LINEAGE N0 => DESCEND N1\nPROBLEM\nPARENT e10 e12\nPARENT e10 e20\nPARENT e10 e18\nPARENT e10 e15\nPARENT e12 e13\nPARENT e13 e4\nPARENT e16 e21\nPARENT e14 e24\nPARENT e21 e9\nPARENT e8 e25\nPARENT e7 e23\nPARENT e7 e5\nPARENT e5 e16\nPARENT e5 e17\nPARENT e5 e6\nPARENT e6 e14\nPARENT e6 e11\nPARENT e11 e22\nPARENT e22 e8\nPARENT e22 e19\nPARENT e19 e10\nQUERY ANCESTOR e7 e13\nSTATE\nLINEAGE e13",
+        "target_text": "REPLACE ROOT WITH e7"
+      }
+    },
+    "splits": {
+      "ood": {
+        "examples": 1846,
+        "families": {
+          "graph_reachability": 396,
+          "implication_chains": 360,
+          "relation_composition": 324,
+          "term_rewriting": 370,
+          "tree_ancestry": 396
+        },
+        "modes": {
+          "action": 833,
+          "repair_action": 833,
+          "verify": 180
+        },
+        "problems": 90,
+        "verify_targets": {
+          "INVALID BAD_EDGE": 18,
+          "INVALID BAD_FACT": 18,
+          "INVALID BAD_NOT_GOAL": 3,
+          "INVALID BAD_NO_MATCH": 4,
+          "INVALID BAD_PARENT": 18,
+          "INVALID BAD_PATH": 2,
+          "INVALID BAD_PREMATURE_HALT": 5,
+          "INVALID BAD_PREMISE": 16,
+          "INVALID BAD_RESULT": 4,
+          "INVALID UNKNOWN_HYP": 2,
+          "VALID": 90
+        }
+      },
+      "test": {
+        "examples": 1188,
+        "families": {
+          "graph_reachability": 274,
+          "implication_chains": 228,
+          "relation_composition": 186,
+          "term_rewriting": 234,
+          "tree_ancestry": 266
+        },
+        "modes": {
+          "action": 504,
+          "repair_action": 504,
+          "verify": 180
+        },
+        "problems": 90,
+        "verify_targets": {
+          "INVALID BAD_EDGE": 18,
+          "INVALID BAD_FACT": 18,
+          "INVALID BAD_NOT_GOAL": 3,
+          "INVALID BAD_NO_MATCH": 3,
+          "INVALID BAD_PARENT": 18,
+          "INVALID BAD_PATH": 7,
+          "INVALID BAD_PREMATURE_HALT": 2,
+          "INVALID BAD_PREMISE": 14,
+          "INVALID BAD_RESULT": 3,
+          "INVALID UNKNOWN_HYP": 4,
+          "VALID": 90
+        }
+      },
+      "train": {
+        "examples": 5960,
+        "families": {
+          "graph_reachability": 1440,
+          "implication_chains": 288,
+          "term_rewriting": 1352,
+          "tree_ancestry": 2880
+        },
+        "modes": {
+          "action": 2792,
+          "repair_action": 2880,
+          "verify": 288
+        },
+        "problems": 576,
+        "verify_targets": {
+          "INVALID BAD_PREMISE": 125,
+          "INVALID UNKNOWN_HYP": 19,
+          "VALID": 144
+        }
+      }
+    }
+  },
+  "status": "pass",
+  "trm": {
+    "identifiers": [
+      "<blank>"
+    ],
+    "splits": {
+      "ood": {
+        "inputs_shape": [
+          1846,
+          970
+        ],
+        "labels_shape": [
+          1846,
+          970
+        ],
+        "non_empty_target_rows": 1846,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 970,
+        "vocab_size": 462
+      },
+      "test": {
+        "inputs_shape": [
+          1188,
+          970
+        ],
+        "labels_shape": [
+          1188,
+          970
+        ],
+        "non_empty_target_rows": 1188,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 970,
+        "vocab_size": 462
+      },
+      "train": {
+        "inputs_shape": [
+          5960,
+          970
+        ],
+        "labels_shape": [
+          5960,
+          970
+        ],
+        "non_empty_target_rows": 5960,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 970,
+        "vocab_size": 462
+      }
+    }
+  },
+  "warnings": []
+}

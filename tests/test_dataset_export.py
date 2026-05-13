@@ -177,6 +177,12 @@ def _five_family_line_code_task_spec_config() -> dict:
     return config
 
 
+def _five_family_formal_task_spec_config() -> dict:
+    config = _five_family_task_spec_config()
+    config["task_spec_format"] = "formal_v1"
+    return config
+
+
 def test_split_generation_has_no_cross_split_fingerprint_overlap() -> None:
     examples_by_split = generate_examples(
         generators=[GraphReachabilityGenerator(), ImplicationChainGenerator(), RelationCompositionGenerator()],
@@ -257,6 +263,96 @@ def test_compact_v1_task_spec_output_remains_stable() -> None:
     ]
 
 
+def test_term_action_reference_format_can_use_rule_line_indices_only_for_terms() -> None:
+    config = _five_family_task_spec_config()
+    config["term_action_reference_format"] = "line_index"
+    examples = generate_examples(
+        generators=[
+            GraphReachabilityGenerator(),
+            ImplicationChainGenerator(),
+            RelationCompositionGenerator(),
+            TreeAncestryGenerator(),
+            TermRewritingGenerator(),
+        ],
+        config=config,
+        root_seed=0,
+    )["train"]
+
+    term_action = next(example for example in examples if example.family == "term_rewriting" and example.mode == "action")
+    graph_action = next(example for example in examples if example.family == "graph_reachability" and example.mode == "action")
+
+    assert term_action.target_lines[0].startswith("RW RULE ") or term_action.target_lines == ["HALT"]
+    assert any("RW RULE N" in line for line in term_action.task_lines)
+    assert graph_action.target_lines[0].startswith("APPEND ")
+    assert "EDGE" not in graph_action.target_lines[0]
+
+
+def test_compact_v2_task_spec_states_canonical_rules_and_current_action_syntax() -> None:
+    graph_lines, _ = render_task_spec(
+        family="graph_reachability",
+        mode="action",
+        seed=1,
+        suffix="0",
+        variant_count=3,
+        task_spec_format="compact_v2",
+    )
+    relation_lines, _ = render_task_spec(
+        family="relation_composition",
+        mode="action",
+        seed=1,
+        suffix="0",
+        variant_count=3,
+        task_spec_format="compact_v2",
+        relation_action_format="follow_left",
+    )
+    term_lines, _ = render_task_spec(
+        family="term_rewriting",
+        mode="action",
+        seed=1,
+        suffix="0",
+        variant_count=3,
+        task_spec_format="compact_v2",
+        action_reference_format="line_index",
+    )
+
+    assert any("shortest" in line for line in graph_lines)
+    assert any("CANONICAL" in line for line in graph_lines)
+    assert any("FOLLOW A C VIA B" in line for line in relation_lines)
+    assert any("RW RULE N" in line for line in term_lines)
+
+
+def test_compact_v3_task_spec_adds_error_and_next_step_hints() -> None:
+    implication_verify_lines, _ = render_task_spec(
+        family="implication_chains",
+        mode="verify",
+        seed=1,
+        suffix="invalid",
+        variant_count=3,
+        task_spec_format="compact_v3",
+    )
+    implication_action_lines, _ = render_task_spec(
+        family="implication_chains",
+        mode="action",
+        seed=1,
+        suffix="0",
+        variant_count=3,
+        task_spec_format="compact_v3",
+    )
+    term_action_lines, _ = render_task_spec(
+        family="term_rewriting",
+        mode="action",
+        seed=1,
+        suffix="0",
+        variant_count=3,
+        task_spec_format="compact_v3",
+    )
+
+    assert "UNKNOWN_HYP when HYP K is no fact and no implication rule" in implication_verify_lines
+    assert "verify UNKNOWN_HYP first then BAD_PREMISE" in implication_verify_lines
+    assert "ACTION APPLY next HYP AFTER last DERIVE" in implication_action_lines
+    assert "ACTION RW applies next RULE to current TERM" in term_action_lines
+
+
 def test_line_code_task_spec_headers_render_as_single_tokens() -> None:
     examples_by_split = generate_examples(
         generators=[
@@ -282,6 +378,69 @@ def test_line_code_task_spec_headers_render_as_single_tokens() -> None:
         assert any(line.endswith("_DEMO") for line in example.task_lines)
         assert example.meta["task_spec_format"] == "line_codes_v1"
         assert 0 <= example.meta["task_spec_variant"] < 3
+
+
+def test_formal_task_spec_headers_render_without_demos() -> None:
+    examples_by_split = generate_examples(
+        generators=[
+            GraphReachabilityGenerator(),
+            ImplicationChainGenerator(),
+            RelationCompositionGenerator(),
+            TreeAncestryGenerator(),
+            TermRewritingGenerator(),
+        ],
+        config=_five_family_formal_task_spec_config(),
+        root_seed=0,
+    )
+    examples = examples_by_split["train"]
+    assert examples
+
+    family_names = {
+        "graph_reachability",
+        "implication_chains",
+        "relation_composition",
+        "tree_ancestry",
+        "term_rewriting",
+    }
+    for example in examples:
+        source_lines = example.source_lines()
+        assert source_lines[0] == f"MODE {example.mode}"
+        assert source_lines[1] == "TASK"
+        assert source_lines.index("TASK") < source_lines.index("PROBLEM") < source_lines.index("STATE")
+        assert example.task_lines
+        task_text = "\n".join(example.task_lines)
+        assert not any(family_name in task_text for family_name in family_names)
+        assert not any(line.startswith("DEMO ") for line in example.task_lines)
+        assert example.meta["task_spec_format"] == "formal_v1"
+        assert 0 <= example.meta["task_spec_variant"] < 3
+
+
+def test_formal_v1_task_spec_output_remains_stable() -> None:
+    lines, variant = render_task_spec(
+        family="term_rewriting",
+        mode="action",
+        seed=1,
+        suffix="0",
+        variant_count=3,
+        task_spec_format="formal_v1",
+    )
+
+    assert variant == 2
+    assert lines == [
+        "OUT ONE_ACTION",
+        "ONE_ACTION MAKES_ONE_VALID_STEP",
+        "VALID ALL_RULES_HOLD",
+        "FORM RULE K : L -> R",
+        "FORM TERM T",
+        "FORM START T",
+        "FORM GOAL T",
+        "FORM QUERY NORMAL_FORM",
+        "FORM RW K AT PATH",
+        "FORM HALT",
+        "RW REPLACES_MATCHING_SUBTERM_AT_PATH",
+        "HALT ONLY_WHEN_DONE",
+        "VALID TRACE_ALTERNATES_TERM_AND_RW",
+    ]
 
 
 def test_task_spec_variants_are_deterministic_for_fixed_seed() -> None:
@@ -312,6 +471,26 @@ def test_line_code_task_spec_variants_are_deterministic_for_fixed_seed() -> None
         "train"
     ]
     second = generate_examples(generators=generators, config=_five_family_line_code_task_spec_config(), root_seed=17)[
+        "train"
+    ]
+
+    assert [(example.id, example.task_lines) for example in first] == [
+        (example.id, example.task_lines) for example in second
+    ]
+
+
+def test_formal_task_spec_variants_are_deterministic_for_fixed_seed() -> None:
+    generators = [
+        GraphReachabilityGenerator(),
+        ImplicationChainGenerator(),
+        RelationCompositionGenerator(),
+        TreeAncestryGenerator(),
+        TermRewritingGenerator(),
+    ]
+    first = generate_examples(generators=generators, config=_five_family_formal_task_spec_config(), root_seed=17)[
+        "train"
+    ]
+    second = generate_examples(generators=generators, config=_five_family_formal_task_spec_config(), root_seed=17)[
         "train"
     ]
 
@@ -399,6 +578,44 @@ def test_0_39_line_code_task_spec_config_changes_only_task_spec_format() -> None
         if key not in {"experiment_note", "task_spec_format"}
     }
     assert line_code_without_changed_fields == task_without_changed_fields
+
+
+def test_0_43_formal_task_spec_config_changes_only_task_spec_format() -> None:
+    task_path = Path("configs/symbolic_0_39_task_spec_headers.json")
+    formal_path = Path("configs/symbolic_0_43_formal_task_spec_headers.json")
+    task = json.loads(task_path.read_text(encoding="utf-8"))
+    formal = json.loads(formal_path.read_text(encoding="utf-8"))
+
+    assert formal["task_spec_format"] == "formal_v1"
+    assert formal["task_spec_variant_count"] == 3
+    task_without_changed_fields = {
+        key: value
+        for key, value in task.items()
+        if key not in {"experiment_note", "task_spec_format"}
+    }
+    formal_without_changed_fields = {
+        key: value
+        for key, value in formal.items()
+        if key not in {"experiment_note", "task_spec_format"}
+    }
+    assert formal_without_changed_fields == task_without_changed_fields
+
+
+def test_0_50_canonical_task_spec_config_changes_only_task_spec_format_from_0_49() -> None:
+    term_rule_path = Path("configs/symbolic_0_49_term_rule_index_actions.json")
+    canonical_path = Path("configs/symbolic_0_50_canonical_task_spec_headers.json")
+    term_rule = json.loads(term_rule_path.read_text(encoding="utf-8"))
+    canonical = json.loads(canonical_path.read_text(encoding="utf-8"))
+
+    assert term_rule["task_spec_format"] == "compact_v1"
+    assert canonical["task_spec_format"] == "compact_v2"
+    term_rule_without_changed_fields = {
+        key: value for key, value in term_rule.items() if key not in {"experiment_note", "task_spec_format"}
+    }
+    canonical_without_changed_fields = {
+        key: value for key, value in canonical.items() if key not in {"experiment_note", "task_spec_format"}
+    }
+    assert canonical_without_changed_fields == term_rule_without_changed_fields
 
 
 def test_0_41_structural_actions_change_only_action_reference_format() -> None:

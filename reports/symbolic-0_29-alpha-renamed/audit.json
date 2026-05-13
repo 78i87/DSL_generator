@@ -1,0 +1,783 @@
+{
+  "data_dir": "data/symbolic-0_29-alpha-renamed",
+  "errors": [],
+  "jsonl": {
+    "difficulty": {
+      "graph_reachability": {
+        "extra_edges": {
+          "max": 16.0,
+          "mean": 8.58530510585305,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "num_nodes": {
+          "max": 19.0,
+          "mean": 12.590909090909092,
+          "min": 5.0,
+          "unique": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "path_length": {
+          "max": 10.0,
+          "mean": 7.455790784557908,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "require_shortest": {
+          "true": 4818
+        },
+        "symbol_offset": {
+          "max": 6.0,
+          "mean": 1.3349937733499377,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ]
+        }
+      },
+      "implication_chains": {
+        "distractor_hyps": {
+          "max": 12.0,
+          "mean": 7.533052039381153,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "num_props": {
+          "max": 19.0,
+          "mean": 12.290201593999063,
+          "min": 5.0,
+          "unique": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "proof_length": {
+          "max": 10.0,
+          "mean": 7.500234411626817,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "symbol_offset": {
+          "max": 6.0,
+          "mean": 1.3389592123769338,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ]
+        }
+      },
+      "relation_composition": {
+        "composition_depth": {
+          "max": 10.0,
+          "mean": 7.699294532627866,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "distractor_facts": {
+          "max": 16.0,
+          "mean": 9.079585537918872,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "num_entities": {
+          "max": 19.0,
+          "mean": 13.000661375661375,
+          "min": 5.0,
+          "unique": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "symbol_offset": {
+          "max": 6.0,
+          "mean": 1.3333333333333333,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ]
+        }
+      },
+      "term_rewriting": {
+        "action_format": {
+          "rule": 4429
+        },
+        "binary_rules": {
+          "max": 10.0,
+          "mean": 5.7724091216979,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "distractor_rules": {
+          "max": 16.0,
+          "mean": 8.513208399187176,
+          "min": 0.0,
+          "unique": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "query_kind": {
+          "goal": 2725,
+          "normal_form": 1704
+        },
+        "repeated_subterms": {
+          "false": 3528,
+          "true": 901
+        },
+        "rewrite_steps": {
+          "max": 10.0,
+          "mean": 7.553172273650937,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "symbol_offset": {
+          "max": 6.0,
+          "mean": 1.4170241589523596,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ]
+        },
+        "term_depth": {
+          "max": 9.0,
+          "mean": 4.096410024836306,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        },
+        "variable_rules": {
+          "max": 7.0,
+          "mean": 2.2056897719575526,
+          "min": 0.0,
+          "unique": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      },
+      "tree_ancestry": {
+        "branching_factor": {
+          "max": 4.0,
+          "mean": 2.6439205955334986,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4
+          ]
+        },
+        "depth": {
+          "max": 10.0,
+          "mean": 7.459884201819686,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "distractor_subtrees": {
+          "max": 16.0,
+          "mean": 8.485732009925558,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "symbol_offset": {
+          "max": 6.0,
+          "mean": 1.3300248138957815,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ]
+        }
+      }
+    },
+    "samples": {
+      "ood/graph_reachability/action": {
+        "id": "ood:graph_reachability:0:action:0",
+        "source_text": "MODE action\nPROBLEM\nEDGE e5 e11\nEDGE e11 e3\nEDGE e7 e1\nEDGE e3 e5\nEDGE e3 e0\nEDGE e0 e1\nEDGE e0 e4\nEDGE e1 e9\nEDGE e9 e3\nEDGE e9 e8\nEDGE e8 e2\nEDGE e2 e6\nEDGE e6 e11\nQUERY REACH e5 e6\nSTATE\nEMPTY",
+        "target_text": "APPEND e5"
+      },
+      "ood/graph_reachability/repair_action": {
+        "id": "ood:graph_reachability:0:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nEDGE e5 e11\nEDGE e11 e3\nEDGE e7 e1\nEDGE e3 e5\nEDGE e3 e0\nEDGE e0 e1\nEDGE e0 e4\nEDGE e1 e9\nEDGE e9 e3\nEDGE e9 e8\nEDGE e8 e2\nEDGE e2 e6\nEDGE e6 e11\nQUERY REACH e5 e6\nSTATE\nPATH e6",
+        "target_text": "REPLACE ROOT WITH e5"
+      },
+      "ood/graph_reachability/verify": {
+        "id": "ood:graph_reachability:0:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nEDGE e5 e11\nEDGE e11 e3\nEDGE e7 e1\nEDGE e3 e5\nEDGE e3 e0\nEDGE e0 e1\nEDGE e0 e4\nEDGE e1 e9\nEDGE e9 e3\nEDGE e9 e8\nEDGE e8 e2\nEDGE e2 e6\nEDGE e6 e11\nQUERY REACH e5 e6\nSTATE\nPATH e5 e11 e3 e0 e1 e9 e8 e2 e6",
+        "target_text": "VALID"
+      },
+      "ood/implication_chains/action": {
+        "id": "ood:implication_chains:18:action:0",
+        "source_text": "MODE action\nPROBLEM\nHYP h15 : p0\nHYP h8 : p0 -> p5\nHYP h16 : p5 -> p9\nHYP h12 : p9 -> p3\nHYP h2 : p3 -> p6\nHYP h7 : p6 -> p2\nHYP h5 : p2 -> p7\nHYP h11 : p7 -> p4\nHYP h17 : p0 -> p9\nHYP h1 : p5 -> p6\nHYP h13 : p5 -> p10\nHYP h0 : p7 -> p2\nHYP h3 : p7 -> p8\nHYP h999 : p4 -> p8\nHYP h14 : p1 -> p0\nHYP h4 : p1 -> p6\nHYP h9 : p10 -> p6\nHYP h6 : p8 -> p3\nGOAL p4\nSTATE\nEMPTY",
+        "target_text": "APPLY h15"
+      },
+      "ood/implication_chains/repair_action": {
+        "id": "ood:implication_chains:18:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nHYP h15 : p0\nHYP h8 : p0 -> p5\nHYP h16 : p5 -> p9\nHYP h12 : p9 -> p3\nHYP h2 : p3 -> p6\nHYP h7 : p6 -> p2\nHYP h5 : p2 -> p7\nHYP h11 : p7 -> p4\nHYP h17 : p0 -> p9\nHYP h1 : p5 -> p6\nHYP h13 : p5 -> p10\nHYP h0 : p7 -> p2\nHYP h3 : p7 -> p8\nHYP h999 : p4 -> p8\nHYP h14 : p1 -> p0\nHYP h4 : p1 -> p6\nHYP h9 : p10 -> p6\nHYP h6 : p8 -> p3\nGOAL p4\nSTATE\nDERIVE p0 BY h10",
+        "target_text": "REPLACE FIRST HYP h15"
+      },
+      "ood/implication_chains/verify": {
+        "id": "ood:implication_chains:18:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nHYP h15 : p0\nHYP h8 : p0 -> p5\nHYP h16 : p5 -> p9\nHYP h12 : p9 -> p3\nHYP h2 : p3 -> p6\nHYP h7 : p6 -> p2\nHYP h5 : p2 -> p7\nHYP h11 : p7 -> p4\nHYP h17 : p0 -> p9\nHYP h1 : p5 -> p6\nHYP h13 : p5 -> p10\nHYP h0 : p7 -> p2\nHYP h3 : p7 -> p8\nHYP h999 : p4 -> p8\nHYP h14 : p1 -> p0\nHYP h4 : p1 -> p6\nHYP h9 : p10 -> p6\nHYP h6 : p8 -> p3\nGOAL p4\nSTATE\nDERIVE p0 BY h15\nDERIVE p5 BY h8 FROM p0\nDERIVE p9 BY h16 FROM p5\nDERIVE p3 BY h12 FROM p9\nDERIVE p6 BY h2 FROM p3\nDERIVE p2 BY h7 FROM p6\nDERIVE p7 BY h5 FROM p2\nDERIVE p4 BY h11 FROM p7",
+        "target_text": "VALID"
+      },
+      "ood/relation_composition/action": {
+        "id": "ood:relation_composition:36:action:0",
+        "source_text": "MODE action\nPROBLEM\nFACT r5 e7 e5\nFACT r11 e5 e9\nFACT r4 e9 e0\nFACT r3 e0 e11\nFACT r10 e11 e6\nFACT r0 e6 e8\nFACT r6 e8 e10\nFACT r9 e10 e3\nRULE r14 = r5 ; r11\nRULE r2 = r14 ; r4\nRULE r7 = r2 ; r3\nRULE r12 = r7 ; r10\nRULE r13 = r12 ; r0\nRULE r8 = r13 ; r6\nRULE r1 = r8 ; r9\nFACT r5 e7 e4\nFACT r4 e6 e3\nFACT r10 e3 e2\nFACT r0 e5 e6\nFACT r0 e11 e1\nFACT r6 e3 e0\nQUERY r1 e7 e3\nSTATE\nEMPTY",
+        "target_text": "FOLLOW e7 e9 VIA e5"
+      },
+      "ood/relation_composition/repair_action": {
+        "id": "ood:relation_composition:36:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nFACT r5 e7 e5\nFACT r11 e5 e9\nFACT r4 e9 e0\nFACT r3 e0 e11\nFACT r10 e11 e6\nFACT r0 e6 e8\nFACT r6 e8 e10\nFACT r9 e10 e3\nRULE r14 = r5 ; r11\nRULE r2 = r14 ; r4\nRULE r7 = r2 ; r3\nRULE r12 = r7 ; r10\nRULE r13 = r12 ; r0\nRULE r8 = r13 ; r6\nRULE r1 = r8 ; r9\nFACT r5 e7 e4\nFACT r4 e6 e3\nFACT r10 e3 e2\nFACT r0 e5 e6\nFACT r0 e11 e1\nFACT r6 e3 e0\nQUERY r1 e7 e3\nSTATE\nDERIVE r14 e7 e9 VIA e7",
+        "target_text": "REPLACE FIRST VIA e5"
+      },
+      "ood/relation_composition/verify": {
+        "id": "ood:relation_composition:36:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nFACT r5 e7 e5\nFACT r11 e5 e9\nFACT r4 e9 e0\nFACT r3 e0 e11\nFACT r10 e11 e6\nFACT r0 e6 e8\nFACT r6 e8 e10\nFACT r9 e10 e3\nRULE r14 = r5 ; r11\nRULE r2 = r14 ; r4\nRULE r7 = r2 ; r3\nRULE r12 = r7 ; r10\nRULE r13 = r12 ; r0\nRULE r8 = r13 ; r6\nRULE r1 = r8 ; r9\nFACT r5 e7 e4\nFACT r4 e6 e3\nFACT r10 e3 e2\nFACT r0 e5 e6\nFACT r0 e11 e1\nFACT r6 e3 e0\nQUERY r1 e7 e3\nSTATE\nDERIVE r14 e7 e9 VIA e5\nDERIVE r2 e7 e0 VIA e9\nDERIVE r7 e7 e11 VIA e0\nDERIVE r12 e7 e6 VIA e11\nDERIVE r13 e7 e8 VIA e6\nDERIVE r8 e7 e10 VIA e8\nDERIVE r1 e7 e3 VIA e10",
+        "target_text": "VALID"
+      },
+      "ood/term_rewriting/action": {
+        "id": "ood:term_rewriting:72:action:0",
+        "source_text": "MODE action\nPROBLEM\nRULE r6 : B g8 B g100 B g3 e72 e3 e1 e0 -> U f60 B g100 B g3 e72 e3 e1\nRULE r13 : U f60 v1 -> U f105 v1\nRULE r4 : U f105 B g100 B g3 e72 e3 e1 -> B g0 B g100 B g3 e72 e3 e1 e0\nRULE r14 : B g0 B g100 B g3 e72 e3 e1 e0 -> U f101 B g100 B g3 e72 e3 e1\nRULE r11 : U f101 v1 -> U f124 v1\nRULE r8 : U f124 B g100 B g3 e72 e3 e1 -> B g63 B g100 B g3 e72 e3 e1 e0\nRULE r12 : B g63 B g100 B g3 e72 e3 e1 e0 -> B g107 B g100 B g3 e72 e3 e1 e0\nRULE r5 : B g107 B g100 B g3 e72 e3 e1 e0 -> U f102 B g100 B g3 e72 e3 e1\nRULE r7 : B g62 v1 v0 -> B g6 v1 v0\nRULE r3 : U f108 v1 -> U f121 v1\nRULE r9 : U f61 v1 -> U f122 v1\nRULE r2 : U f103 v1 -> U f125 v1\nRULE r10 : U f1 v1 -> U f2 v1\nRULE r16 : U f5 v1 -> U f8 v1\nRULE r0 : B g120 v1 v0 -> B g31 v1 v0\nRULE r15 : B g30 v1 v0 -> B g127 v1 v0\nRULE r1 : U f128 v1 -> U f104 v1\nSTART B g106 U f123 U f4 B g8 B g100 B g3 e72 e3 e1 e0 e2\nQUERY NORMAL_FORM\nSTATE\nTERM B g106 U f123 U f4 B g8 B g100 B g3 e72 e3 e1 e0 e2",
+        "target_text": "RW r6"
+      },
+      "ood/term_rewriting/repair_action": {
+        "id": "ood:term_rewriting:72:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nRULE r6 : B g8 B g100 B g3 e72 e3 e1 e0 -> U f60 B g100 B g3 e72 e3 e1\nRULE r13 : U f60 v1 -> U f105 v1\nRULE r4 : U f105 B g100 B g3 e72 e3 e1 -> B g0 B g100 B g3 e72 e3 e1 e0\nRULE r14 : B g0 B g100 B g3 e72 e3 e1 e0 -> U f101 B g100 B g3 e72 e3 e1\nRULE r11 : U f101 v1 -> U f124 v1\nRULE r8 : U f124 B g100 B g3 e72 e3 e1 -> B g63 B g100 B g3 e72 e3 e1 e0\nRULE r12 : B g63 B g100 B g3 e72 e3 e1 e0 -> B g107 B g100 B g3 e72 e3 e1 e0\nRULE r5 : B g107 B g100 B g3 e72 e3 e1 e0 -> U f102 B g100 B g3 e72 e3 e1\nRULE r7 : B g62 v1 v0 -> B g6 v1 v0\nRULE r3 : U f108 v1 -> U f121 v1\nRULE r9 : U f61 v1 -> U f122 v1\nRULE r2 : U f103 v1 -> U f125 v1\nRULE r10 : U f1 v1 -> U f2 v1\nRULE r16 : U f5 v1 -> U f8 v1\nRULE r0 : B g120 v1 v0 -> B g31 v1 v0\nRULE r15 : B g30 v1 v0 -> B g127 v1 v0\nRULE r1 : U f128 v1 -> U f104 v1\nSTART B g106 U f123 U f4 B g8 B g100 B g3 e72 e3 e1 e0 e2\nQUERY NORMAL_FORM\nSTATE\nTERM B g106 U f123 U f4 B g8 B g100 B g3 e72 e3 e1 e0 e2\nRW r6\nTERM B g106 U f123 U f4 U f60 B g100 B g3 e72 e1 e1 e2",
+        "target_text": "REPAIR FIRST_BAD"
+      },
+      "ood/term_rewriting/verify": {
+        "id": "ood:term_rewriting:72:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nRULE r6 : B g8 B g100 B g3 e72 e3 e1 e0 -> U f60 B g100 B g3 e72 e3 e1\nRULE r13 : U f60 v1 -> U f105 v1\nRULE r4 : U f105 B g100 B g3 e72 e3 e1 -> B g0 B g100 B g3 e72 e3 e1 e0\nRULE r14 : B g0 B g100 B g3 e72 e3 e1 e0 -> U f101 B g100 B g3 e72 e3 e1\nRULE r11 : U f101 v1 -> U f124 v1\nRULE r8 : U f124 B g100 B g3 e72 e3 e1 -> B g63 B g100 B g3 e72 e3 e1 e0\nRULE r12 : B g63 B g100 B g3 e72 e3 e1 e0 -> B g107 B g100 B g3 e72 e3 e1 e0\nRULE r5 : B g107 B g100 B g3 e72 e3 e1 e0 -> U f102 B g100 B g3 e72 e3 e1\nRULE r7 : B g62 v1 v0 -> B g6 v1 v0\nRULE r3 : U f108 v1 -> U f121 v1\nRULE r9 : U f61 v1 -> U f122 v1\nRULE r2 : U f103 v1 -> U f125 v1\nRULE r10 : U f1 v1 -> U f2 v1\nRULE r16 : U f5 v1 -> U f8 v1\nRULE r0 : B g120 v1 v0 -> B g31 v1 v0\nRULE r15 : B g30 v1 v0 -> B g127 v1 v0\nRULE r1 : U f128 v1 -> U f104 v1\nSTART B g106 U f123 U f4 B g8 B g100 B g3 e72 e3 e1 e0 e2\nQUERY NORMAL_FORM\nSTATE\nTERM B g106 U f123 U f4 B g8 B g100 B g3 e72 e3 e1 e0 e2\nRW r6\nTERM B g106 U f123 U f4 U f60 B g100 B g3 e72 e3 e1 e2\nRW r13\nTERM B g106 U f123 U f4 U f105 B g100 B g3 e72 e3 e1 e2\nRW r4\nTERM B g106 U f123 U f4 B g0 B g100 B g3 e72 e3 e1 e0 e2\nRW r14\nTERM B g106 U f123 U f4 U f101 B g100 B g3 e72 e3 e1 e2\nRW r11\nTERM B g106 U f123 U f4 U f124 B g100 B g3 e72 e3 e1 e2\nRW r8\nTERM B g106 U f123 U f4 B g63 B g100 B g3 e72 e3 e1 e0 e2\nRW r12\nTERM B g106 U f123 U f4 B g107 B g100 B g3 e72 e3 e1 e0 e2\nRW r5\nTERM B g106 U f123 U f4 U f102 B g100 B g3 e72 e3 e1 e2\nHALT",
+        "target_text": "VALID"
+      },
+      "ood/tree_ancestry/action": {
+        "id": "ood:tree_ancestry:54:action:0",
+        "source_text": "MODE action\nPROBLEM\nPARENT e2 e8\nPARENT e8 e1\nPARENT e8 e13\nPARENT e13 e11\nPARENT e11 e7\nPARENT e7 e4\nPARENT e7 e10\nPARENT e10 e5\nPARENT e10 e12\nPARENT e5 e3\nPARENT e3 e6\nPARENT e3 e9\nPARENT e9 e0\nQUERY ANCESTOR e2 e9\nSTATE\nEMPTY",
+        "target_text": "DESCEND e2"
+      },
+      "ood/tree_ancestry/repair_action": {
+        "id": "ood:tree_ancestry:54:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nPARENT e2 e8\nPARENT e8 e1\nPARENT e8 e13\nPARENT e13 e11\nPARENT e11 e7\nPARENT e7 e4\nPARENT e7 e10\nPARENT e10 e5\nPARENT e10 e12\nPARENT e5 e3\nPARENT e3 e6\nPARENT e3 e9\nPARENT e9 e0\nQUERY ANCESTOR e2 e9\nSTATE\nLINEAGE e9",
+        "target_text": "REPLACE ROOT WITH e2"
+      },
+      "ood/tree_ancestry/verify": {
+        "id": "ood:tree_ancestry:54:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nPARENT e2 e8\nPARENT e8 e1\nPARENT e8 e13\nPARENT e13 e11\nPARENT e11 e7\nPARENT e7 e4\nPARENT e7 e10\nPARENT e10 e5\nPARENT e10 e12\nPARENT e5 e3\nPARENT e3 e6\nPARENT e3 e9\nPARENT e9 e0\nQUERY ANCESTOR e2 e9\nSTATE\nLINEAGE e2 e8 e13 e11 e7 e10 e5 e3 e9",
+        "target_text": "VALID"
+      },
+      "test/graph_reachability/action": {
+        "id": "test:graph_reachability:0:action:0",
+        "source_text": "MODE action\nPROBLEM\nEDGE e7 e1\nEDGE e1 e3\nEDGE e3 e6\nEDGE e3 e2\nEDGE e6 e4\nEDGE e2 e8\nEDGE e2 e5\nEDGE e5 e1\nEDGE e0 e7\nQUERY REACH e7 e4\nSTATE\nEMPTY",
+        "target_text": "APPEND e7"
+      },
+      "test/graph_reachability/repair_action": {
+        "id": "test:graph_reachability:0:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nEDGE e7 e1\nEDGE e1 e3\nEDGE e3 e6\nEDGE e3 e2\nEDGE e6 e4\nEDGE e2 e8\nEDGE e2 e5\nEDGE e5 e1\nEDGE e0 e7\nQUERY REACH e7 e4\nSTATE\nPATH e4",
+        "target_text": "REPLACE ROOT WITH e7"
+      },
+      "test/graph_reachability/verify": {
+        "id": "test:graph_reachability:0:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nEDGE e7 e1\nEDGE e1 e3\nEDGE e3 e6\nEDGE e3 e2\nEDGE e6 e4\nEDGE e2 e8\nEDGE e2 e5\nEDGE e5 e1\nEDGE e0 e7\nQUERY REACH e7 e4\nSTATE\nPATH e7 e1 e3 e6 e4",
+        "target_text": "VALID"
+      },
+      "test/implication_chains/action": {
+        "id": "test:implication_chains:18:action:0",
+        "source_text": "MODE action\nPROBLEM\nHYP h2 : p2\nHYP h1 : p2 -> p3\nHYP h3 : p3 -> p0\nHYP h5 : p0 -> p1\nHYP h6 : p2 -> p0\nHYP h0 : p3 -> p2\nHYP h4 : p3 -> p1\nHYP h999 : p1 -> p3\nGOAL p1\nSTATE\nEMPTY",
+        "target_text": "APPLY h2"
+      },
+      "test/implication_chains/repair_action": {
+        "id": "test:implication_chains:18:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nHYP h2 : p2\nHYP h1 : p2 -> p3\nHYP h3 : p3 -> p0\nHYP h5 : p0 -> p1\nHYP h6 : p2 -> p0\nHYP h0 : p3 -> p2\nHYP h4 : p3 -> p1\nHYP h999 : p1 -> p3\nGOAL p1\nSTATE\nDERIVE p2 BY h7",
+        "target_text": "REPLACE FIRST HYP h2"
+      },
+      "test/implication_chains/verify": {
+        "id": "test:implication_chains:18:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nHYP h2 : p2\nHYP h1 : p2 -> p3\nHYP h3 : p3 -> p0\nHYP h5 : p0 -> p1\nHYP h6 : p2 -> p0\nHYP h0 : p3 -> p2\nHYP h4 : p3 -> p1\nHYP h999 : p1 -> p3\nGOAL p1\nSTATE\nDERIVE p2 BY h2\nDERIVE p3 BY h1 FROM p2\nDERIVE p0 BY h3 FROM p3\nDERIVE p1 BY h5 FROM p0",
+        "target_text": "VALID"
+      },
+      "test/relation_composition/action": {
+        "id": "test:relation_composition:36:action:0",
+        "source_text": "MODE action\nPROBLEM\nFACT r5 e2 e1\nFACT r8 e1 e4\nFACT r0 e4 e3\nFACT r4 e3 e0\nFACT r6 e0 e5\nRULE r3 = r5 ; r8\nRULE r7 = r3 ; r0\nRULE r2 = r7 ; r4\nRULE r1 = r2 ; r6\nFACT r5 e4 e5\nFACT r8 e3 e5\nFACT r8 e5 e4\nFACT r0 e4 e5\nFACT r4 e5 e4\nQUERY r1 e2 e5\nSTATE\nEMPTY",
+        "target_text": "FOLLOW e2 e4 VIA e1"
+      },
+      "test/relation_composition/repair_action": {
+        "id": "test:relation_composition:36:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nFACT r5 e2 e1\nFACT r8 e1 e4\nFACT r0 e4 e3\nFACT r4 e3 e0\nFACT r6 e0 e5\nRULE r3 = r5 ; r8\nRULE r7 = r3 ; r0\nRULE r2 = r7 ; r4\nRULE r1 = r2 ; r6\nFACT r5 e4 e5\nFACT r8 e3 e5\nFACT r8 e5 e4\nFACT r0 e4 e5\nFACT r4 e5 e4\nQUERY r1 e2 e5\nSTATE\nDERIVE r3 e2 e4 VIA e2",
+        "target_text": "REPLACE FIRST VIA e1"
+      },
+      "test/relation_composition/verify": {
+        "id": "test:relation_composition:36:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nFACT r5 e2 e1\nFACT r8 e1 e4\nFACT r0 e4 e3\nFACT r4 e3 e0\nFACT r6 e0 e5\nRULE r3 = r5 ; r8\nRULE r7 = r3 ; r0\nRULE r2 = r7 ; r4\nRULE r1 = r2 ; r6\nFACT r5 e4 e5\nFACT r8 e3 e5\nFACT r8 e5 e4\nFACT r0 e4 e5\nFACT r4 e5 e4\nQUERY r1 e2 e5\nSTATE\nDERIVE r3 e2 e4 VIA e1\nDERIVE r7 e2 e3 VIA e4\nDERIVE r2 e2 e0 VIA e3\nDERIVE r1 e2 e5 VIA e0",
+        "target_text": "VALID"
+      },
+      "test/term_rewriting/action": {
+        "id": "test:term_rewriting:72:action:0",
+        "source_text": "MODE action\nPROBLEM\nRULE r5 : U f0 v1 -> U f4 v1\nRULE r1 : U f4 B g31 e3 e1 -> U f2 B g31 e3 e1\nRULE r0 : U f2 B g31 e3 e1 -> B g121 B g31 e3 e1 e2\nRULE r4 : B g121 B g31 e3 e1 e2 -> U f1 B g31 e3 e1\nRULE r3 : B g60 v1 v0 -> B g3 v1 v0\nRULE r2 : B g101 v1 v0 -> B g120 v1 v0\nSTART B g30 U f0 B g31 e3 e1 U f0 B g31 e3 e1\nGOAL B g30 U f1 B g31 e3 e1 U f0 B g31 e3 e1\nSTATE\nTERM B g30 U f0 B g31 e3 e1 U f0 B g31 e3 e1",
+        "target_text": "RW r5"
+      },
+      "test/term_rewriting/repair_action": {
+        "id": "test:term_rewriting:72:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nRULE r5 : U f0 v1 -> U f4 v1\nRULE r1 : U f4 B g31 e3 e1 -> U f2 B g31 e3 e1\nRULE r0 : U f2 B g31 e3 e1 -> B g121 B g31 e3 e1 e2\nRULE r4 : B g121 B g31 e3 e1 e2 -> U f1 B g31 e3 e1\nRULE r3 : B g60 v1 v0 -> B g3 v1 v0\nRULE r2 : B g101 v1 v0 -> B g120 v1 v0\nSTART B g30 U f0 B g31 e3 e1 U f0 B g31 e3 e1\nGOAL B g30 U f1 B g31 e3 e1 U f0 B g31 e3 e1\nSTATE\nTERM B g30 U f0 B g31 e3 e1 U f0 B g31 e3 e1\nRW r5\nTERM B g30 U f4 B g31 e3 e1 U f0 B g100 e3 e1",
+        "target_text": "REPAIR FIRST_BAD"
+      },
+      "test/term_rewriting/verify": {
+        "id": "test:term_rewriting:72:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nRULE r5 : U f0 v1 -> U f4 v1\nRULE r1 : U f4 B g31 e3 e1 -> U f2 B g31 e3 e1\nRULE r0 : U f2 B g31 e3 e1 -> B g121 B g31 e3 e1 e2\nRULE r4 : B g121 B g31 e3 e1 e2 -> U f1 B g31 e3 e1\nRULE r3 : B g60 v1 v0 -> B g3 v1 v0\nRULE r2 : B g101 v1 v0 -> B g120 v1 v0\nSTART B g30 U f0 B g31 e3 e1 U f0 B g31 e3 e1\nGOAL B g30 U f1 B g31 e3 e1 U f0 B g31 e3 e1\nSTATE\nTERM B g30 U f0 B g31 e3 e1 U f0 B g31 e3 e1\nRW r5\nTERM B g30 U f4 B g31 e3 e1 U f0 B g31 e3 e1\nRW r1\nTERM B g30 U f2 B g31 e3 e1 U f0 B g31 e3 e1\nRW r0\nTERM B g30 B g121 B g31 e3 e1 e2 U f0 B g31 e3 e1\nRW r4\nTERM B g30 U f1 B g31 e3 e1 U f0 B g31 e3 e1",
+        "target_text": "VALID"
+      },
+      "test/tree_ancestry/action": {
+        "id": "test:tree_ancestry:54:action:0",
+        "source_text": "MODE action\nPROBLEM\nPARENT e8 e3\nPARENT e8 e7\nPARENT e3 e6\nPARENT e3 e4\nPARENT e6 e2\nPARENT e2 e1\nPARENT e1 e0\nPARENT e7 e5\nQUERY ANCESTOR e8 e1\nSTATE\nEMPTY",
+        "target_text": "DESCEND e8"
+      },
+      "test/tree_ancestry/repair_action": {
+        "id": "test:tree_ancestry:54:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nPARENT e8 e3\nPARENT e8 e7\nPARENT e3 e6\nPARENT e3 e4\nPARENT e6 e2\nPARENT e2 e1\nPARENT e1 e0\nPARENT e7 e5\nQUERY ANCESTOR e8 e1\nSTATE\nLINEAGE e1",
+        "target_text": "REPLACE ROOT WITH e8"
+      },
+      "test/tree_ancestry/verify": {
+        "id": "test:tree_ancestry:54:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nPARENT e8 e3\nPARENT e8 e7\nPARENT e3 e6\nPARENT e3 e4\nPARENT e6 e2\nPARENT e2 e1\nPARENT e1 e0\nPARENT e7 e5\nQUERY ANCESTOR e8 e1\nSTATE\nLINEAGE e8 e3 e6 e2 e1",
+        "target_text": "VALID"
+      },
+      "train/graph_reachability/action": {
+        "id": "train:graph_reachability:0:action:0",
+        "source_text": "MODE action\nPROBLEM\nEDGE e2 e3\nEDGE e3 e0\nEDGE e0 e5\nEDGE e5 e1\nEDGE e1 e3\nEDGE e1 e4\nEDGE e4 e2\nEDGE e4 e3\nEDGE e4 e1\nQUERY REACH e2 e4\nSTATE\nEMPTY",
+        "target_text": "APPEND e2"
+      },
+      "train/graph_reachability/repair_action": {
+        "id": "train:graph_reachability:0:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nEDGE e2 e3\nEDGE e3 e0\nEDGE e0 e5\nEDGE e5 e1\nEDGE e1 e3\nEDGE e1 e4\nEDGE e4 e2\nEDGE e4 e3\nEDGE e4 e1\nQUERY REACH e2 e4\nSTATE\nPATH e4",
+        "target_text": "REPLACE ROOT WITH e2"
+      },
+      "train/graph_reachability/verify": {
+        "id": "train:graph_reachability:0:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nEDGE e2 e3\nEDGE e3 e0\nEDGE e0 e5\nEDGE e5 e1\nEDGE e1 e3\nEDGE e1 e4\nEDGE e4 e2\nEDGE e4 e3\nEDGE e4 e1\nQUERY REACH e2 e4\nSTATE\nPATH e2 e3 e0 e5 e1 e4",
+        "target_text": "VALID"
+      },
+      "train/implication_chains/action": {
+        "id": "train:implication_chains:312:action:0",
+        "source_text": "MODE action\nPROBLEM\nHYP h0 : p0\nHYP h2 : p0 -> p2\nHYP h1 : p2 -> p1\nHYP h4 : p0 -> p8\nHYP h3 : p1 -> p0\nHYP h5 : p1 -> p2\nGOAL p1\nSTATE\nEMPTY",
+        "target_text": "APPLY h0"
+      },
+      "train/implication_chains/repair_action": {
+        "id": "train:implication_chains:312:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nHYP h0 : p0\nHYP h2 : p0 -> p2\nHYP h1 : p2 -> p1\nHYP h4 : p0 -> p8\nHYP h3 : p1 -> p0\nHYP h5 : p1 -> p2\nGOAL p1\nSTATE\nDERIVE p0 BY h999",
+        "target_text": "REPLACE FIRST HYP h0"
+      },
+      "train/implication_chains/verify": {
+        "id": "train:implication_chains:312:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nHYP h0 : p0\nHYP h2 : p0 -> p2\nHYP h1 : p2 -> p1\nHYP h4 : p0 -> p8\nHYP h3 : p1 -> p0\nHYP h5 : p1 -> p2\nGOAL p1\nSTATE\nDERIVE p0 BY h0\nDERIVE p2 BY h2 FROM p0\nDERIVE p1 BY h1 FROM p2",
+        "target_text": "VALID"
+      },
+      "train/relation_composition/action": {
+        "id": "train:relation_composition:624:action:0",
+        "source_text": "MODE action\nPROBLEM\nFACT r4 e2 e1\nFACT r2 e1 e3\nFACT r1 e3 e0\nRULE r0 = r4 ; r2\nRULE r3 = r0 ; r1\nFACT r4 e3 e0\nFACT r1 e1 e3\nQUERY r3 e2 e0\nSTATE\nEMPTY",
+        "target_text": "FOLLOW e2 e3 VIA e1"
+      },
+      "train/relation_composition/repair_action": {
+        "id": "train:relation_composition:624:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nFACT r4 e2 e1\nFACT r2 e1 e3\nFACT r1 e3 e0\nRULE r0 = r4 ; r2\nRULE r3 = r0 ; r1\nFACT r4 e3 e0\nFACT r1 e1 e3\nQUERY r3 e2 e0\nSTATE\nDERIVE r0 e2 e3 VIA e2",
+        "target_text": "REPLACE FIRST VIA e1"
+      },
+      "train/relation_composition/verify": {
+        "id": "train:relation_composition:624:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nFACT r4 e2 e1\nFACT r2 e1 e3\nFACT r1 e3 e0\nRULE r0 = r4 ; r2\nRULE r3 = r0 ; r1\nFACT r4 e3 e0\nFACT r1 e1 e3\nQUERY r3 e2 e0\nSTATE\nDERIVE r0 e2 e3 VIA e1\nDERIVE r3 e2 e0 VIA e3",
+        "target_text": "VALID"
+      },
+      "train/term_rewriting/action": {
+        "id": "train:term_rewriting:1368:action:0",
+        "source_text": "MODE action\nPROBLEM\nRULE r4 : U f2 e1 -> U f60 e1\nRULE r3 : U f60 v1 -> U f61 v1\nRULE r2 : U f61 v1 -> U f1 v1\nRULE r5 : U f1 e1 -> B g5 e1 e0\nRULE r1 : B g5 e1 e0 -> U f101 e1\nRULE r6 : B g100 v1 v0 -> B g120 v1 v0\nRULE r0 : U f121 v1 -> U f3 v1\nSTART U f0 U f2 e1\nQUERY NORMAL_FORM\nSTATE\nTERM U f0 U f2 e1",
+        "target_text": "RW r4"
+      },
+      "train/term_rewriting/repair_action": {
+        "id": "train:term_rewriting:1368:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nRULE r4 : U f2 e1 -> U f60 e1\nRULE r3 : U f60 v1 -> U f61 v1\nRULE r2 : U f61 v1 -> U f1 v1\nRULE r5 : U f1 e1 -> B g5 e1 e0\nRULE r1 : B g5 e1 e0 -> U f101 e1\nRULE r6 : B g100 v1 v0 -> B g120 v1 v0\nRULE r0 : U f121 v1 -> U f3 v1\nSTART U f0 U f2 e1\nQUERY NORMAL_FORM\nSTATE\nTERM U f0 U f2 e1\nRW r4\nTERM U f5 U f60 e1",
+        "target_text": "REPAIR FIRST_BAD"
+      },
+      "train/term_rewriting/verify": {
+        "id": "train:term_rewriting:1368:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nRULE r4 : U f2 e1 -> U f60 e1\nRULE r3 : U f60 v1 -> U f61 v1\nRULE r2 : U f61 v1 -> U f1 v1\nRULE r5 : U f1 e1 -> B g5 e1 e0\nRULE r1 : B g5 e1 e0 -> U f101 e1\nRULE r6 : B g100 v1 v0 -> B g120 v1 v0\nRULE r0 : U f121 v1 -> U f3 v1\nSTART U f0 U f2 e1\nQUERY NORMAL_FORM\nSTATE\nTERM U f0 U f2 e1\nRW r4\nTERM U f0 U f60 e1\nRW r3\nTERM U f0 U f61 e1\nRW r2\nTERM U f0 U f1 e1\nRW r5\nTERM U f0 B g5 e1 e0\nRW r1\nTERM U f0 U f101 e1\nHALT",
+        "target_text": "VALID"
+      },
+      "train/tree_ancestry/action": {
+        "id": "train:tree_ancestry:1056:action:0",
+        "source_text": "MODE action\nPROBLEM\nPARENT e6 e0\nPARENT e0 e1\nPARENT e1 e4\nPARENT e1 e5\nPARENT e4 e7\nPARENT e7 e3\nPARENT e3 e2\nQUERY ANCESTOR e6 e7\nSTATE\nEMPTY",
+        "target_text": "DESCEND e6"
+      },
+      "train/tree_ancestry/repair_action": {
+        "id": "train:tree_ancestry:1056:repair_action:1",
+        "source_text": "MODE repair_action\nPROBLEM\nPARENT e6 e0\nPARENT e0 e1\nPARENT e1 e4\nPARENT e1 e5\nPARENT e4 e7\nPARENT e7 e3\nPARENT e3 e2\nQUERY ANCESTOR e6 e7\nSTATE\nLINEAGE e7",
+        "target_text": "REPLACE ROOT WITH e6"
+      },
+      "train/tree_ancestry/verify": {
+        "id": "train:tree_ancestry:1056:verify:valid",
+        "source_text": "MODE verify\nPROBLEM\nPARENT e6 e0\nPARENT e0 e1\nPARENT e1 e4\nPARENT e1 e5\nPARENT e4 e7\nPARENT e7 e3\nPARENT e3 e2\nQUERY ANCESTOR e6 e7\nSTATE\nLINEAGE e6 e0 e1 e4 e7",
+        "target_text": "VALID"
+      }
+    },
+    "splits": {
+      "ood": {
+        "examples": 1856,
+        "families": {
+          "graph_reachability": 396,
+          "implication_chains": 360,
+          "relation_composition": 324,
+          "term_rewriting": 380,
+          "tree_ancestry": 396
+        },
+        "modes": {
+          "action": 838,
+          "repair_action": 838,
+          "verify": 180
+        },
+        "problems": 90,
+        "verify_targets": {
+          "INVALID BAD_EDGE": 18,
+          "INVALID BAD_FACT": 18,
+          "INVALID BAD_NOT_GOAL": 1,
+          "INVALID BAD_NO_MATCH": 6,
+          "INVALID BAD_PARENT": 18,
+          "INVALID BAD_PATH": 6,
+          "INVALID BAD_PREMATURE_HALT": 2,
+          "INVALID BAD_PREMISE": 14,
+          "INVALID BAD_RESULT": 3,
+          "INVALID UNKNOWN_HYP": 4,
+          "VALID": 90
+        }
+      },
+      "test": {
+        "examples": 1202,
+        "families": {
+          "graph_reachability": 268,
+          "implication_chains": 234,
+          "relation_composition": 194,
+          "term_rewriting": 230,
+          "tree_ancestry": 276
+        },
+        "modes": {
+          "action": 511,
+          "repair_action": 511,
+          "verify": 180
+        },
+        "problems": 90,
+        "verify_targets": {
+          "INVALID BAD_EDGE": 18,
+          "INVALID BAD_FACT": 18,
+          "INVALID BAD_NOT_GOAL": 1,
+          "INVALID BAD_NO_MATCH": 4,
+          "INVALID BAD_PARENT": 18,
+          "INVALID BAD_PATH": 3,
+          "INVALID BAD_PREMATURE_HALT": 5,
+          "INVALID BAD_PREMISE": 11,
+          "INVALID BAD_RESULT": 5,
+          "INVALID UNKNOWN_HYP": 7,
+          "VALID": 90
+        }
+      },
+      "train": {
+        "examples": 19827,
+        "families": {
+          "graph_reachability": 4154,
+          "implication_chains": 3672,
+          "relation_composition": 4018,
+          "term_rewriting": 3819,
+          "tree_ancestry": 4164
+        },
+        "modes": {
+          "action": 8795,
+          "repair_action": 9304,
+          "verify": 1728
+        },
+        "problems": 1776,
+        "verify_targets": {
+          "INVALID BAD_EDGE": 143,
+          "INVALID BAD_FACT": 144,
+          "INVALID BAD_LINEAGE_END": 1,
+          "INVALID BAD_NOT_GOAL": 31,
+          "INVALID BAD_NO_MATCH": 74,
+          "INVALID BAD_PARENT": 143,
+          "INVALID BAD_PATH": 77,
+          "INVALID BAD_PATH_END": 1,
+          "INVALID BAD_PREMATURE_HALT": 42,
+          "INVALID BAD_PREMISE": 115,
+          "INVALID BAD_RESULT": 64,
+          "INVALID UNKNOWN_HYP": 29,
+          "VALID": 864
+        }
+      }
+    }
+  },
+  "status": "pass",
+  "trm": {
+    "identifiers": [
+      "<blank>"
+    ],
+    "splits": {
+      "ood": {
+        "inputs_shape": [
+          1856,
+          850
+        ],
+        "labels_shape": [
+          1856,
+          850
+        ],
+        "non_empty_target_rows": 1856,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 850,
+        "vocab_size": 304
+      },
+      "test": {
+        "inputs_shape": [
+          1202,
+          850
+        ],
+        "labels_shape": [
+          1202,
+          850
+        ],
+        "non_empty_target_rows": 1202,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 850,
+        "vocab_size": 304
+      },
+      "train": {
+        "inputs_shape": [
+          19827,
+          850
+        ],
+        "labels_shape": [
+          19827,
+          850
+        ],
+        "non_empty_target_rows": 19827,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 850,
+        "vocab_size": 304
+      }
+    }
+  },
+  "warnings": []
+}

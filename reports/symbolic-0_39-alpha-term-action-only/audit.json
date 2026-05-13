@@ -1,0 +1,229 @@
+{
+  "data_dir": "data/symbolic-0_39-alpha-term-action-only",
+  "errors": [],
+  "jsonl": {
+    "difficulty": {
+      "term_rewriting": {
+        "action_format": {
+          "rule": 2056
+        },
+        "binary_rules": {
+          "max": 10.0,
+          "mean": 5.750972762645914,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "distractor_rules": {
+          "max": 16.0,
+          "mean": 8.42704280155642,
+          "min": 0.0,
+          "unique": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "query_kind": {
+          "goal": 1230,
+          "normal_form": 826
+        },
+        "repeated_subterms": {
+          "false": 1654,
+          "true": 402
+        },
+        "rewrite_steps": {
+          "max": 10.0,
+          "mean": 7.519455252918288,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "symbol_offset": {
+          "max": 6.0,
+          "mean": 1.3861867704280155,
+          "min": 0.0,
+          "unique": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ]
+        },
+        "term_depth": {
+          "max": 8.0,
+          "mean": 4.046692607003891,
+          "min": 1.0,
+          "unique": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "variable_rules": {
+          "max": 7.0,
+          "mean": 2.1921206225680936,
+          "min": 0.0,
+          "unique": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      }
+    },
+    "samples": {
+      "ood/term_rewriting/action": {
+        "id": "ood:term_rewriting:72:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K replaces a matching L subterm with R\nSYNTAX TERM T : current expression\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs current TERM equal T\nSYNTAX QUERY NORMAL_FORM : DONE needs no RULE applicable\nACTION RW K AT PATH applies rule K to the subterm at PATH\nACTION HALT stops only when DONE already holds\nVALID trace alternates TERM then RW then TERM, with optional final HALT\nDEMO RULE K20 : OP20 X0 -> OP21 X0 ; START OP20 X0 ; GOAL OP21 X0 ; TERM OP20 X0 => RW K20 AT ROOT\nPROBLEM\nRULE r9 : B g8 B g107 B g62 e2 e0 e1 e72 -> U f121 B g107 B g62 e2 e0 e1\nRULE r3 : U f121 v1 -> U f2 v1\nRULE r12 : U f2 B g107 B g62 e2 e0 e1 -> B g6 B g107 B g62 e2 e0 e1 e72\nRULE r0 : B g6 B g107 B g62 e2 e0 e1 e72 -> U f108 B g107 B g62 e2 e0 e1\nRULE r10 : U f108 v1 -> U f124 v1\nRULE r4 : U f124 B g107 B g62 e2 e0 e1 -> B g0 B g107 B g62 e2 e0 e1 e72\nRULE r7 : B g0 B g107 B g62 e2 e0 e1 e72 -> B g100 B g107 B g62 e2 e0 e1 e72\nRULE r1 : B g100 B g107 B g62 e2 e0 e1 e72 -> U f61 B g107 B g62 e2 e0 e1\nRULE r6 : B g31 v1 v0 -> B g120 v1 v0\nRULE r14 : U f1 v1 -> U f128 v1\nRULE r16 : U f123 v1 -> U f5 v1\nRULE r5 : U f102 v1 -> U f101 v1\nRULE r11 : U f60 v1 -> U f8 v1\nRULE r15 : U f103 v1 -> U f105 v1\nRULE r8 : B g30 v1 v0 -> B g127 v1 v0\nRULE r2 : B g106 v1 v0 -> B g7 v1 v0\nRULE r13 : U f104 v1 -> U f122 v1\nSTART B g3 U f4 U f125 B g8 B g107 B g62 e2 e0 e1 e72 e3\nQUERY NORMAL_FORM\nSTATE\nTERM B g3 U f4 U f125 B g8 B g107 B g62 e2 e0 e1 e72 e3",
+        "target_text": "RW r9"
+      },
+      "test/term_rewriting/action": {
+        "id": "test:term_rewriting:72:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K replaces a matching L subterm with R\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs current TERM equal T\nSYNTAX QUERY NORMAL_FORM : DONE needs no RULE applicable\nSYNTAX TERM T : current expression\nACTION RW K AT PATH applies rule K to the subterm at PATH\nACTION HALT stops only when DONE already holds\nVALID trace alternates TERM then RW then TERM, with optional final HALT\nDEMO RULE K00 : OP00 A0 -> OP01 A0 ; START OP00 A0 ; GOAL OP01 A0 ; TERM OP00 A0 => RW K00 AT ROOT\nPROBLEM\nRULE r3 : U f4 v1 -> U f0 v1\nRULE r5 : U f0 B g100 e0 e2 -> U f1 B g100 e0 e2\nRULE r2 : U f1 B g100 e0 e2 -> B g101 B g100 e0 e2 e3\nRULE r4 : B g101 B g100 e0 e2 e3 -> U f2 B g100 e0 e2\nRULE r1 : B g31 v1 v0 -> B g3 v1 v0\nRULE r0 : B g30 v1 v0 -> B g60 v1 v0\nSTART B g121 U f4 B g100 e0 e2 U f4 B g100 e0 e2\nGOAL B g121 U f2 B g100 e0 e2 U f4 B g100 e0 e2\nSTATE\nTERM B g121 U f4 B g100 e0 e2 U f4 B g100 e0 e2",
+        "target_text": "RW r3"
+      },
+      "train/term_rewriting/action": {
+        "id": "train:term_rewriting:1368:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K replaces a matching L subterm with R\nSYNTAX TERM T : current expression\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs current TERM equal T\nSYNTAX QUERY NORMAL_FORM : DONE needs no RULE applicable\nACTION RW K AT PATH applies rule K to the subterm at PATH\nACTION HALT stops only when DONE already holds\nVALID trace alternates TERM then RW then TERM, with optional final HALT\nDEMO RULE K20 : OP20 X0 -> OP21 X0 ; START OP20 X0 ; GOAL OP21 X0 ; TERM OP20 X0 => RW K20 AT ROOT\nPROBLEM\nRULE r3 : U f1 e1 -> U f121 e1\nRULE r6 : U f121 v1 -> U f61 v1\nRULE r5 : U f61 v1 -> U f3 v1\nRULE r1 : U f3 e1 -> B g5 e1 e0\nRULE r4 : B g5 e1 e0 -> U f5 e1\nRULE r0 : B g100 v1 v0 -> B g4 v1 v0\nRULE r2 : U f0 v1 -> U f2 v1\nSTART U f101 U f1 e1\nQUERY NORMAL_FORM\nSTATE\nTERM U f101 U f1 e1",
+        "target_text": "RW r3"
+      }
+    },
+    "splits": {
+      "ood": {
+        "examples": 172,
+        "families": {
+          "term_rewriting": 172
+        },
+        "modes": {
+          "action": 172
+        },
+        "problems": 18,
+        "verify_targets": {}
+      },
+      "test": {
+        "examples": 97,
+        "families": {
+          "term_rewriting": 97
+        },
+        "modes": {
+          "action": 97
+        },
+        "problems": 18,
+        "verify_targets": {}
+      },
+      "train": {
+        "examples": 1787,
+        "families": {
+          "term_rewriting": 1787
+        },
+        "modes": {
+          "action": 1787
+        },
+        "problems": 240,
+        "verify_targets": {}
+      }
+    }
+  },
+  "status": "pass",
+  "trm": {
+    "identifiers": [
+      "<blank>"
+    ],
+    "splits": {
+      "ood": {
+        "inputs_shape": [
+          172,
+          877
+        ],
+        "labels_shape": [
+          172,
+          877
+        ],
+        "non_empty_target_rows": 172,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 877,
+        "vocab_size": 462
+      },
+      "test": {
+        "inputs_shape": [
+          97,
+          877
+        ],
+        "labels_shape": [
+          97,
+          877
+        ],
+        "non_empty_target_rows": 97,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 877,
+        "vocab_size": 462
+      },
+      "train": {
+        "inputs_shape": [
+          1787,
+          877
+        ],
+        "labels_shape": [
+          1787,
+          877
+        ],
+        "non_empty_target_rows": 1787,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 877,
+        "vocab_size": 462
+      }
+    }
+  },
+  "warnings": []
+}
