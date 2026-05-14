@@ -279,11 +279,11 @@ def _action_target_lines(
     if action_reference_format not in {"symbol", "line_index"}:
         raise ValueError(f"Unsupported action_reference_format: {action_reference_format}")
 
-    if family == "graph_reachability":
+    if family in {"graph_reachability", "shortest_path_lite", "dfa_simulation_lite"}:
         current_nodes = _graph_state_nodes(current)
         next_nodes = _graph_state_nodes(next_state)
         if len(next_nodes) != len(current_nodes) + 1 or next_nodes[: len(current_nodes)] != current_nodes:
-            raise ValueError("Graph action target requires a one-node path extension")
+            raise ValueError(f"{family} action target requires a one-node path extension")
         if action_reference_format == "line_index":
             if not current_nodes:
                 return ["APPEND START"]
@@ -303,7 +303,7 @@ def _action_target_lines(
             return [f"DESCEND PARENT {parent_index}"]
         return [f"DESCEND {next_nodes[-1]}"]
 
-    if family == "term_rewriting":
+    if family in {"term_rewriting", "equality_rewriting_lite"}:
         if len(next_state) == len(current) + 1 and next_state[: len(current)] == current and next_state[-1] == "HALT":
             return ["HALT"]
         if len(next_state) == len(current) + 2 and next_state[: len(current)] == current:
@@ -319,7 +319,7 @@ def _action_target_lines(
                         return [f"RW RULE {rule_index} AT {' '.join(tokens[3:])}"]
                     raise ValueError("Term rewriting action target has malformed rewrite line")
                 return [action_line]
-        raise ValueError("Term rewriting action target requires one rewrite transition or HALT")
+        raise ValueError(f"{family} action target requires one rewrite transition or HALT")
 
     if len(next_state) != len(current) + 1 or next_state[: len(current)] != current:
         raise ValueError(f"{family} action target requires one appended derivation line")
@@ -366,7 +366,7 @@ def _repair_action_target_lines(
     tree_repair_action_format: str = "index",
     term_repair_action_format: str = "rewrite",
 ) -> list[str]:
-    if family == "graph_reachability":
+    if family in {"graph_reachability", "shortest_path_lite", "dfa_simulation_lite"}:
         corrupted_nodes = _graph_state_nodes(corrupted)
         target_nodes = _graph_state_nodes(target)
         if len(corrupted_nodes) != len(target_nodes):
@@ -446,7 +446,7 @@ def _repair_action_target_lines(
         prefix = _line_repair_prefix("relation_composition", target, idx, repair_action_format)
         return [f"{prefix} {token_names[token_idx]} {target_tokens[token_idx]}"]
 
-    if family == "term_rewriting":
+    if family in {"term_rewriting", "equality_rewriting_lite"}:
         if term_repair_action_format == "first_bad":
             return ["REPAIR FIRST_BAD"]
         if term_repair_action_format != "rewrite":

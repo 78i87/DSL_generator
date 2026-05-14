@@ -2,9 +2,12 @@ from __future__ import annotations
 
 from reasoning_dsl.core import build_examples_for_problem
 from reasoning_dsl.generators import (
+    DfaSimulationLiteGenerator,
+    EqualityRewritingLiteGenerator,
     GraphReachabilityGenerator,
     ImplicationChainGenerator,
     RelationCompositionGenerator,
+    ShortestPathLiteGenerator,
     TermRewritingGenerator,
     TreeAncestryGenerator,
 )
@@ -16,6 +19,9 @@ def test_generators_verify_final_and_reject_corruption() -> None:
         (ImplicationChainGenerator(), {"num_props": 7, "proof_length": 3, "distractor_hyps": 2}),
         (RelationCompositionGenerator(), {"num_entities": 7, "composition_depth": 3, "distractor_facts": 2}),
         (TreeAncestryGenerator(), {"depth": 3, "branching_factor": 2, "distractor_subtrees": 2}),
+        (ShortestPathLiteGenerator(), {"num_nodes": 8, "path_length": 3, "extra_edges": 3}),
+        (DfaSimulationLiteGenerator(), {"input_length": 3, "relation_count": 3, "num_states": 8, "distractor_facts": 3}),
+        (EqualityRewritingLiteGenerator(), {"rewrite_steps": 3, "distractor_rules": 2, "reverse_rule_rate": 0.5}),
         (
             TermRewritingGenerator(),
             {
@@ -77,6 +83,21 @@ def test_action_targets_one_delta_line_with_next_state_metadata() -> None:
             TreeAncestryGenerator(),
             {"depth": 3, "branching_factor": 2, "distractor_subtrees": 1},
             "DESCEND ",
+        ),
+        (
+            ShortestPathLiteGenerator(),
+            {"num_nodes": 8, "path_length": 3, "extra_edges": 3},
+            "APPEND ",
+        ),
+        (
+            DfaSimulationLiteGenerator(),
+            {"input_length": 3, "relation_count": 3, "num_states": 8, "distractor_facts": 3},
+            "APPEND ",
+        ),
+        (
+            EqualityRewritingLiteGenerator(),
+            {"rewrite_steps": 3, "distractor_rules": 2, "reverse_rule_rate": 0.5},
+            "RW ",
         ),
     ]
 
@@ -232,6 +253,26 @@ def test_term_rewriting_first_bad_repair_action_is_single_primitive() -> None:
         assert example.meta["repaired_state_lines"] == problem.canonical_states[example.meta["target_step"]]
 
 
+def test_equality_lite_first_bad_repair_action_is_single_primitive() -> None:
+    generator = EqualityRewritingLiteGenerator()
+    problem = generator.generate(3, {"rewrite_steps": 3, "distractor_rules": 2, "reverse_rule_rate": 0.5})
+    examples = build_examples_for_problem(
+        generator=generator,
+        problem=problem,
+        split="train",
+        problem_index=0,
+        seed=3,
+        modes=["repair_action"],
+        term_repair_action_format="first_bad",
+    )
+
+    assert examples
+    assert {tuple(example.target_lines) for example in examples} == {("REPAIR FIRST_BAD",)}
+    for example in examples:
+        assert not generator.verify(problem, example.state_lines).valid
+        assert example.meta["repaired_state_lines"] == problem.canonical_states[example.meta["target_step"]]
+
+
 def test_term_rewriting_rule_action_repeated_subterms_stay_leftmost_valid() -> None:
     generator = TermRewritingGenerator()
     problem = generator.generate(
@@ -274,6 +315,16 @@ def test_repair_action_targets_one_compact_edit() -> None:
         (
             TreeAncestryGenerator(),
             {"depth": 3, "branching_factor": 2, "distractor_subtrees": 1},
+            "REPLACE NODE ",
+        ),
+        (
+            ShortestPathLiteGenerator(),
+            {"num_nodes": 8, "path_length": 3, "extra_edges": 3},
+            "REPLACE NODE ",
+        ),
+        (
+            DfaSimulationLiteGenerator(),
+            {"input_length": 3, "relation_count": 3, "num_states": 8, "distractor_facts": 3},
             "REPLACE NODE ",
         ),
     ]
@@ -342,6 +393,16 @@ def test_repair_action_targets_can_use_local_context_form() -> None:
         (
             TreeAncestryGenerator(),
             {"depth": 3, "branching_factor": 2, "distractor_subtrees": 1},
+            ("REPLACE ROOT WITH ", "REPLACE AFTER "),
+        ),
+        (
+            ShortestPathLiteGenerator(),
+            {"num_nodes": 8, "path_length": 3, "extra_edges": 3},
+            ("REPLACE ROOT WITH ", "REPLACE AFTER "),
+        ),
+        (
+            DfaSimulationLiteGenerator(),
+            {"input_length": 3, "relation_count": 3, "num_states": 8, "distractor_facts": 3},
             ("REPLACE ROOT WITH ", "REPLACE AFTER "),
         ),
     ]

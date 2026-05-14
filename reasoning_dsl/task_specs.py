@@ -208,6 +208,12 @@ def _family_lines(family: str, variant: int, *, action_reference_format: str = "
         return _tree_lines(variant)
     if family == "term_rewriting":
         return _term_lines(variant, action_reference_format=action_reference_format)
+    if family == "shortest_path_lite":
+        return _shortest_path_lite_lines(variant)
+    if family == "dfa_simulation_lite":
+        return _dfa_lite_lines(variant)
+    if family == "equality_rewriting_lite":
+        return _equality_lite_lines(variant)
     raise ValueError(f"Unsupported task spec family: {family}")
 
 
@@ -334,6 +340,21 @@ def _graph_v2_lines(variant: int) -> list[str]:
         "VALID PATH follows EDGE and has the fewest EDGE steps to target",
         "CANONICAL PATH starts at query start, ends at query target, and is shortest",
         "ACTION APPEND X starts or extends that canonical shortest PATH",
+    ]
+    demo = f"DEMO EDGE {a} {b} ; EDGE {b} {c} ; QUERY REACH {a} {c} ; EMPTY => APPEND {a} ; PATH {a} => APPEND {b}"
+    return [*core, demo] if variant != 2 else [core[1], core[0], *core[2:], demo]
+
+
+def _shortest_path_lite_lines(variant: int) -> list[str]:
+    a, b, c = _demo_symbols(variant)
+    core = [
+        "SYNTAX EDGE A B : directed step from A to B",
+        "SYNTAX QUERY REACH A C : DONE needs PATH from A to C",
+        "SYNTAX PATH A B C : ordered visited nodes",
+        "STATE EMPTY means no PATH has started",
+        "VALID PATH requires each adjacent pair has EDGE",
+        "ACTION APPEND X starts with query start or extends from last node by EDGE",
+        "DONE when PATH starts at query start and ends at query target",
     ]
     demo = f"DEMO EDGE {a} {b} ; EDGE {b} {c} ; QUERY REACH {a} {c} ; EMPTY => APPEND {a} ; PATH {a} => APPEND {b}"
     return [*core, demo] if variant != 2 else [core[1], core[0], *core[2:], demo]
@@ -490,6 +511,25 @@ def _relation_v2_lines(variant: int, *, relation_action_format: str = "follow") 
     return [*core, demo] if variant != 2 else [core[1], core[0], *core[2:], demo]
 
 
+def _dfa_lite_lines(variant: int) -> list[str]:
+    a, b, c = _demo_symbols(variant)
+    rel0 = f"REL{variant}0"
+    rel1 = f"REL{variant}1"
+    h0 = f"K{variant}0"
+    h1 = f"K{variant}1"
+    core = [
+        "SYNTAX FACT R A B : directed step from A to B",
+        "SYNTAX HYP K : R : ordered rule R",
+        "SYNTAX START A : initial STATE is A",
+        "SYNTAX GOAL C : DONE needs PATH ending C",
+        "SYNTAX PATH A B C : ordered visited nodes",
+        "ACTION APPEND X starts or extends PATH by next HYP rule",
+        "VALID PATH uses each HYP rule with matching FACT",
+    ]
+    demo = f"DEMO FACT {rel0} {a} {b} ; FACT {rel1} {b} {c} ; HYP {h0} : {rel0} ; HYP {h1} : {rel1} ; START {a} ; GOAL {c} ; EMPTY => APPEND {a} ; PATH {a} => APPEND {b}"
+    return [*core, demo] if variant != 1 else [core[1], core[0], *core[2:], demo]
+
+
 def _tree_lines(variant: int) -> list[str]:
     a, b, c = _demo_symbols(variant)
     core = [
@@ -624,6 +664,24 @@ def _term_v2_lines(variant: int, *, action_reference_format: str = "symbol") -> 
         "CANONICAL trace uses the next rewrite step toward DONE",
     ]
     demo = f"DEMO RULE {rule} : {op0} {a} -> {op1} {a} ; START {op0} {a} ; GOAL {op1} {a} ; TERM {op0} {a} => {demo_action}"
+    return [*core, demo] if variant != 2 else [core[0], core[3], core[1], *core[2:3], *core[4:], demo]
+
+
+def _equality_lite_lines(variant: int) -> list[str]:
+    a, _b, _c = _demo_symbols(variant)
+    rule = f"K{variant}0"
+    op0 = f"OP{variant}0"
+    op1 = f"OP{variant}1"
+    core = [
+        "SYNTAX RULE K : L -> R : K maps expression L and R",
+        "SYNTAX START T : initial TERM is T",
+        "SYNTAX GOAL T : DONE needs TERM equal GOAL",
+        "SYNTAX TERM T : current expression",
+        "ACTION RW K AT PATH changes one subterm by RULE K",
+        "VALID trace alternates TERM then RW then TERM",
+        "DONE when current TERM is GOAL",
+    ]
+    demo = f"DEMO RULE {rule} : {op0} {a} -> {op1} {a} ; START {op0} {a} ; GOAL {op1} {a} ; TERM {op0} {a} => RW {rule} AT ROOT"
     return [*core, demo] if variant != 2 else [core[0], core[3], core[1], *core[2:3], *core[4:], demo]
 
 

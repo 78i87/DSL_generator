@@ -1,0 +1,397 @@
+{
+  "data_dir": "data/symbolic-0_86-zero-shot-new-families",
+  "errors": [],
+  "jsonl": {
+    "difficulty": {
+      "dfa_simulation_lite": {
+        "distractor_facts": {
+          "max": 8.0,
+          "mean": 6.538461538461538,
+          "min": 5.0,
+          "unique": [
+            5,
+            8
+          ]
+        },
+        "input_length": {
+          "max": 6.0,
+          "mean": 3.7948717948717947,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "num_states": {
+          "max": 12.0,
+          "mean": 10.051282051282051,
+          "min": 8.0,
+          "unique": [
+            8,
+            12
+          ]
+        },
+        "relation_count": {
+          "max": 4.0,
+          "mean": 3.5128205128205128,
+          "min": 3.0,
+          "unique": [
+            3,
+            4
+          ]
+        },
+        "symbol_offset": {
+          "max": 2.0,
+          "mean": 1.0256410256410255,
+          "min": 0.0,
+          "unique": [
+            0,
+            2
+          ]
+        }
+      },
+      "equality_rewriting_lite": {
+        "distractor_rules": {
+          "max": 4.0,
+          "mean": 3.5692307692307694,
+          "min": 3.0,
+          "unique": [
+            3,
+            4
+          ]
+        },
+        "reversed_rules": {
+          "max": 4.0,
+          "mean": 1.7230769230769232,
+          "min": 0.0,
+          "unique": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "rewrite_steps": {
+          "max": 6.0,
+          "mean": 4.092307692307692,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "symbol_offset": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "unique": [
+            0
+          ]
+        }
+      },
+      "shortest_path_lite": {
+        "extra_edges": {
+          "max": 8.0,
+          "mean": 6.594936708860759,
+          "min": 5.0,
+          "unique": [
+            5,
+            8
+          ]
+        },
+        "num_nodes": {
+          "max": 12.0,
+          "mean": 10.126582278481013,
+          "min": 8.0,
+          "unique": [
+            8,
+            12
+          ]
+        },
+        "path_length": {
+          "max": 6.0,
+          "mean": 3.9873417721518987,
+          "min": 2.0,
+          "unique": [
+            2,
+            3,
+            4,
+            6
+          ]
+        },
+        "symbol_offset": {
+          "max": 2.0,
+          "mean": 1.0632911392405062,
+          "min": 0.0,
+          "unique": [
+            0,
+            2
+          ]
+        }
+      }
+    },
+    "samples": {
+      "ood/dfa_simulation_lite/action": {
+        "id": "ood:dfa_simulation_lite:12:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX FACT R A B : directed step from A to B\nSYNTAX HYP K : R : ordered rule R\nSYNTAX START A : initial STATE is A\nSYNTAX GOAL C : DONE needs PATH ending C\nSYNTAX PATH A B C : ordered visited nodes\nACTION APPEND X starts or extends PATH by next HYP rule\nVALID PATH uses each HYP rule with matching FACT\nDEMO FACT REL20 X0 X1 ; FACT REL21 X1 X2 ; HYP K20 : REL20 ; HYP K21 : REL21 ; START X0 ; GOAL X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nFACT r0 e1 e2\nFACT r1 e2 e3\nFACT r1 e4 e2\nFACT r2 e0 e1\nFACT r2 e2 e6\nFACT r2 e4 e7\nFACT r2 e6 e0\nFACT r2 e6 e5\nHYP h0 : r2\nHYP h1 : r0\nHYP h2 : r1\nSTART e0\nGOAL e3\nSTATE\nEMPTY",
+        "target_text": "APPEND e0"
+      },
+      "ood/dfa_simulation_lite/repair_action": {
+        "id": "ood:dfa_simulation_lite:12:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX FACT R A B : directed step from A to B\nSYNTAX HYP K : R : ordered rule R\nSYNTAX START A : initial STATE is A\nSYNTAX GOAL C : DONE needs PATH ending C\nSYNTAX PATH A B C : ordered visited nodes\nACTION APPEND X starts or extends PATH by next HYP rule\nVALID PATH uses each HYP rule with matching FACT\nDEMO FACT REL00 A0 A1 ; FACT REL01 A1 A2 ; HYP K00 : REL00 ; HYP K01 : REL01 ; START A0 ; GOAL A2 ; EMPTY => APPEND A0 ; PATH A0 => APPEND A1\nPROBLEM\nFACT r0 e1 e2\nFACT r1 e2 e3\nFACT r1 e4 e2\nFACT r2 e0 e1\nFACT r2 e2 e6\nFACT r2 e4 e7\nFACT r2 e6 e0\nFACT r2 e6 e5\nHYP h0 : r2\nHYP h1 : r0\nHYP h2 : r1\nSTART e0\nGOAL e3\nSTATE\nPATH e3",
+        "target_text": "REPLACE ROOT WITH e0"
+      },
+      "ood/dfa_simulation_lite/verify": {
+        "id": "ood:dfa_simulation_lite:12:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX FACT R A B : directed step from A to B\nSYNTAX HYP K : R : ordered rule R\nSYNTAX START A : initial STATE is A\nSYNTAX GOAL C : DONE needs PATH ending C\nSYNTAX PATH A B C : ordered visited nodes\nACTION APPEND X starts or extends PATH by next HYP rule\nVALID PATH uses each HYP rule with matching FACT\nDEMO FACT REL20 X0 X1 ; FACT REL21 X1 X2 ; HYP K20 : REL20 ; HYP K21 : REL21 ; START X0 ; GOAL X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nFACT r0 e1 e2\nFACT r1 e2 e3\nFACT r1 e4 e2\nFACT r2 e0 e1\nFACT r2 e2 e6\nFACT r2 e4 e7\nFACT r2 e6 e0\nFACT r2 e6 e5\nHYP h0 : r2\nHYP h1 : r0\nHYP h2 : r1\nSTART e0\nGOAL e3\nSTATE\nPATH e0 e1 e2 e3",
+        "target_text": "VALID"
+      },
+      "ood/equality_rewriting_lite/action": {
+        "id": "ood:equality_rewriting_lite:24:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K maps expression L and R\nSYNTAX TERM T : current expression\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs TERM equal GOAL\nACTION RW K AT PATH changes one subterm by RULE K\nVALID trace alternates TERM then RW then TERM\nDONE when current TERM is GOAL\nDEMO RULE K20 : OP20 X0 -> OP21 X0 ; START OP20 X0 ; GOAL OP21 X0 ; TERM OP20 X0 => RW K20 AT ROOT\nPROBLEM\nRULE r0 : U f1 e0 -> U f0 e0\nRULE r1 : U f2 e0 -> U f1 e0\nRULE r2 : U f3 e0 -> U f4 e0\nRULE r3 : U f4 e0 -> U f5 e0\nRULE r4 : U f5 e0 -> U f6 e0\nSTART U f0 e0\nGOAL U f2 e0\nSTATE\nTERM U f0 e0",
+        "target_text": "RW r0 AT ROOT"
+      },
+      "ood/equality_rewriting_lite/repair_action": {
+        "id": "ood:equality_rewriting_lite:24:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K maps expression L and R\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs TERM equal GOAL\nSYNTAX TERM T : current expression\nACTION RW K AT PATH changes one subterm by RULE K\nVALID trace alternates TERM then RW then TERM\nDONE when current TERM is GOAL\nDEMO RULE K00 : OP00 A0 -> OP01 A0 ; START OP00 A0 ; GOAL OP01 A0 ; TERM OP00 A0 => RW K00 AT ROOT\nPROBLEM\nRULE r0 : U f1 e0 -> U f0 e0\nRULE r1 : U f2 e0 -> U f1 e0\nRULE r2 : U f3 e0 -> U f4 e0\nRULE r3 : U f4 e0 -> U f5 e0\nRULE r4 : U f5 e0 -> U f6 e0\nSTART U f0 e0\nGOAL U f2 e0\nSTATE\nTERM U f0 e0\nRW r0 AT ROOT\nTERM U f13 e0",
+        "target_text": "REPAIR FIRST_BAD"
+      },
+      "ood/equality_rewriting_lite/verify": {
+        "id": "ood:equality_rewriting_lite:24:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K maps expression L and R\nSYNTAX TERM T : current expression\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs TERM equal GOAL\nACTION RW K AT PATH changes one subterm by RULE K\nVALID trace alternates TERM then RW then TERM\nDONE when current TERM is GOAL\nDEMO RULE K20 : OP20 X0 -> OP21 X0 ; START OP20 X0 ; GOAL OP21 X0 ; TERM OP20 X0 => RW K20 AT ROOT\nPROBLEM\nRULE r0 : U f1 e0 -> U f0 e0\nRULE r1 : U f2 e0 -> U f1 e0\nRULE r2 : U f3 e0 -> U f4 e0\nRULE r3 : U f4 e0 -> U f5 e0\nRULE r4 : U f5 e0 -> U f6 e0\nSTART U f0 e0\nGOAL U f2 e0\nSTATE\nTERM U f0 e0\nRW r0 AT ROOT\nTERM U f1 e0\nRW r1 AT ROOT\nTERM U f2 e0",
+        "target_text": "VALID"
+      },
+      "ood/shortest_path_lite/action": {
+        "id": "ood:shortest_path_lite:0:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE A0 A1 ; EDGE A1 A2 ; QUERY REACH A0 A2 ; EMPTY => APPEND A0 ; PATH A0 => APPEND A1\nPROBLEM\nEDGE e0 e1\nEDGE e1 e0\nEDGE e1 e2\nEDGE e2 e3\nEDGE e4 e0\nEDGE e5 e6\nEDGE e6 e1\nEDGE e7 e4\nQUERY REACH e0 e3\nSTATE\nEMPTY",
+        "target_text": "APPEND e0"
+      },
+      "ood/shortest_path_lite/repair_action": {
+        "id": "ood:shortest_path_lite:0:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE N0 N1 ; EDGE N1 N2 ; QUERY REACH N0 N2 ; EMPTY => APPEND N0 ; PATH N0 => APPEND N1\nPROBLEM\nEDGE e0 e1\nEDGE e1 e0\nEDGE e1 e2\nEDGE e2 e3\nEDGE e4 e0\nEDGE e5 e6\nEDGE e6 e1\nEDGE e7 e4\nQUERY REACH e0 e3\nSTATE\nPATH e3",
+        "target_text": "REPLACE ROOT WITH e0"
+      },
+      "ood/shortest_path_lite/verify": {
+        "id": "ood:shortest_path_lite:0:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE X0 X1 ; EDGE X1 X2 ; QUERY REACH X0 X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nEDGE e0 e1\nEDGE e1 e0\nEDGE e1 e2\nEDGE e2 e3\nEDGE e4 e0\nEDGE e5 e6\nEDGE e6 e1\nEDGE e7 e4\nQUERY REACH e0 e3\nSTATE\nPATH e0 e1 e2 e3",
+        "target_text": "VALID"
+      },
+      "test/dfa_simulation_lite/action": {
+        "id": "test:dfa_simulation_lite:1:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX FACT R A B : directed step from A to B\nSYNTAX HYP K : R : ordered rule R\nSYNTAX START A : initial STATE is A\nSYNTAX GOAL C : DONE needs PATH ending C\nSYNTAX PATH A B C : ordered visited nodes\nACTION APPEND X starts or extends PATH by next HYP rule\nVALID PATH uses each HYP rule with matching FACT\nDEMO FACT REL20 X0 X1 ; FACT REL21 X1 X2 ; HYP K20 : REL20 ; HYP K21 : REL21 ; START X0 ; GOAL X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nFACT r0 e6 e1\nFACT r1 e0 e1\nFACT r1 e1 e2\nFACT r1 e3 e6\nFACT r2 e1 e2\nFACT r2 e3 e5\nFACT r2 e3 e6\nHYP h0 : r1\nHYP h1 : r2\nSTART e0\nGOAL e2\nSTATE\nEMPTY",
+        "target_text": "APPEND e0"
+      },
+      "test/dfa_simulation_lite/repair_action": {
+        "id": "test:dfa_simulation_lite:1:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX FACT R A B : directed step from A to B\nSYNTAX HYP K : R : ordered rule R\nSYNTAX START A : initial STATE is A\nSYNTAX GOAL C : DONE needs PATH ending C\nSYNTAX PATH A B C : ordered visited nodes\nACTION APPEND X starts or extends PATH by next HYP rule\nVALID PATH uses each HYP rule with matching FACT\nDEMO FACT REL20 X0 X1 ; FACT REL21 X1 X2 ; HYP K20 : REL20 ; HYP K21 : REL21 ; START X0 ; GOAL X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nFACT r0 e6 e1\nFACT r1 e0 e1\nFACT r1 e1 e2\nFACT r1 e3 e6\nFACT r2 e1 e2\nFACT r2 e3 e5\nFACT r2 e3 e6\nHYP h0 : r1\nHYP h1 : r2\nSTART e0\nGOAL e2\nSTATE\nPATH e2",
+        "target_text": "REPLACE ROOT WITH e0"
+      },
+      "test/dfa_simulation_lite/verify": {
+        "id": "test:dfa_simulation_lite:1:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX FACT R A B : directed step from A to B\nSYNTAX HYP K : R : ordered rule R\nSYNTAX START A : initial STATE is A\nSYNTAX GOAL C : DONE needs PATH ending C\nSYNTAX PATH A B C : ordered visited nodes\nACTION APPEND X starts or extends PATH by next HYP rule\nVALID PATH uses each HYP rule with matching FACT\nDEMO FACT REL20 X0 X1 ; FACT REL21 X1 X2 ; HYP K20 : REL20 ; HYP K21 : REL21 ; START X0 ; GOAL X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nFACT r0 e6 e1\nFACT r1 e0 e1\nFACT r1 e1 e2\nFACT r1 e3 e6\nFACT r2 e1 e2\nFACT r2 e3 e5\nFACT r2 e3 e6\nHYP h0 : r1\nHYP h1 : r2\nSTART e0\nGOAL e2\nSTATE\nPATH e0 e1 e2",
+        "target_text": "VALID"
+      },
+      "test/equality_rewriting_lite/action": {
+        "id": "test:equality_rewriting_lite:2:action:0",
+        "source_text": "MODE action\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nSYNTAX RULE K : L -> R : K maps expression L and R\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs TERM equal GOAL\nSYNTAX TERM T : current expression\nACTION RW K AT PATH changes one subterm by RULE K\nVALID trace alternates TERM then RW then TERM\nDONE when current TERM is GOAL\nDEMO RULE K10 : OP10 N0 -> OP11 N0 ; START OP10 N0 ; GOAL OP11 N0 ; TERM OP10 N0 => RW K10 AT ROOT\nPROBLEM\nRULE r0 : U f1 e0 -> U f0 e0\nRULE r1 : U f2 e0 -> U f1 e0\nRULE r2 : U f3 e0 -> U f2 e0\nRULE r3 : U f4 e0 -> U f5 e0\nRULE r4 : U f5 e0 -> U f6 e0\nRULE r5 : U f6 e0 -> U f7 e0\nSTART U f0 e0\nGOAL U f3 e0\nSTATE\nTERM U f0 e0",
+        "target_text": "RW r0 AT ROOT"
+      },
+      "test/equality_rewriting_lite/repair_action": {
+        "id": "test:equality_rewriting_lite:2:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K maps expression L and R\nSYNTAX TERM T : current expression\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs TERM equal GOAL\nACTION RW K AT PATH changes one subterm by RULE K\nVALID trace alternates TERM then RW then TERM\nDONE when current TERM is GOAL\nDEMO RULE K20 : OP20 X0 -> OP21 X0 ; START OP20 X0 ; GOAL OP21 X0 ; TERM OP20 X0 => RW K20 AT ROOT\nPROBLEM\nRULE r0 : U f1 e0 -> U f0 e0\nRULE r1 : U f2 e0 -> U f1 e0\nRULE r2 : U f3 e0 -> U f2 e0\nRULE r3 : U f4 e0 -> U f5 e0\nRULE r4 : U f5 e0 -> U f6 e0\nRULE r5 : U f6 e0 -> U f7 e0\nSTART U f0 e0\nGOAL U f3 e0\nSTATE\nTERM U f0 e0\nRW r0 AT ROOT\nTERM U f13 e0",
+        "target_text": "REPAIR FIRST_BAD"
+      },
+      "test/equality_rewriting_lite/verify": {
+        "id": "test:equality_rewriting_lite:2:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K maps expression L and R\nSYNTAX TERM T : current expression\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs TERM equal GOAL\nACTION RW K AT PATH changes one subterm by RULE K\nVALID trace alternates TERM then RW then TERM\nDONE when current TERM is GOAL\nDEMO RULE K20 : OP20 X0 -> OP21 X0 ; START OP20 X0 ; GOAL OP21 X0 ; TERM OP20 X0 => RW K20 AT ROOT\nPROBLEM\nRULE r0 : U f1 e0 -> U f0 e0\nRULE r1 : U f2 e0 -> U f1 e0\nRULE r2 : U f3 e0 -> U f2 e0\nRULE r3 : U f4 e0 -> U f5 e0\nRULE r4 : U f5 e0 -> U f6 e0\nRULE r5 : U f6 e0 -> U f7 e0\nSTART U f0 e0\nGOAL U f3 e0\nSTATE\nTERM U f0 e0\nRW r0 AT ROOT\nTERM U f1 e0\nRW r1 AT ROOT\nTERM U f2 e0\nRW r2 AT ROOT\nTERM U f3 e0",
+        "target_text": "VALID"
+      },
+      "test/shortest_path_lite/action": {
+        "id": "test:shortest_path_lite:0:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE X0 X1 ; EDGE X1 X2 ; QUERY REACH X0 X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nEDGE e0 e1\nEDGE e0 e5\nEDGE e0 e6\nEDGE e1 e2\nEDGE e2 e3\nEDGE e5 e1\nEDGE e7 e4\nQUERY REACH e0 e2\nSTATE\nEMPTY",
+        "target_text": "APPEND e0"
+      },
+      "test/shortest_path_lite/repair_action": {
+        "id": "test:shortest_path_lite:0:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE X0 X1 ; EDGE X1 X2 ; QUERY REACH X0 X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nEDGE e0 e1\nEDGE e0 e5\nEDGE e0 e6\nEDGE e1 e2\nEDGE e2 e3\nEDGE e5 e1\nEDGE e7 e4\nQUERY REACH e0 e2\nSTATE\nPATH e2",
+        "target_text": "REPLACE ROOT WITH e0"
+      },
+      "test/shortest_path_lite/verify": {
+        "id": "test:shortest_path_lite:0:verify:valid",
+        "source_text": "MODE verify\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE N0 N1 ; EDGE N1 N2 ; QUERY REACH N0 N2 ; EMPTY => APPEND N0 ; PATH N0 => APPEND N1\nPROBLEM\nEDGE e0 e1\nEDGE e0 e5\nEDGE e0 e6\nEDGE e1 e2\nEDGE e2 e3\nEDGE e5 e1\nEDGE e7 e4\nQUERY REACH e0 e2\nSTATE\nPATH e0 e1 e2",
+        "target_text": "VALID"
+      },
+      "train/dfa_simulation_lite/action": {
+        "id": "train:dfa_simulation_lite:1:action:0",
+        "source_text": "MODE action\nTASK\nVALID means all rules hold; INVALID CODE names the first failed rule\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nSYNTAX HYP K : R : ordered rule R\nSYNTAX FACT R A B : directed step from A to B\nSYNTAX START A : initial STATE is A\nSYNTAX GOAL C : DONE needs PATH ending C\nSYNTAX PATH A B C : ordered visited nodes\nACTION APPEND X starts or extends PATH by next HYP rule\nVALID PATH uses each HYP rule with matching FACT\nDEMO FACT REL10 N0 N1 ; FACT REL11 N1 N2 ; HYP K10 : REL10 ; HYP K11 : REL11 ; START N0 ; GOAL N2 ; EMPTY => APPEND N0 ; PATH N0 => APPEND N1\nPROBLEM\nFACT r0 e1 e7\nFACT r0 e2 e3\nFACT r1 e0 e1\nFACT r1 e2 e3\nFACT r1 e5 e1\nFACT r1 e7 e6\nFACT r2 e1 e2\nFACT r2 e7 e4\nHYP h0 : r1\nHYP h1 : r2\nHYP h2 : r0\nSTART e0\nGOAL e3\nSTATE\nEMPTY",
+        "target_text": "APPEND e0"
+      },
+      "train/dfa_simulation_lite/repair_action": {
+        "id": "train:dfa_simulation_lite:1:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX FACT R A B : directed step from A to B\nSYNTAX HYP K : R : ordered rule R\nSYNTAX START A : initial STATE is A\nSYNTAX GOAL C : DONE needs PATH ending C\nSYNTAX PATH A B C : ordered visited nodes\nACTION APPEND X starts or extends PATH by next HYP rule\nVALID PATH uses each HYP rule with matching FACT\nDEMO FACT REL00 A0 A1 ; FACT REL01 A1 A2 ; HYP K00 : REL00 ; HYP K01 : REL01 ; START A0 ; GOAL A2 ; EMPTY => APPEND A0 ; PATH A0 => APPEND A1\nPROBLEM\nFACT r0 e1 e7\nFACT r0 e2 e3\nFACT r1 e0 e1\nFACT r1 e2 e3\nFACT r1 e5 e1\nFACT r1 e7 e6\nFACT r2 e1 e2\nFACT r2 e7 e4\nHYP h0 : r1\nHYP h1 : r2\nHYP h2 : r0\nSTART e0\nGOAL e3\nSTATE\nPATH e3",
+        "target_text": "REPLACE ROOT WITH e0"
+      },
+      "train/dfa_simulation_lite/verify": {
+        "id": "train:dfa_simulation_lite:1:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX FACT R A B : directed step from A to B\nSYNTAX HYP K : R : ordered rule R\nSYNTAX START A : initial STATE is A\nSYNTAX GOAL C : DONE needs PATH ending C\nSYNTAX PATH A B C : ordered visited nodes\nACTION APPEND X starts or extends PATH by next HYP rule\nVALID PATH uses each HYP rule with matching FACT\nDEMO FACT REL20 X0 X1 ; FACT REL21 X1 X2 ; HYP K20 : REL20 ; HYP K21 : REL21 ; START X0 ; GOAL X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nFACT r0 e1 e7\nFACT r0 e2 e3\nFACT r1 e0 e1\nFACT r1 e2 e3\nFACT r1 e5 e1\nFACT r1 e7 e6\nFACT r2 e1 e2\nFACT r2 e7 e4\nHYP h0 : r1\nHYP h1 : r2\nHYP h2 : r0\nSTART e0\nGOAL e3\nSTATE\nPATH e0 e1 e2 e3",
+        "target_text": "VALID"
+      },
+      "train/equality_rewriting_lite/action": {
+        "id": "train:equality_rewriting_lite:2:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K maps expression L and R\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs TERM equal GOAL\nSYNTAX TERM T : current expression\nACTION RW K AT PATH changes one subterm by RULE K\nVALID trace alternates TERM then RW then TERM\nDONE when current TERM is GOAL\nDEMO RULE K00 : OP00 A0 -> OP01 A0 ; START OP00 A0 ; GOAL OP01 A0 ; TERM OP00 A0 => RW K00 AT ROOT\nPROBLEM\nRULE r0 : U f0 e0 -> U f1 e0\nRULE r1 : U f1 e0 -> U f2 e0\nRULE r2 : U f2 e0 -> U f3 e0\nRULE r3 : U f4 e0 -> U f5 e0\nRULE r4 : U f5 e0 -> U f6 e0\nRULE r5 : U f6 e0 -> U f7 e0\nSTART U f0 e0\nGOAL U f3 e0\nSTATE\nTERM U f0 e0",
+        "target_text": "RW r0 AT ROOT"
+      },
+      "train/equality_rewriting_lite/repair_action": {
+        "id": "train:equality_rewriting_lite:2:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K maps expression L and R\nSYNTAX TERM T : current expression\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs TERM equal GOAL\nACTION RW K AT PATH changes one subterm by RULE K\nVALID trace alternates TERM then RW then TERM\nDONE when current TERM is GOAL\nDEMO RULE K20 : OP20 X0 -> OP21 X0 ; START OP20 X0 ; GOAL OP21 X0 ; TERM OP20 X0 => RW K20 AT ROOT\nPROBLEM\nRULE r0 : U f0 e0 -> U f1 e0\nRULE r1 : U f1 e0 -> U f2 e0\nRULE r2 : U f2 e0 -> U f3 e0\nRULE r3 : U f4 e0 -> U f5 e0\nRULE r4 : U f5 e0 -> U f6 e0\nRULE r5 : U f6 e0 -> U f7 e0\nSTART U f0 e0\nGOAL U f3 e0\nSTATE\nTERM U f0 e0\nRW r0 AT ROOT\nTERM U f13 e0",
+        "target_text": "REPAIR FIRST_BAD"
+      },
+      "train/equality_rewriting_lite/verify": {
+        "id": "train:equality_rewriting_lite:2:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX RULE K : L -> R : K maps expression L and R\nSYNTAX START T : initial TERM is T\nSYNTAX GOAL T : DONE needs TERM equal GOAL\nSYNTAX TERM T : current expression\nACTION RW K AT PATH changes one subterm by RULE K\nVALID trace alternates TERM then RW then TERM\nDONE when current TERM is GOAL\nDEMO RULE K00 : OP00 A0 -> OP01 A0 ; START OP00 A0 ; GOAL OP01 A0 ; TERM OP00 A0 => RW K00 AT ROOT\nPROBLEM\nRULE r0 : U f0 e0 -> U f1 e0\nRULE r1 : U f1 e0 -> U f2 e0\nRULE r2 : U f2 e0 -> U f3 e0\nRULE r3 : U f4 e0 -> U f5 e0\nRULE r4 : U f5 e0 -> U f6 e0\nRULE r5 : U f6 e0 -> U f7 e0\nSTART U f0 e0\nGOAL U f3 e0\nSTATE\nTERM U f0 e0\nRW r0 AT ROOT\nTERM U f1 e0\nRW r1 AT ROOT\nTERM U f2 e0\nRW r2 AT ROOT\nTERM U f3 e0",
+        "target_text": "VALID"
+      },
+      "train/shortest_path_lite/action": {
+        "id": "train:shortest_path_lite:0:action:0",
+        "source_text": "MODE action\nTASK\nOUTPUT exactly one primitive action line\nACTION changes STATE by one valid step toward DONE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE X0 X1 ; EDGE X1 X2 ; QUERY REACH X0 X2 ; EMPTY => APPEND X0 ; PATH X0 => APPEND X1\nPROBLEM\nEDGE e0 e1\nEDGE e1 e2\nEDGE e2 e3\nEDGE e2 e6\nEDGE e3 e2\nEDGE e3 e7\nEDGE e7 e3\nEDGE e7 e6\nQUERY REACH e0 e3\nSTATE\nEMPTY",
+        "target_text": "APPEND e0"
+      },
+      "train/shortest_path_lite/repair_action": {
+        "id": "train:shortest_path_lite:0:repair_action:1",
+        "source_text": "MODE repair_action\nTASK\nOUTPUT exactly one local repair action line\nREPAIR changes corrupted STATE into the intended STATE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE A0 A1 ; EDGE A1 A2 ; QUERY REACH A0 A2 ; EMPTY => APPEND A0 ; PATH A0 => APPEND A1\nPROBLEM\nEDGE e0 e1\nEDGE e1 e2\nEDGE e2 e3\nEDGE e2 e6\nEDGE e3 e2\nEDGE e3 e7\nEDGE e7 e3\nEDGE e7 e6\nQUERY REACH e0 e3\nSTATE\nPATH e3",
+        "target_text": "REPLACE ROOT WITH e0"
+      },
+      "train/shortest_path_lite/verify": {
+        "id": "train:shortest_path_lite:0:verify:valid",
+        "source_text": "MODE verify\nTASK\nOUTPUT VALID when STATE satisfies all rules\nOUTPUT INVALID CODE when the first broken rule has CODE\nVALID means all rules hold; INVALID CODE names the first failed rule\nSYNTAX EDGE A B : directed step from A to B\nSYNTAX QUERY REACH A C : DONE needs PATH from A to C\nSYNTAX PATH A B C : ordered visited nodes\nSTATE EMPTY means no PATH has started\nVALID PATH requires each adjacent pair has EDGE\nACTION APPEND X starts with query start or extends from last node by EDGE\nDONE when PATH starts at query start and ends at query target\nDEMO EDGE A0 A1 ; EDGE A1 A2 ; QUERY REACH A0 A2 ; EMPTY => APPEND A0 ; PATH A0 => APPEND A1\nPROBLEM\nEDGE e0 e1\nEDGE e1 e2\nEDGE e2 e3\nEDGE e2 e6\nEDGE e3 e2\nEDGE e3 e7\nEDGE e7 e3\nEDGE e7 e6\nQUERY REACH e0 e3\nSTATE\nPATH e0 e1 e2 e3",
+        "target_text": "VALID"
+      }
+    },
+    "splits": {
+      "ood": {
+        "examples": 392,
+        "families": {
+          "dfa_simulation_lite": 138,
+          "equality_rewriting_lite": 114,
+          "shortest_path_lite": 140
+        },
+        "modes": {
+          "action": 160,
+          "repair_action": 160,
+          "verify": 72
+        },
+        "problems": 36,
+        "verify_targets": {
+          "INVALID BAD_EDGE": 9,
+          "INVALID BAD_FACT": 8,
+          "INVALID BAD_PATH": 7,
+          "INVALID BAD_RESULT": 12,
+          "VALID": 36
+        }
+      },
+      "test": {
+        "examples": 24,
+        "families": {
+          "dfa_simulation_lite": 8,
+          "equality_rewriting_lite": 8,
+          "shortest_path_lite": 8
+        },
+        "modes": {
+          "action": 9,
+          "repair_action": 9,
+          "verify": 6
+        },
+        "problems": 3,
+        "verify_targets": {
+          "INVALID BAD_PATH": 2,
+          "INVALID BAD_RESULT": 1,
+          "VALID": 3
+        }
+      },
+      "train": {
+        "examples": 28,
+        "families": {
+          "dfa_simulation_lite": 10,
+          "equality_rewriting_lite": 8,
+          "shortest_path_lite": 10
+        },
+        "modes": {
+          "action": 11,
+          "repair_action": 11,
+          "verify": 6
+        },
+        "problems": 3,
+        "verify_targets": {
+          "INVALID BAD_FACT": 1,
+          "INVALID BAD_PATH": 1,
+          "INVALID BAD_RESULT": 1,
+          "VALID": 3
+        }
+      }
+    }
+  },
+  "status": "pass",
+  "trm": {
+    "identifiers": [
+      "<blank>"
+    ],
+    "splits": {
+      "ood": {
+        "inputs_shape": [
+          392,
+          328
+        ],
+        "labels_shape": [
+          392,
+          328
+        ],
+        "non_empty_target_rows": 392,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 328,
+        "vocab_size": 462
+      },
+      "test": {
+        "inputs_shape": [
+          24,
+          328
+        ],
+        "labels_shape": [
+          24,
+          328
+        ],
+        "non_empty_target_rows": 24,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 328,
+        "vocab_size": 462
+      },
+      "train": {
+        "inputs_shape": [
+          28,
+          328
+        ],
+        "labels_shape": [
+          28,
+          328
+        ],
+        "non_empty_target_rows": 28,
+        "puzzle_identifier_values": [
+          0
+        ],
+        "seq_len": 328,
+        "vocab_size": 462
+      }
+    }
+  },
+  "warnings": []
+}

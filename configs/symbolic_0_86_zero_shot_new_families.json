@@ -1,0 +1,83 @@
+{
+  "description": "v0.86 eval-only zero-shot new-family benchmark using the 0.85 fixed vocab. Do not train on this dataset.",
+  "root_seed": 8600,
+  "tokenization": "whitespace",
+  "modes": ["action", "repair_action", "verify"],
+  "repair_action_format": "local",
+  "term_repair_action_format": "first_bad",
+  "task_spec_format": "compact_v1",
+  "task_spec_variant_count": 3,
+  "splits": {
+    "train": {
+      "difficulty_mixture": [
+        {"name": "audit_only_short", "difficulty": "short", "problems_per_family": 1}
+      ]
+    },
+    "test": {
+      "difficulty_mixture": [
+        {"name": "audit_only_short", "difficulty": "short", "problems_per_family": 1}
+      ]
+    },
+    "ood": {
+      "difficulty_mixture": [
+        {"name": "ood_short", "difficulty": "short", "problems_per_family": 6},
+        {"name": "ood_bridge", "difficulty": "bridge", "problems_per_family": 6}
+      ]
+    }
+  },
+  "families": {
+    "shortest_path_lite": {
+      "enabled": true,
+      "short": {
+        "path_length_min": 2,
+        "path_length_max": 3,
+        "num_nodes": 8,
+        "extra_edges": 5,
+        "symbol_offset": 0
+      },
+      "bridge": {
+        "path_length_min": 4,
+        "path_length_max": 6,
+        "num_nodes": 12,
+        "extra_edges": 8,
+        "symbol_offset": 2
+      }
+    },
+    "dfa_simulation_lite": {
+      "enabled": true,
+      "short": {
+        "input_length_min": 2,
+        "input_length_max": 3,
+        "relation_count": 3,
+        "num_states": 8,
+        "distractor_facts": 5,
+        "symbol_offset": 0
+      },
+      "bridge": {
+        "input_length_min": 4,
+        "input_length_max": 6,
+        "relation_count": 4,
+        "num_states": 12,
+        "distractor_facts": 8,
+        "symbol_offset": 2
+      }
+    },
+    "equality_rewriting_lite": {
+      "enabled": true,
+      "short": {
+        "rewrite_steps_min": 2,
+        "rewrite_steps_max": 3,
+        "distractor_rules": 3,
+        "reverse_rule_rate": 0.5,
+        "symbol_offset": 0
+      },
+      "bridge": {
+        "rewrite_steps_min": 4,
+        "rewrite_steps_max": 6,
+        "distractor_rules": 4,
+        "reverse_rule_rate": 0.5,
+        "symbol_offset": 0
+      }
+    }
+  }
+}

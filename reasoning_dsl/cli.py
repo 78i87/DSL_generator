@@ -11,11 +11,20 @@ from reasoning_dsl.audit import audit_dataset, write_audit_report
 from reasoning_dsl.export_jsonl import export_jsonl
 from reasoning_dsl.export_trm import export_trm_arrays
 from reasoning_dsl.generators import (
+    DfaSimulationLiteGenerator,
+    EqualityRewritingLiteGenerator,
     GraphReachabilityGenerator,
     ImplicationChainGenerator,
     RelationCompositionGenerator,
+    ShortestPathLiteGenerator,
     TermRewritingGenerator,
     TreeAncestryGenerator,
+)
+from reasoning_dsl.relational import export_relational_from_jsonl
+from reasoning_dsl.relational_arrays import export_relational_arrays_from_jsonl
+from reasoning_dsl.relational_task_schema_arrays import (
+    export_task_schema_arrays_from_jsonl,
+    fact_predicate_generality_report,
 )
 from reasoning_dsl.split import generate_examples
 from reasoning_dsl.tokenize import Vocab
@@ -55,6 +64,9 @@ def generate_command(args: argparse.Namespace) -> None:
         RelationCompositionGenerator(),
         TreeAncestryGenerator(),
         TermRewritingGenerator(),
+        ShortestPathLiteGenerator(),
+        DfaSimulationLiteGenerator(),
+        EqualityRewritingLiteGenerator(),
     ]
     examples_by_split = generate_examples(generators=generators, config=config, root_seed=root_seed)
     export_jsonl(examples_by_split, output_dir)
@@ -118,6 +130,37 @@ def canonicalize_command(args: argparse.Namespace) -> None:
     print(f"Wrote {total_examples} canonicalized examples to {output_dir}")
 
 
+def relational_export_command(args: argparse.Namespace) -> None:
+    export_relational_from_jsonl(args.data_dir, args.output_dir)
+    print(f"Wrote relational-object JSONL to {Path(args.output_dir) / 'relational_jsonl'}")
+
+
+def relational_arrays_command(args: argparse.Namespace) -> None:
+    export_relational_arrays_from_jsonl(
+        args.data_dir,
+        args.output_dir,
+        families=set(args.family) if args.family else None,
+        modes=set(args.mode) if args.mode else None,
+    )
+    print(f"Wrote relational path arrays to {Path(args.output_dir)}")
+
+
+def relational_task_schema_arrays_command(args: argparse.Namespace) -> None:
+    export_task_schema_arrays_from_jsonl(
+        args.data_dir,
+        args.output_dir,
+        families=set(args.family) if args.family else None,
+        modes=set(args.mode) if args.mode else None,
+        fail_on_legacy_predicates=args.fail_on_legacy_predicates,
+    )
+    print(f"Wrote relational task-schema arrays to {Path(args.output_dir)}")
+
+
+def relational_schema_report_command(args: argparse.Namespace) -> None:
+    report = fact_predicate_generality_report()
+    print(json.dumps(report, indent=2, sort_keys=True))
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Generate symbolic reasoning DSL datasets.")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -154,6 +197,39 @@ def build_parser() -> argparse.ArgumentParser:
     canonicalize.add_argument("--output-dir", required=True, help="Output dataset directory.")
     canonicalize.add_argument("--vocab-from", default=None, help="Reuse an existing vocab.json and fail if canonical text is OOV.")
     canonicalize.set_defaults(func=canonicalize_command)
+
+    relational = subparsers.add_parser("relational-export", help="Export JSONL examples to anonymous-object relational JSONL.")
+    relational.add_argument("--data-dir", required=True, help="Generated dataset directory containing jsonl/*.jsonl.")
+    relational.add_argument("--output-dir", required=True, help="Output directory for relational_jsonl/*.jsonl.")
+    relational.set_defaults(func=relational_export_command)
+
+    rel_arrays = subparsers.add_parser("relational-arrays", help="Export graph/tree path-style relational tensors.")
+    rel_arrays.add_argument("--data-dir", required=True, help="Generated dataset directory containing jsonl/*.jsonl.")
+    rel_arrays.add_argument("--output-dir", required=True, help="Output directory for split array folders.")
+    rel_arrays.add_argument("--family", action="append", default=[], help="Family to include; may be repeated.")
+    rel_arrays.add_argument("--mode", action="append", default=[], help="Mode to include; may be repeated.")
+    rel_arrays.set_defaults(func=relational_arrays_command)
+
+    schema_arrays = subparsers.add_parser(
+        "relational-task-schema-arrays",
+        help="Export graph/tree task-schema relational tensors.",
+    )
+    schema_arrays.add_argument("--data-dir", required=True, help="Generated dataset directory containing jsonl/*.jsonl.")
+    schema_arrays.add_argument("--output-dir", required=True, help="Output directory for split array folders.")
+    schema_arrays.add_argument("--family", action="append", default=[], help="Family to include; may be repeated.")
+    schema_arrays.add_argument("--mode", action="append", default=[], help="Mode to include; may be repeated.")
+    schema_arrays.add_argument(
+        "--fail-on-legacy-predicates",
+        action="store_true",
+        help="Fail export if selected examples use task-shaped predicates targeted for v2 cleanup.",
+    )
+    schema_arrays.set_defaults(func=relational_task_schema_arrays_command)
+
+    schema_report = subparsers.add_parser(
+        "relational-schema-report",
+        help="Print current relational task-schema fact predicate classes.",
+    )
+    schema_report.set_defaults(func=relational_schema_report_command)
     return parser
 
 
